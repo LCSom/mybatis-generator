@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.UserRoleBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.UserRoleBean" >
+    <id column="urt_id" property="urtId" jdbcType="INTEGER" />
+    <result column="urt_ut_id" property="urtUtId" jdbcType="INTEGER" />
+    <result column="urt_name" property="urtName" jdbcType="VARCHAR" />
+    <result column="urt_description" property="urtDescription" jdbcType="VARCHAR" />
+    <result column="urt_param1" property="urtParam1" jdbcType="VARCHAR" />
+    <result column="urt_param2" property="urtParam2" jdbcType="VARCHAR" />
+    <result column="urt_param3" property="urtParam3" jdbcType="VARCHAR" />
+    <result column="urt_param4" property="urtParam4" jdbcType="VARCHAR" />
+    <result column="urt_param5" property="urtParam5" jdbcType="VARCHAR" />
+    <result column="urt_status" property="urtStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    urt_id, urt_ut_id, urt_name, urt_description, urt_param1, urt_param2, urt_param3, 
+    urt_param4, urt_param5, urt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.UserRoleBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_userrole_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_userrole_tbl
+    where urt_id = #{urtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_userrole_tbl
+    where urt_id = #{urtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.UserRoleBeanExample" >
+    delete from newcems_userrole_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.UserRoleBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="urtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_userrole_tbl (urt_ut_id, urt_name, urt_description, 
+      urt_param1, urt_param2, urt_param3, 
+      urt_param4, urt_param5, urt_status
+      )
+    values (#{urtUtId,jdbcType=INTEGER}, #{urtName,jdbcType=VARCHAR}, #{urtDescription,jdbcType=VARCHAR}, 
+      #{urtParam1,jdbcType=VARCHAR}, #{urtParam2,jdbcType=VARCHAR}, #{urtParam3,jdbcType=VARCHAR}, 
+      #{urtParam4,jdbcType=VARCHAR}, #{urtParam5,jdbcType=VARCHAR}, #{urtStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.UserRoleBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="urtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_userrole_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="urtUtId != null" >
+        urt_ut_id,
+      </if>
+      <if test="urtName != null" >
+        urt_name,
+      </if>
+      <if test="urtDescription != null" >
+        urt_description,
+      </if>
+      <if test="urtParam1 != null" >
+        urt_param1,
+      </if>
+      <if test="urtParam2 != null" >
+        urt_param2,
+      </if>
+      <if test="urtParam3 != null" >
+        urt_param3,
+      </if>
+      <if test="urtParam4 != null" >
+        urt_param4,
+      </if>
+      <if test="urtParam5 != null" >
+        urt_param5,
+      </if>
+      <if test="urtStatus != null" >
+        urt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="urtUtId != null" >
+        #{urtUtId,jdbcType=INTEGER},
+      </if>
+      <if test="urtName != null" >
+        #{urtName,jdbcType=VARCHAR},
+      </if>
+      <if test="urtDescription != null" >
+        #{urtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam1 != null" >
+        #{urtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam2 != null" >
+        #{urtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam3 != null" >
+        #{urtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam4 != null" >
+        #{urtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam5 != null" >
+        #{urtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="urtStatus != null" >
+        #{urtStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.UserRoleBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_userrole_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_userrole_tbl
+    <set >
+      <if test="record.urtId != null" >
+        urt_id = #{record.urtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.urtUtId != null" >
+        urt_ut_id = #{record.urtUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.urtName != null" >
+        urt_name = #{record.urtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtDescription != null" >
+        urt_description = #{record.urtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtParam1 != null" >
+        urt_param1 = #{record.urtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtParam2 != null" >
+        urt_param2 = #{record.urtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtParam3 != null" >
+        urt_param3 = #{record.urtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtParam4 != null" >
+        urt_param4 = #{record.urtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtParam5 != null" >
+        urt_param5 = #{record.urtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urtStatus != null" >
+        urt_status = #{record.urtStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_userrole_tbl
+    set urt_id = #{record.urtId,jdbcType=INTEGER},
+      urt_ut_id = #{record.urtUtId,jdbcType=INTEGER},
+      urt_name = #{record.urtName,jdbcType=VARCHAR},
+      urt_description = #{record.urtDescription,jdbcType=VARCHAR},
+      urt_param1 = #{record.urtParam1,jdbcType=VARCHAR},
+      urt_param2 = #{record.urtParam2,jdbcType=VARCHAR},
+      urt_param3 = #{record.urtParam3,jdbcType=VARCHAR},
+      urt_param4 = #{record.urtParam4,jdbcType=VARCHAR},
+      urt_param5 = #{record.urtParam5,jdbcType=VARCHAR},
+      urt_status = #{record.urtStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.UserRoleBean" >
+    update newcems_userrole_tbl
+    <set >
+      <if test="urtUtId != null" >
+        urt_ut_id = #{urtUtId,jdbcType=INTEGER},
+      </if>
+      <if test="urtName != null" >
+        urt_name = #{urtName,jdbcType=VARCHAR},
+      </if>
+      <if test="urtDescription != null" >
+        urt_description = #{urtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam1 != null" >
+        urt_param1 = #{urtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam2 != null" >
+        urt_param2 = #{urtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam3 != null" >
+        urt_param3 = #{urtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam4 != null" >
+        urt_param4 = #{urtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="urtParam5 != null" >
+        urt_param5 = #{urtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="urtStatus != null" >
+        urt_status = #{urtStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where urt_id = #{urtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.UserRoleBean" >
+    update newcems_userrole_tbl
+    set urt_ut_id = #{urtUtId,jdbcType=INTEGER},
+      urt_name = #{urtName,jdbcType=VARCHAR},
+      urt_description = #{urtDescription,jdbcType=VARCHAR},
+      urt_param1 = #{urtParam1,jdbcType=VARCHAR},
+      urt_param2 = #{urtParam2,jdbcType=VARCHAR},
+      urt_param3 = #{urtParam3,jdbcType=VARCHAR},
+      urt_param4 = #{urtParam4,jdbcType=VARCHAR},
+      urt_param5 = #{urtParam5,jdbcType=VARCHAR},
+      urt_status = #{urtStatus,jdbcType=INTEGER}
+    where urt_id = #{urtId,jdbcType=INTEGER}
+  </update>
+</mapper>

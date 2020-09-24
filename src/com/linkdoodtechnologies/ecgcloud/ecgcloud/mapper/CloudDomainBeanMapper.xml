@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.CloudDomainBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBean" >
+    <id column="cdt_id" property="cdtId" jdbcType="INTEGER" />
+    <result column="cdt_domain_name" property="cdtDomainName" jdbcType="VARCHAR" />
+    <result column="cdt_ip" property="cdtIp" jdbcType="VARCHAR" />
+    <result column="cdt_version" property="cdtVersion" jdbcType="VARCHAR" />
+    <result column="cdt_created_datetime" property="cdtCreatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="cdt_updated_datetime" property="cdtUpdatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="cdt_status" property="cdtStatus" jdbcType="INTEGER" />
+    <result column="cdt_param1" property="cdtParam1" jdbcType="VARCHAR" />
+    <result column="cdt_param2" property="cdtParam2" jdbcType="VARCHAR" />
+    <result column="cdt_param3" property="cdtParam3" jdbcType="VARCHAR" />
+    <result column="cdt_param4" property="cdtParam4" jdbcType="VARCHAR" />
+    <result column="cdt_param5" property="cdtParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cdt_id, cdt_domain_name, cdt_ip, cdt_version, cdt_created_datetime, cdt_updated_datetime, 
+    cdt_status, cdt_param1, cdt_param2, cdt_param3, cdt_param4, cdt_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cloud_domain_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cloud_domain_tbl
+    where cdt_id = #{cdtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cloud_domain_tbl
+    where cdt_id = #{cdtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBeanExample" >
+    delete from cloud_domain_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="cdtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_domain_tbl (cdt_domain_name, cdt_ip, cdt_version, 
+      cdt_created_datetime, cdt_updated_datetime, 
+      cdt_status, cdt_param1, cdt_param2, 
+      cdt_param3, cdt_param4, cdt_param5
+      )
+    values (#{cdtDomainName,jdbcType=VARCHAR}, #{cdtIp,jdbcType=VARCHAR}, #{cdtVersion,jdbcType=VARCHAR}, 
+      #{cdtCreatedDatetime,jdbcType=TIMESTAMP}, #{cdtUpdatedDatetime,jdbcType=TIMESTAMP}, 
+      #{cdtStatus,jdbcType=INTEGER}, #{cdtParam1,jdbcType=VARCHAR}, #{cdtParam2,jdbcType=VARCHAR}, 
+      #{cdtParam3,jdbcType=VARCHAR}, #{cdtParam4,jdbcType=VARCHAR}, #{cdtParam5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="cdtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_domain_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cdtDomainName != null" >
+        cdt_domain_name,
+      </if>
+      <if test="cdtIp != null" >
+        cdt_ip,
+      </if>
+      <if test="cdtVersion != null" >
+        cdt_version,
+      </if>
+      <if test="cdtCreatedDatetime != null" >
+        cdt_created_datetime,
+      </if>
+      <if test="cdtUpdatedDatetime != null" >
+        cdt_updated_datetime,
+      </if>
+      <if test="cdtStatus != null" >
+        cdt_status,
+      </if>
+      <if test="cdtParam1 != null" >
+        cdt_param1,
+      </if>
+      <if test="cdtParam2 != null" >
+        cdt_param2,
+      </if>
+      <if test="cdtParam3 != null" >
+        cdt_param3,
+      </if>
+      <if test="cdtParam4 != null" >
+        cdt_param4,
+      </if>
+      <if test="cdtParam5 != null" >
+        cdt_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cdtDomainName != null" >
+        #{cdtDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtIp != null" >
+        #{cdtIp,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtVersion != null" >
+        #{cdtVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtCreatedDatetime != null" >
+        #{cdtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdtUpdatedDatetime != null" >
+        #{cdtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdtStatus != null" >
+        #{cdtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cdtParam1 != null" >
+        #{cdtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam2 != null" >
+        #{cdtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam3 != null" >
+        #{cdtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam4 != null" >
+        #{cdtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam5 != null" >
+        #{cdtParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cloud_domain_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cloud_domain_tbl
+    <set >
+      <if test="record.cdtId != null" >
+        cdt_id = #{record.cdtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cdtDomainName != null" >
+        cdt_domain_name = #{record.cdtDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtIp != null" >
+        cdt_ip = #{record.cdtIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtVersion != null" >
+        cdt_version = #{record.cdtVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtCreatedDatetime != null" >
+        cdt_created_datetime = #{record.cdtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cdtUpdatedDatetime != null" >
+        cdt_updated_datetime = #{record.cdtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cdtStatus != null" >
+        cdt_status = #{record.cdtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.cdtParam1 != null" >
+        cdt_param1 = #{record.cdtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtParam2 != null" >
+        cdt_param2 = #{record.cdtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtParam3 != null" >
+        cdt_param3 = #{record.cdtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtParam4 != null" >
+        cdt_param4 = #{record.cdtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdtParam5 != null" >
+        cdt_param5 = #{record.cdtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cloud_domain_tbl
+    set cdt_id = #{record.cdtId,jdbcType=INTEGER},
+      cdt_domain_name = #{record.cdtDomainName,jdbcType=VARCHAR},
+      cdt_ip = #{record.cdtIp,jdbcType=VARCHAR},
+      cdt_version = #{record.cdtVersion,jdbcType=VARCHAR},
+      cdt_created_datetime = #{record.cdtCreatedDatetime,jdbcType=TIMESTAMP},
+      cdt_updated_datetime = #{record.cdtUpdatedDatetime,jdbcType=TIMESTAMP},
+      cdt_status = #{record.cdtStatus,jdbcType=INTEGER},
+      cdt_param1 = #{record.cdtParam1,jdbcType=VARCHAR},
+      cdt_param2 = #{record.cdtParam2,jdbcType=VARCHAR},
+      cdt_param3 = #{record.cdtParam3,jdbcType=VARCHAR},
+      cdt_param4 = #{record.cdtParam4,jdbcType=VARCHAR},
+      cdt_param5 = #{record.cdtParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBean" >
+    update cloud_domain_tbl
+    <set >
+      <if test="cdtDomainName != null" >
+        cdt_domain_name = #{cdtDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtIp != null" >
+        cdt_ip = #{cdtIp,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtVersion != null" >
+        cdt_version = #{cdtVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtCreatedDatetime != null" >
+        cdt_created_datetime = #{cdtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdtUpdatedDatetime != null" >
+        cdt_updated_datetime = #{cdtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdtStatus != null" >
+        cdt_status = #{cdtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cdtParam1 != null" >
+        cdt_param1 = #{cdtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam2 != null" >
+        cdt_param2 = #{cdtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam3 != null" >
+        cdt_param3 = #{cdtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam4 != null" >
+        cdt_param4 = #{cdtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdtParam5 != null" >
+        cdt_param5 = #{cdtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cdt_id = #{cdtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudDomainBean" >
+    update cloud_domain_tbl
+    set cdt_domain_name = #{cdtDomainName,jdbcType=VARCHAR},
+      cdt_ip = #{cdtIp,jdbcType=VARCHAR},
+      cdt_version = #{cdtVersion,jdbcType=VARCHAR},
+      cdt_created_datetime = #{cdtCreatedDatetime,jdbcType=TIMESTAMP},
+      cdt_updated_datetime = #{cdtUpdatedDatetime,jdbcType=TIMESTAMP},
+      cdt_status = #{cdtStatus,jdbcType=INTEGER},
+      cdt_param1 = #{cdtParam1,jdbcType=VARCHAR},
+      cdt_param2 = #{cdtParam2,jdbcType=VARCHAR},
+      cdt_param3 = #{cdtParam3,jdbcType=VARCHAR},
+      cdt_param4 = #{cdtParam4,jdbcType=VARCHAR},
+      cdt_param5 = #{cdtParam5,jdbcType=VARCHAR}
+    where cdt_id = #{cdtId,jdbcType=INTEGER}
+  </update>
+</mapper>

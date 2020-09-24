@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.UserInfoBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.UserInfoBean" >
+    <id column="uit_id" property="uitId" jdbcType="INTEGER" />
+    <result column="uit_ut_id" property="uitUtId" jdbcType="INTEGER" />
+    <result column="uit_name" property="uitName" jdbcType="VARCHAR" />
+    <result column="uit_email" property="uitEmail" jdbcType="VARCHAR" />
+    <result column="uit_tel" property="uitTel" jdbcType="VARCHAR" />
+    <result column="uit_office_tel" property="uitOfficeTel" jdbcType="VARCHAR" />
+    <result column="uit_description" property="uitDescription" jdbcType="VARCHAR" />
+    <result column="uit_gender" property="uitGender" jdbcType="INTEGER" />
+    <result column="uit_birthday" property="uitBirthday" jdbcType="VARCHAR" />
+    <result column="uit_location" property="uitLocation" jdbcType="VARCHAR" />
+    <result column="uit_image" property="uitImage" jdbcType="VARCHAR" />
+    <result column="uit_position" property="uitPosition" jdbcType="VARCHAR" />
+    <result column="uit_company" property="uitCompany" jdbcType="VARCHAR" />
+    <result column="uit_staff" property="uitStaff" jdbcType="VARCHAR" />
+    <result column="uit_status" property="uitStatus" jdbcType="INTEGER" />
+    <result column="uit_registerType" property="uitRegistertype" jdbcType="INTEGER" />
+    <result column="uit_registerTime" property="uitRegistertime" jdbcType="VARCHAR" />
+    <result column="uit_lastLoginTime" property="uitLastlogintime" jdbcType="VARCHAR" />
+    <result column="uit_loginTime" property="uitLogintime" jdbcType="VARCHAR" />
+    <result column="uit_suspendedTime" property="uitSuspendedtime" jdbcType="VARCHAR" />
+    <result column="uit_updatePwdTime" property="uitUpdatepwdtime" jdbcType="VARCHAR" />
+    <result column="uit_oldPwd" property="uitOldpwd" jdbcType="VARCHAR" />
+    <result column="uit_lastLoginIp" property="uitLastloginip" jdbcType="VARCHAR" />
+    <result column="uit_loginIp" property="uitLoginip" jdbcType="VARCHAR" />
+    <result column="uit_param1" property="uitParam1" jdbcType="VARCHAR" />
+    <result column="uit_param2" property="uitParam2" jdbcType="VARCHAR" />
+    <result column="uit_param3" property="uitParam3" jdbcType="VARCHAR" />
+    <result column="uit_param4" property="uitParam4" jdbcType="VARCHAR" />
+    <result column="uit_param5" property="uitParam5" jdbcType="VARCHAR" />
+    <result column="uit_param6" property="uitParam6" jdbcType="VARCHAR" />
+    <result column="uit_created_datetime" property="uitCreatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="uit_updated_datetime" property="uitUpdatedDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uit_id, uit_ut_id, uit_name, uit_email, uit_tel, uit_office_tel, uit_description, 
+    uit_gender, uit_birthday, uit_location, uit_image, uit_position, uit_company, uit_staff, 
+    uit_status, uit_registerType, uit_registerTime, uit_lastLoginTime, uit_loginTime, 
+    uit_suspendedTime, uit_updatePwdTime, uit_oldPwd, uit_lastLoginIp, uit_loginIp, uit_param1, 
+    uit_param2, uit_param3, uit_param4, uit_param5, uit_param6, uit_created_datetime, 
+    uit_updated_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.UserInfoBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_userinfo_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_userinfo_tbl
+    where uit_id = #{uitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_userinfo_tbl
+    where uit_id = #{uitId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.UserInfoBeanExample" >
+    delete from newcems_userinfo_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.UserInfoBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="uitId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_userinfo_tbl (uit_ut_id, uit_name, uit_email, 
+      uit_tel, uit_office_tel, uit_description, 
+      uit_gender, uit_birthday, uit_location, 
+      uit_image, uit_position, uit_company, 
+      uit_staff, uit_status, uit_registerType, 
+      uit_registerTime, uit_lastLoginTime, uit_loginTime, 
+      uit_suspendedTime, uit_updatePwdTime, uit_oldPwd, 
+      uit_lastLoginIp, uit_loginIp, uit_param1, 
+      uit_param2, uit_param3, uit_param4, 
+      uit_param5, uit_param6, uit_created_datetime, 
+      uit_updated_datetime)
+    values (#{uitUtId,jdbcType=INTEGER}, #{uitName,jdbcType=VARCHAR}, #{uitEmail,jdbcType=VARCHAR}, 
+      #{uitTel,jdbcType=VARCHAR}, #{uitOfficeTel,jdbcType=VARCHAR}, #{uitDescription,jdbcType=VARCHAR}, 
+      #{uitGender,jdbcType=INTEGER}, #{uitBirthday,jdbcType=VARCHAR}, #{uitLocation,jdbcType=VARCHAR}, 
+      #{uitImage,jdbcType=VARCHAR}, #{uitPosition,jdbcType=VARCHAR}, #{uitCompany,jdbcType=VARCHAR}, 
+      #{uitStaff,jdbcType=VARCHAR}, #{uitStatus,jdbcType=INTEGER}, #{uitRegistertype,jdbcType=INTEGER}, 
+      #{uitRegistertime,jdbcType=VARCHAR}, #{uitLastlogintime,jdbcType=VARCHAR}, #{uitLogintime,jdbcType=VARCHAR}, 
+      #{uitSuspendedtime,jdbcType=VARCHAR}, #{uitUpdatepwdtime,jdbcType=VARCHAR}, #{uitOldpwd,jdbcType=VARCHAR}, 
+      #{uitLastloginip,jdbcType=VARCHAR}, #{uitLoginip,jdbcType=VARCHAR}, #{uitParam1,jdbcType=VARCHAR}, 
+      #{uitParam2,jdbcType=VARCHAR}, #{uitParam3,jdbcType=VARCHAR}, #{uitParam4,jdbcType=VARCHAR}, 
+      #{uitParam5,jdbcType=VARCHAR}, #{uitParam6,jdbcType=VARCHAR}, #{uitCreatedDatetime,jdbcType=TIMESTAMP}, 
+      #{uitUpdatedDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.UserInfoBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="uitId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_userinfo_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uitUtId != null" >
+        uit_ut_id,
+      </if>
+      <if test="uitName != null" >
+        uit_name,
+      </if>
+      <if test="uitEmail != null" >
+        uit_email,
+      </if>
+      <if test="uitTel != null" >
+        uit_tel,
+      </if>
+      <if test="uitOfficeTel != null" >
+        uit_office_tel,
+      </if>
+      <if test="uitDescription != null" >
+        uit_description,
+      </if>
+      <if test="uitGender != null" >
+        uit_gender,
+      </if>
+      <if test="uitBirthday != null" >
+        uit_birthday,
+      </if>
+      <if test="uitLocation != null" >
+        uit_location,
+      </if>
+      <if test="uitImage != null" >
+        uit_image,
+      </if>
+      <if test="uitPosition != null" >
+        uit_position,
+      </if>
+      <if test="uitCompany != null" >
+        uit_company,
+      </if>
+      <if test="uitStaff != null" >
+        uit_staff,
+      </if>
+      <if test="uitStatus != null" >
+        uit_status,
+      </if>
+      <if test="uitRegistertype != null" >
+        uit_registerType,
+      </if>
+      <if test="uitRegistertime != null" >
+        uit_registerTime,
+      </if>
+      <if test="uitLastlogintime != null" >
+        uit_lastLoginTime,
+      </if>
+      <if test="uitLogintime != null" >
+        uit_loginTime,
+      </if>
+      <if test="uitSuspendedtime != null" >
+        uit_suspendedTime,
+      </if>
+      <if test="uitUpdatepwdtime != null" >
+        uit_updatePwdTime,
+      </if>
+      <if test="uitOldpwd != null" >
+        uit_oldPwd,
+      </if>
+      <if test="uitLastloginip != null" >
+        uit_lastLoginIp,
+      </if>
+      <if test="uitLoginip != null" >
+        uit_loginIp,
+      </if>
+      <if test="uitParam1 != null" >
+        uit_param1,
+      </if>
+      <if test="uitParam2 != null" >
+        uit_param2,
+      </if>
+      <if test="uitParam3 != null" >
+        uit_param3,
+      </if>
+      <if test="uitParam4 != null" >
+        uit_param4,
+      </if>
+      <if test="uitParam5 != null" >
+        uit_param5,
+      </if>
+      <if test="uitParam6 != null" >
+        uit_param6,
+      </if>
+      <if test="uitCreatedDatetime != null" >
+        uit_created_datetime,
+      </if>
+      <if test="uitUpdatedDatetime != null" >
+        uit_updated_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uitUtId != null" >
+        #{uitUtId,jdbcType=INTEGER},
+      </if>
+      <if test="uitName != null" >
+        #{uitName,jdbcType=VARCHAR},
+      </if>
+      <if test="uitEmail != null" >
+        #{uitEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uitTel != null" >
+        #{uitTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uitOfficeTel != null" >
+        #{uitOfficeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uitDescription != null" >
+        #{uitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="uitGender != null" >
+        #{uitGender,jdbcType=INTEGER},
+      </if>
+      <if test="uitBirthday != null" >
+        #{uitBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLocation != null" >
+        #{uitLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="uitImage != null" >
+        #{uitImage,jdbcType=VARCHAR},
+      </if>
+      <if test="uitPosition != null" >
+        #{uitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="uitCompany != null" >
+        #{uitCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="uitStaff != null" >
+        #{uitStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="uitStatus != null" >
+        #{uitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="uitRegistertype != null" >
+        #{uitRegistertype,jdbcType=INTEGER},
+      </if>
+      <if test="uitRegistertime != null" >
+        #{uitRegistertime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLastlogintime != null" >
+        #{uitLastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLogintime != null" >
+        #{uitLogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitSuspendedtime != null" >
+        #{uitSuspendedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitUpdatepwdtime != null" >
+        #{uitUpdatepwdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitOldpwd != null" >
+        #{uitOldpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLastloginip != null" >
+        #{uitLastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLoginip != null" >
+        #{uitLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam1 != null" >
+        #{uitParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam2 != null" >
+        #{uitParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam3 != null" >
+        #{uitParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam4 != null" >
+        #{uitParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam5 != null" >
+        #{uitParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam6 != null" >
+        #{uitParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="uitCreatedDatetime != null" >
+        #{uitCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uitUpdatedDatetime != null" >
+        #{uitUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.UserInfoBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_userinfo_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_userinfo_tbl
+    <set >
+      <if test="record.uitId != null" >
+        uit_id = #{record.uitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uitUtId != null" >
+        uit_ut_id = #{record.uitUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uitName != null" >
+        uit_name = #{record.uitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitEmail != null" >
+        uit_email = #{record.uitEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitTel != null" >
+        uit_tel = #{record.uitTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitOfficeTel != null" >
+        uit_office_tel = #{record.uitOfficeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitDescription != null" >
+        uit_description = #{record.uitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitGender != null" >
+        uit_gender = #{record.uitGender,jdbcType=INTEGER},
+      </if>
+      <if test="record.uitBirthday != null" >
+        uit_birthday = #{record.uitBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitLocation != null" >
+        uit_location = #{record.uitLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitImage != null" >
+        uit_image = #{record.uitImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitPosition != null" >
+        uit_position = #{record.uitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitCompany != null" >
+        uit_company = #{record.uitCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitStaff != null" >
+        uit_staff = #{record.uitStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitStatus != null" >
+        uit_status = #{record.uitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.uitRegistertype != null" >
+        uit_registerType = #{record.uitRegistertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.uitRegistertime != null" >
+        uit_registerTime = #{record.uitRegistertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitLastlogintime != null" >
+        uit_lastLoginTime = #{record.uitLastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitLogintime != null" >
+        uit_loginTime = #{record.uitLogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitSuspendedtime != null" >
+        uit_suspendedTime = #{record.uitSuspendedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitUpdatepwdtime != null" >
+        uit_updatePwdTime = #{record.uitUpdatepwdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitOldpwd != null" >
+        uit_oldPwd = #{record.uitOldpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitLastloginip != null" >
+        uit_lastLoginIp = #{record.uitLastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitLoginip != null" >
+        uit_loginIp = #{record.uitLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam1 != null" >
+        uit_param1 = #{record.uitParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam2 != null" >
+        uit_param2 = #{record.uitParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam3 != null" >
+        uit_param3 = #{record.uitParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam4 != null" >
+        uit_param4 = #{record.uitParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam5 != null" >
+        uit_param5 = #{record.uitParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitParam6 != null" >
+        uit_param6 = #{record.uitParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uitCreatedDatetime != null" >
+        uit_created_datetime = #{record.uitCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uitUpdatedDatetime != null" >
+        uit_updated_datetime = #{record.uitUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_userinfo_tbl
+    set uit_id = #{record.uitId,jdbcType=INTEGER},
+      uit_ut_id = #{record.uitUtId,jdbcType=INTEGER},
+      uit_name = #{record.uitName,jdbcType=VARCHAR},
+      uit_email = #{record.uitEmail,jdbcType=VARCHAR},
+      uit_tel = #{record.uitTel,jdbcType=VARCHAR},
+      uit_office_tel = #{record.uitOfficeTel,jdbcType=VARCHAR},
+      uit_description = #{record.uitDescription,jdbcType=VARCHAR},
+      uit_gender = #{record.uitGender,jdbcType=INTEGER},
+      uit_birthday = #{record.uitBirthday,jdbcType=VARCHAR},
+      uit_location = #{record.uitLocation,jdbcType=VARCHAR},
+      uit_image = #{record.uitImage,jdbcType=VARCHAR},
+      uit_position = #{record.uitPosition,jdbcType=VARCHAR},
+      uit_company = #{record.uitCompany,jdbcType=VARCHAR},
+      uit_staff = #{record.uitStaff,jdbcType=VARCHAR},
+      uit_status = #{record.uitStatus,jdbcType=INTEGER},
+      uit_registerType = #{record.uitRegistertype,jdbcType=INTEGER},
+      uit_registerTime = #{record.uitRegistertime,jdbcType=VARCHAR},
+      uit_lastLoginTime = #{record.uitLastlogintime,jdbcType=VARCHAR},
+      uit_loginTime = #{record.uitLogintime,jdbcType=VARCHAR},
+      uit_suspendedTime = #{record.uitSuspendedtime,jdbcType=VARCHAR},
+      uit_updatePwdTime = #{record.uitUpdatepwdtime,jdbcType=VARCHAR},
+      uit_oldPwd = #{record.uitOldpwd,jdbcType=VARCHAR},
+      uit_lastLoginIp = #{record.uitLastloginip,jdbcType=VARCHAR},
+      uit_loginIp = #{record.uitLoginip,jdbcType=VARCHAR},
+      uit_param1 = #{record.uitParam1,jdbcType=VARCHAR},
+      uit_param2 = #{record.uitParam2,jdbcType=VARCHAR},
+      uit_param3 = #{record.uitParam3,jdbcType=VARCHAR},
+      uit_param4 = #{record.uitParam4,jdbcType=VARCHAR},
+      uit_param5 = #{record.uitParam5,jdbcType=VARCHAR},
+      uit_param6 = #{record.uitParam6,jdbcType=VARCHAR},
+      uit_created_datetime = #{record.uitCreatedDatetime,jdbcType=TIMESTAMP},
+      uit_updated_datetime = #{record.uitUpdatedDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.UserInfoBean" >
+    update newcems_userinfo_tbl
+    <set >
+      <if test="uitUtId != null" >
+        uit_ut_id = #{uitUtId,jdbcType=INTEGER},
+      </if>
+      <if test="uitName != null" >
+        uit_name = #{uitName,jdbcType=VARCHAR},
+      </if>
+      <if test="uitEmail != null" >
+        uit_email = #{uitEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uitTel != null" >
+        uit_tel = #{uitTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uitOfficeTel != null" >
+        uit_office_tel = #{uitOfficeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uitDescription != null" >
+        uit_description = #{uitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="uitGender != null" >
+        uit_gender = #{uitGender,jdbcType=INTEGER},
+      </if>
+      <if test="uitBirthday != null" >
+        uit_birthday = #{uitBirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLocation != null" >
+        uit_location = #{uitLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="uitImage != null" >
+        uit_image = #{uitImage,jdbcType=VARCHAR},
+      </if>
+      <if test="uitPosition != null" >
+        uit_position = #{uitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="uitCompany != null" >
+        uit_company = #{uitCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="uitStaff != null" >
+        uit_staff = #{uitStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="uitStatus != null" >
+        uit_status = #{uitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="uitRegistertype != null" >
+        uit_registerType = #{uitRegistertype,jdbcType=INTEGER},
+      </if>
+      <if test="uitRegistertime != null" >
+        uit_registerTime = #{uitRegistertime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLastlogintime != null" >
+        uit_lastLoginTime = #{uitLastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLogintime != null" >
+        uit_loginTime = #{uitLogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitSuspendedtime != null" >
+        uit_suspendedTime = #{uitSuspendedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitUpdatepwdtime != null" >
+        uit_updatePwdTime = #{uitUpdatepwdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uitOldpwd != null" >
+        uit_oldPwd = #{uitOldpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLastloginip != null" >
+        uit_lastLoginIp = #{uitLastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="uitLoginip != null" >
+        uit_loginIp = #{uitLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam1 != null" >
+        uit_param1 = #{uitParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam2 != null" >
+        uit_param2 = #{uitParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam3 != null" >
+        uit_param3 = #{uitParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam4 != null" >
+        uit_param4 = #{uitParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam5 != null" >
+        uit_param5 = #{uitParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="uitParam6 != null" >
+        uit_param6 = #{uitParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="uitCreatedDatetime != null" >
+        uit_created_datetime = #{uitCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uitUpdatedDatetime != null" >
+        uit_updated_datetime = #{uitUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uit_id = #{uitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.UserInfoBean" >
+    update newcems_userinfo_tbl
+    set uit_ut_id = #{uitUtId,jdbcType=INTEGER},
+      uit_name = #{uitName,jdbcType=VARCHAR},
+      uit_email = #{uitEmail,jdbcType=VARCHAR},
+      uit_tel = #{uitTel,jdbcType=VARCHAR},
+      uit_office_tel = #{uitOfficeTel,jdbcType=VARCHAR},
+      uit_description = #{uitDescription,jdbcType=VARCHAR},
+      uit_gender = #{uitGender,jdbcType=INTEGER},
+      uit_birthday = #{uitBirthday,jdbcType=VARCHAR},
+      uit_location = #{uitLocation,jdbcType=VARCHAR},
+      uit_image = #{uitImage,jdbcType=VARCHAR},
+      uit_position = #{uitPosition,jdbcType=VARCHAR},
+      uit_company = #{uitCompany,jdbcType=VARCHAR},
+      uit_staff = #{uitStaff,jdbcType=VARCHAR},
+      uit_status = #{uitStatus,jdbcType=INTEGER},
+      uit_registerType = #{uitRegistertype,jdbcType=INTEGER},
+      uit_registerTime = #{uitRegistertime,jdbcType=VARCHAR},
+      uit_lastLoginTime = #{uitLastlogintime,jdbcType=VARCHAR},
+      uit_loginTime = #{uitLogintime,jdbcType=VARCHAR},
+      uit_suspendedTime = #{uitSuspendedtime,jdbcType=VARCHAR},
+      uit_updatePwdTime = #{uitUpdatepwdtime,jdbcType=VARCHAR},
+      uit_oldPwd = #{uitOldpwd,jdbcType=VARCHAR},
+      uit_lastLoginIp = #{uitLastloginip,jdbcType=VARCHAR},
+      uit_loginIp = #{uitLoginip,jdbcType=VARCHAR},
+      uit_param1 = #{uitParam1,jdbcType=VARCHAR},
+      uit_param2 = #{uitParam2,jdbcType=VARCHAR},
+      uit_param3 = #{uitParam3,jdbcType=VARCHAR},
+      uit_param4 = #{uitParam4,jdbcType=VARCHAR},
+      uit_param5 = #{uitParam5,jdbcType=VARCHAR},
+      uit_param6 = #{uitParam6,jdbcType=VARCHAR},
+      uit_created_datetime = #{uitCreatedDatetime,jdbcType=TIMESTAMP},
+      uit_updated_datetime = #{uitUpdatedDatetime,jdbcType=TIMESTAMP}
+    where uit_id = #{uitId,jdbcType=INTEGER}
+  </update>
+</mapper>

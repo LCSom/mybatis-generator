@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.KvsSoftBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.KvsSoftBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="desInfo" property="desinfo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="softVersion" property="softversion" jdbcType="VARCHAR" />
+    <result column="softEngineVer" property="softenginever" jdbcType="VARCHAR" />
+    <result column="softVirusBaseVer" property="softvirusbasever" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="installPath" property="installpath" jdbcType="VARCHAR" />
+    <result column="engineVer" property="enginever" jdbcType="VARCHAR" />
+    <result column="virusBaseVer" property="virusbasever" jdbcType="VARCHAR" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, flag, desInfo, type, company, softVersion, softEngineVer, softVirusBaseVer, 
+    url, version, installPath, engineVer, virusBaseVer, publishTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.KvsSoftBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_kvssoft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_kvssoft
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_kvssoft
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.KvsSoftBeanExample" >
+    delete from cems_kvssoft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.KvsSoftBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_kvssoft (name, flag, desInfo, 
+      type, company, softVersion, 
+      softEngineVer, softVirusBaseVer, url, 
+      version, installPath, engineVer, 
+      virusBaseVer, publishTime)
+    values (#{name,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{desinfo,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{softversion,jdbcType=VARCHAR}, 
+      #{softenginever,jdbcType=VARCHAR}, #{softvirusbasever,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{installpath,jdbcType=VARCHAR}, #{enginever,jdbcType=VARCHAR}, 
+      #{virusbasever,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.KvsSoftBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_kvssoft
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="desinfo != null" >
+        desInfo,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="softversion != null" >
+        softVersion,
+      </if>
+      <if test="softenginever != null" >
+        softEngineVer,
+      </if>
+      <if test="softvirusbasever != null" >
+        softVirusBaseVer,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="installpath != null" >
+        installPath,
+      </if>
+      <if test="enginever != null" >
+        engineVer,
+      </if>
+      <if test="virusbasever != null" >
+        virusBaseVer,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="desinfo != null" >
+        #{desinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="softversion != null" >
+        #{softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="softenginever != null" >
+        #{softenginever,jdbcType=VARCHAR},
+      </if>
+      <if test="softvirusbasever != null" >
+        #{softvirusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="installpath != null" >
+        #{installpath,jdbcType=VARCHAR},
+      </if>
+      <if test="enginever != null" >
+        #{enginever,jdbcType=VARCHAR},
+      </if>
+      <if test="virusbasever != null" >
+        #{virusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.KvsSoftBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_kvssoft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_kvssoft
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desinfo != null" >
+        desInfo = #{record.desinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softversion != null" >
+        softVersion = #{record.softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softenginever != null" >
+        softEngineVer = #{record.softenginever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softvirusbasever != null" >
+        softVirusBaseVer = #{record.softvirusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.installpath != null" >
+        installPath = #{record.installpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enginever != null" >
+        engineVer = #{record.enginever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virusbasever != null" >
+        virusBaseVer = #{record.virusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishtime != null" >
+        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_kvssoft
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=VARCHAR},
+      desInfo = #{record.desinfo,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      company = #{record.company,jdbcType=VARCHAR},
+      softVersion = #{record.softversion,jdbcType=VARCHAR},
+      softEngineVer = #{record.softenginever,jdbcType=VARCHAR},
+      softVirusBaseVer = #{record.softvirusbasever,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      installPath = #{record.installpath,jdbcType=VARCHAR},
+      engineVer = #{record.enginever,jdbcType=VARCHAR},
+      virusBaseVer = #{record.virusbasever,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.KvsSoftBean" >
+    update cems_kvssoft
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="desinfo != null" >
+        desInfo = #{desinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="softversion != null" >
+        softVersion = #{softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="softenginever != null" >
+        softEngineVer = #{softenginever,jdbcType=VARCHAR},
+      </if>
+      <if test="softvirusbasever != null" >
+        softVirusBaseVer = #{softvirusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="installpath != null" >
+        installPath = #{installpath,jdbcType=VARCHAR},
+      </if>
+      <if test="enginever != null" >
+        engineVer = #{enginever,jdbcType=VARCHAR},
+      </if>
+      <if test="virusbasever != null" >
+        virusBaseVer = #{virusbasever,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.KvsSoftBean" >
+    update cems_kvssoft
+    set name = #{name,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      desInfo = #{desinfo,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      softVersion = #{softversion,jdbcType=VARCHAR},
+      softEngineVer = #{softenginever,jdbcType=VARCHAR},
+      softVirusBaseVer = #{softvirusbasever,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      installPath = #{installpath,jdbcType=VARCHAR},
+      engineVer = #{enginever,jdbcType=VARCHAR},
+      virusBaseVer = #{virusbasever,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

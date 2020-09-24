@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.RoleBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.RoleBean" >
+    <id column="rt_id" property="rtId" jdbcType="INTEGER" />
+    <result column="rt_name" property="rtName" jdbcType="VARCHAR" />
+    <result column="rt_description" property="rtDescription" jdbcType="VARCHAR" />
+    <result column="rt_type" property="rtType" jdbcType="VARCHAR" />
+    <result column="rt_role_level" property="rtRoleLevel" jdbcType="INTEGER" />
+    <result column="rt_creator" property="rtCreator" jdbcType="VARCHAR" />
+    <result column="rt_updater" property="rtUpdater" jdbcType="VARCHAR" />
+    <result column="rt_classify" property="rtClassify" jdbcType="VARCHAR" />
+    <result column="rt_param1" property="rtParam1" jdbcType="VARCHAR" />
+    <result column="rt_param2" property="rtParam2" jdbcType="VARCHAR" />
+    <result column="rt_param3" property="rtParam3" jdbcType="VARCHAR" />
+    <result column="rt_param4" property="rtParam4" jdbcType="VARCHAR" />
+    <result column="rt_param5" property="rtParam5" jdbcType="VARCHAR" />
+    <result column="rt_param6" property="rtParam6" jdbcType="VARCHAR" />
+    <result column="rt_created_datetime" property="rtCreatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="rt_updated_datetime" property="rtUpdatedDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rt_id, rt_name, rt_description, rt_type, rt_role_level, rt_creator, rt_updater, rt_classify, 
+    rt_param1, rt_param2, rt_param3, rt_param4, rt_param5, rt_param6, rt_created_datetime, 
+    rt_updated_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.RoleBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_role_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_role_tbl
+    where rt_id = #{rtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_role_tbl
+    where rt_id = #{rtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.RoleBeanExample" >
+    delete from newcems_role_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.RoleBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="rtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_role_tbl (rt_name, rt_description, rt_type, 
+      rt_role_level, rt_creator, rt_updater, 
+      rt_classify, rt_param1, rt_param2, 
+      rt_param3, rt_param4, rt_param5, 
+      rt_param6, rt_created_datetime, rt_updated_datetime
+      )
+    values (#{rtName,jdbcType=VARCHAR}, #{rtDescription,jdbcType=VARCHAR}, #{rtType,jdbcType=VARCHAR}, 
+      #{rtRoleLevel,jdbcType=INTEGER}, #{rtCreator,jdbcType=VARCHAR}, #{rtUpdater,jdbcType=VARCHAR}, 
+      #{rtClassify,jdbcType=VARCHAR}, #{rtParam1,jdbcType=VARCHAR}, #{rtParam2,jdbcType=VARCHAR}, 
+      #{rtParam3,jdbcType=VARCHAR}, #{rtParam4,jdbcType=VARCHAR}, #{rtParam5,jdbcType=VARCHAR}, 
+      #{rtParam6,jdbcType=VARCHAR}, #{rtCreatedDatetime,jdbcType=TIMESTAMP}, #{rtUpdatedDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.RoleBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="rtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_role_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rtName != null" >
+        rt_name,
+      </if>
+      <if test="rtDescription != null" >
+        rt_description,
+      </if>
+      <if test="rtType != null" >
+        rt_type,
+      </if>
+      <if test="rtRoleLevel != null" >
+        rt_role_level,
+      </if>
+      <if test="rtCreator != null" >
+        rt_creator,
+      </if>
+      <if test="rtUpdater != null" >
+        rt_updater,
+      </if>
+      <if test="rtClassify != null" >
+        rt_classify,
+      </if>
+      <if test="rtParam1 != null" >
+        rt_param1,
+      </if>
+      <if test="rtParam2 != null" >
+        rt_param2,
+      </if>
+      <if test="rtParam3 != null" >
+        rt_param3,
+      </if>
+      <if test="rtParam4 != null" >
+        rt_param4,
+      </if>
+      <if test="rtParam5 != null" >
+        rt_param5,
+      </if>
+      <if test="rtParam6 != null" >
+        rt_param6,
+      </if>
+      <if test="rtCreatedDatetime != null" >
+        rt_created_datetime,
+      </if>
+      <if test="rtUpdatedDatetime != null" >
+        rt_updated_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rtName != null" >
+        #{rtName,jdbcType=VARCHAR},
+      </if>
+      <if test="rtDescription != null" >
+        #{rtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="rtType != null" >
+        #{rtType,jdbcType=VARCHAR},
+      </if>
+      <if test="rtRoleLevel != null" >
+        #{rtRoleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="rtCreator != null" >
+        #{rtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="rtUpdater != null" >
+        #{rtUpdater,jdbcType=VARCHAR},
+      </if>
+      <if test="rtClassify != null" >
+        #{rtClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam1 != null" >
+        #{rtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam2 != null" >
+        #{rtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam3 != null" >
+        #{rtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam4 != null" >
+        #{rtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam5 != null" >
+        #{rtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam6 != null" >
+        #{rtParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="rtCreatedDatetime != null" >
+        #{rtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtUpdatedDatetime != null" >
+        #{rtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.RoleBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_role_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_role_tbl
+    <set >
+      <if test="record.rtId != null" >
+        rt_id = #{record.rtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rtName != null" >
+        rt_name = #{record.rtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtDescription != null" >
+        rt_description = #{record.rtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtType != null" >
+        rt_type = #{record.rtType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtRoleLevel != null" >
+        rt_role_level = #{record.rtRoleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.rtCreator != null" >
+        rt_creator = #{record.rtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtUpdater != null" >
+        rt_updater = #{record.rtUpdater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtClassify != null" >
+        rt_classify = #{record.rtClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam1 != null" >
+        rt_param1 = #{record.rtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam2 != null" >
+        rt_param2 = #{record.rtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam3 != null" >
+        rt_param3 = #{record.rtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam4 != null" >
+        rt_param4 = #{record.rtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam5 != null" >
+        rt_param5 = #{record.rtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtParam6 != null" >
+        rt_param6 = #{record.rtParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtCreatedDatetime != null" >
+        rt_created_datetime = #{record.rtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rtUpdatedDatetime != null" >
+        rt_updated_datetime = #{record.rtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_role_tbl
+    set rt_id = #{record.rtId,jdbcType=INTEGER},
+      rt_name = #{record.rtName,jdbcType=VARCHAR},
+      rt_description = #{record.rtDescription,jdbcType=VARCHAR},
+      rt_type = #{record.rtType,jdbcType=VARCHAR},
+      rt_role_level = #{record.rtRoleLevel,jdbcType=INTEGER},
+      rt_creator = #{record.rtCreator,jdbcType=VARCHAR},
+      rt_updater = #{record.rtUpdater,jdbcType=VARCHAR},
+      rt_classify = #{record.rtClassify,jdbcType=VARCHAR},
+      rt_param1 = #{record.rtParam1,jdbcType=VARCHAR},
+      rt_param2 = #{record.rtParam2,jdbcType=VARCHAR},
+      rt_param3 = #{record.rtParam3,jdbcType=VARCHAR},
+      rt_param4 = #{record.rtParam4,jdbcType=VARCHAR},
+      rt_param5 = #{record.rtParam5,jdbcType=VARCHAR},
+      rt_param6 = #{record.rtParam6,jdbcType=VARCHAR},
+      rt_created_datetime = #{record.rtCreatedDatetime,jdbcType=TIMESTAMP},
+      rt_updated_datetime = #{record.rtUpdatedDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.RoleBean" >
+    update newcems_role_tbl
+    <set >
+      <if test="rtName != null" >
+        rt_name = #{rtName,jdbcType=VARCHAR},
+      </if>
+      <if test="rtDescription != null" >
+        rt_description = #{rtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="rtType != null" >
+        rt_type = #{rtType,jdbcType=VARCHAR},
+      </if>
+      <if test="rtRoleLevel != null" >
+        rt_role_level = #{rtRoleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="rtCreator != null" >
+        rt_creator = #{rtCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="rtUpdater != null" >
+        rt_updater = #{rtUpdater,jdbcType=VARCHAR},
+      </if>
+      <if test="rtClassify != null" >
+        rt_classify = #{rtClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam1 != null" >
+        rt_param1 = #{rtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam2 != null" >
+        rt_param2 = #{rtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam3 != null" >
+        rt_param3 = #{rtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam4 != null" >
+        rt_param4 = #{rtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam5 != null" >
+        rt_param5 = #{rtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="rtParam6 != null" >
+        rt_param6 = #{rtParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="rtCreatedDatetime != null" >
+        rt_created_datetime = #{rtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtUpdatedDatetime != null" >
+        rt_updated_datetime = #{rtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rt_id = #{rtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.RoleBean" >
+    update newcems_role_tbl
+    set rt_name = #{rtName,jdbcType=VARCHAR},
+      rt_description = #{rtDescription,jdbcType=VARCHAR},
+      rt_type = #{rtType,jdbcType=VARCHAR},
+      rt_role_level = #{rtRoleLevel,jdbcType=INTEGER},
+      rt_creator = #{rtCreator,jdbcType=VARCHAR},
+      rt_updater = #{rtUpdater,jdbcType=VARCHAR},
+      rt_classify = #{rtClassify,jdbcType=VARCHAR},
+      rt_param1 = #{rtParam1,jdbcType=VARCHAR},
+      rt_param2 = #{rtParam2,jdbcType=VARCHAR},
+      rt_param3 = #{rtParam3,jdbcType=VARCHAR},
+      rt_param4 = #{rtParam4,jdbcType=VARCHAR},
+      rt_param5 = #{rtParam5,jdbcType=VARCHAR},
+      rt_param6 = #{rtParam6,jdbcType=VARCHAR},
+      rt_created_datetime = #{rtCreatedDatetime,jdbcType=TIMESTAMP},
+      rt_updated_datetime = #{rtUpdatedDatetime,jdbcType=TIMESTAMP}
+    where rt_id = #{rtId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.LogBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBean" >
+    <id column="lt_id" property="ltId" jdbcType="INTEGER" />
+    <result column="lt_msg" property="ltMsg" jdbcType="VARCHAR" />
+    <result column="lt_log_type" property="ltLogType" jdbcType="VARCHAR" />
+    <result column="lt_param1" property="ltParam1" jdbcType="VARCHAR" />
+    <result column="lt_param2" property="ltParam2" jdbcType="VARCHAR" />
+    <result column="lt_param3" property="ltParam3" jdbcType="VARCHAR" />
+    <result column="lt_param4" property="ltParam4" jdbcType="VARCHAR" />
+    <result column="lt_param5" property="ltParam5" jdbcType="VARCHAR" />
+    <result column="lt_param6" property="ltParam6" jdbcType="VARCHAR" />
+    <result column="lt_param7" property="ltParam7" jdbcType="VARCHAR" />
+    <result column="lt_param8" property="ltParam8" jdbcType="VARCHAR" />
+    <result column="lt_param9" property="ltParam9" jdbcType="VARCHAR" />
+    <result column="lt_param10" property="ltParam10" jdbcType="VARCHAR" />
+    <result column="lt_status_remark" property="ltStatusRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lt_id, lt_msg, lt_log_type, lt_param1, lt_param2, lt_param3, lt_param4, lt_param5, 
+    lt_param6, lt_param7, lt_param8, lt_param9, lt_param10, lt_status_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_tbl
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_tbl
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBeanExample" >
+    delete from log_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ltId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into log_tbl (lt_msg, lt_log_type, lt_param1, 
+      lt_param2, lt_param3, lt_param4, 
+      lt_param5, lt_param6, lt_param7, 
+      lt_param8, lt_param9, lt_param10, 
+      lt_status_remark)
+    values (#{ltMsg,jdbcType=VARCHAR}, #{ltLogType,jdbcType=VARCHAR}, #{ltParam1,jdbcType=VARCHAR}, 
+      #{ltParam2,jdbcType=VARCHAR}, #{ltParam3,jdbcType=VARCHAR}, #{ltParam4,jdbcType=VARCHAR}, 
+      #{ltParam5,jdbcType=VARCHAR}, #{ltParam6,jdbcType=VARCHAR}, #{ltParam7,jdbcType=VARCHAR}, 
+      #{ltParam8,jdbcType=VARCHAR}, #{ltParam9,jdbcType=VARCHAR}, #{ltParam10,jdbcType=VARCHAR}, 
+      #{ltStatusRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ltId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into log_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ltMsg != null" >
+        lt_msg,
+      </if>
+      <if test="ltLogType != null" >
+        lt_log_type,
+      </if>
+      <if test="ltParam1 != null" >
+        lt_param1,
+      </if>
+      <if test="ltParam2 != null" >
+        lt_param2,
+      </if>
+      <if test="ltParam3 != null" >
+        lt_param3,
+      </if>
+      <if test="ltParam4 != null" >
+        lt_param4,
+      </if>
+      <if test="ltParam5 != null" >
+        lt_param5,
+      </if>
+      <if test="ltParam6 != null" >
+        lt_param6,
+      </if>
+      <if test="ltParam7 != null" >
+        lt_param7,
+      </if>
+      <if test="ltParam8 != null" >
+        lt_param8,
+      </if>
+      <if test="ltParam9 != null" >
+        lt_param9,
+      </if>
+      <if test="ltParam10 != null" >
+        lt_param10,
+      </if>
+      <if test="ltStatusRemark != null" >
+        lt_status_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ltMsg != null" >
+        #{ltMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ltLogType != null" >
+        #{ltLogType,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam1 != null" >
+        #{ltParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam2 != null" >
+        #{ltParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam3 != null" >
+        #{ltParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam4 != null" >
+        #{ltParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam5 != null" >
+        #{ltParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam6 != null" >
+        #{ltParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam7 != null" >
+        #{ltParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam8 != null" >
+        #{ltParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam9 != null" >
+        #{ltParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam10 != null" >
+        #{ltParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="ltStatusRemark != null" >
+        #{ltStatusRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBeanExample" resultType="java.lang.Integer" >
+    select count(*) from log_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log_tbl
+    <set >
+      <if test="record.ltId != null" >
+        lt_id = #{record.ltId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ltMsg != null" >
+        lt_msg = #{record.ltMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltLogType != null" >
+        lt_log_type = #{record.ltLogType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam1 != null" >
+        lt_param1 = #{record.ltParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam2 != null" >
+        lt_param2 = #{record.ltParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam3 != null" >
+        lt_param3 = #{record.ltParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam4 != null" >
+        lt_param4 = #{record.ltParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam5 != null" >
+        lt_param5 = #{record.ltParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam6 != null" >
+        lt_param6 = #{record.ltParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam7 != null" >
+        lt_param7 = #{record.ltParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam8 != null" >
+        lt_param8 = #{record.ltParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam9 != null" >
+        lt_param9 = #{record.ltParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltParam10 != null" >
+        lt_param10 = #{record.ltParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltStatusRemark != null" >
+        lt_status_remark = #{record.ltStatusRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log_tbl
+    set lt_id = #{record.ltId,jdbcType=INTEGER},
+      lt_msg = #{record.ltMsg,jdbcType=VARCHAR},
+      lt_log_type = #{record.ltLogType,jdbcType=VARCHAR},
+      lt_param1 = #{record.ltParam1,jdbcType=VARCHAR},
+      lt_param2 = #{record.ltParam2,jdbcType=VARCHAR},
+      lt_param3 = #{record.ltParam3,jdbcType=VARCHAR},
+      lt_param4 = #{record.ltParam4,jdbcType=VARCHAR},
+      lt_param5 = #{record.ltParam5,jdbcType=VARCHAR},
+      lt_param6 = #{record.ltParam6,jdbcType=VARCHAR},
+      lt_param7 = #{record.ltParam7,jdbcType=VARCHAR},
+      lt_param8 = #{record.ltParam8,jdbcType=VARCHAR},
+      lt_param9 = #{record.ltParam9,jdbcType=VARCHAR},
+      lt_param10 = #{record.ltParam10,jdbcType=VARCHAR},
+      lt_status_remark = #{record.ltStatusRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBean" >
+    update log_tbl
+    <set >
+      <if test="ltMsg != null" >
+        lt_msg = #{ltMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ltLogType != null" >
+        lt_log_type = #{ltLogType,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam1 != null" >
+        lt_param1 = #{ltParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam2 != null" >
+        lt_param2 = #{ltParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam3 != null" >
+        lt_param3 = #{ltParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam4 != null" >
+        lt_param4 = #{ltParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam5 != null" >
+        lt_param5 = #{ltParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam6 != null" >
+        lt_param6 = #{ltParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam7 != null" >
+        lt_param7 = #{ltParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam8 != null" >
+        lt_param8 = #{ltParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam9 != null" >
+        lt_param9 = #{ltParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="ltParam10 != null" >
+        lt_param10 = #{ltParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="ltStatusRemark != null" >
+        lt_status_remark = #{ltStatusRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.LogBean" >
+    update log_tbl
+    set lt_msg = #{ltMsg,jdbcType=VARCHAR},
+      lt_log_type = #{ltLogType,jdbcType=VARCHAR},
+      lt_param1 = #{ltParam1,jdbcType=VARCHAR},
+      lt_param2 = #{ltParam2,jdbcType=VARCHAR},
+      lt_param3 = #{ltParam3,jdbcType=VARCHAR},
+      lt_param4 = #{ltParam4,jdbcType=VARCHAR},
+      lt_param5 = #{ltParam5,jdbcType=VARCHAR},
+      lt_param6 = #{ltParam6,jdbcType=VARCHAR},
+      lt_param7 = #{ltParam7,jdbcType=VARCHAR},
+      lt_param8 = #{ltParam8,jdbcType=VARCHAR},
+      lt_param9 = #{ltParam9,jdbcType=VARCHAR},
+      lt_param10 = #{ltParam10,jdbcType=VARCHAR},
+      lt_status_remark = #{ltStatusRemark,jdbcType=VARCHAR}
+    where lt_id = #{ltId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.ConstantBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBean" >
+    <id column="const_id" property="constId" jdbcType="INTEGER" />
+    <result column="const_type" property="constType" jdbcType="VARCHAR" />
+    <result column="const_value" property="constValue" jdbcType="VARCHAR" />
+    <result column="const_param1" property="constParam1" jdbcType="VARCHAR" />
+    <result column="const_param2" property="constParam2" jdbcType="VARCHAR" />
+    <result column="const_param3" property="constParam3" jdbcType="VARCHAR" />
+    <result column="const_param4" property="constParam4" jdbcType="VARCHAR" />
+    <result column="const_param5" property="constParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    const_id, const_type, const_value, const_param1, const_param2, const_param3, const_param4, 
+    const_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from constant_tbl
+    where const_id = #{constId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from constant_tbl
+    where const_id = #{constId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBeanExample" >
+    delete from constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="constId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into constant_tbl (const_type, const_value, const_param1, 
+      const_param2, const_param3, const_param4, 
+      const_param5)
+    values (#{constType,jdbcType=VARCHAR}, #{constValue,jdbcType=VARCHAR}, #{constParam1,jdbcType=VARCHAR}, 
+      #{constParam2,jdbcType=VARCHAR}, #{constParam3,jdbcType=VARCHAR}, #{constParam4,jdbcType=VARCHAR}, 
+      #{constParam5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="constId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into constant_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="constType != null" >
+        const_type,
+      </if>
+      <if test="constValue != null" >
+        const_value,
+      </if>
+      <if test="constParam1 != null" >
+        const_param1,
+      </if>
+      <if test="constParam2 != null" >
+        const_param2,
+      </if>
+      <if test="constParam3 != null" >
+        const_param3,
+      </if>
+      <if test="constParam4 != null" >
+        const_param4,
+      </if>
+      <if test="constParam5 != null" >
+        const_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="constType != null" >
+        #{constType,jdbcType=VARCHAR},
+      </if>
+      <if test="constValue != null" >
+        #{constValue,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam1 != null" >
+        #{constParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam2 != null" >
+        #{constParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam3 != null" >
+        #{constParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam4 != null" >
+        #{constParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam5 != null" >
+        #{constParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBeanExample" resultType="java.lang.Integer" >
+    select count(*) from constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update constant_tbl
+    <set >
+      <if test="record.constId != null" >
+        const_id = #{record.constId,jdbcType=INTEGER},
+      </if>
+      <if test="record.constType != null" >
+        const_type = #{record.constType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constValue != null" >
+        const_value = #{record.constValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constParam1 != null" >
+        const_param1 = #{record.constParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constParam2 != null" >
+        const_param2 = #{record.constParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constParam3 != null" >
+        const_param3 = #{record.constParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constParam4 != null" >
+        const_param4 = #{record.constParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constParam5 != null" >
+        const_param5 = #{record.constParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update constant_tbl
+    set const_id = #{record.constId,jdbcType=INTEGER},
+      const_type = #{record.constType,jdbcType=VARCHAR},
+      const_value = #{record.constValue,jdbcType=VARCHAR},
+      const_param1 = #{record.constParam1,jdbcType=VARCHAR},
+      const_param2 = #{record.constParam2,jdbcType=VARCHAR},
+      const_param3 = #{record.constParam3,jdbcType=VARCHAR},
+      const_param4 = #{record.constParam4,jdbcType=VARCHAR},
+      const_param5 = #{record.constParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBean" >
+    update constant_tbl
+    <set >
+      <if test="constType != null" >
+        const_type = #{constType,jdbcType=VARCHAR},
+      </if>
+      <if test="constValue != null" >
+        const_value = #{constValue,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam1 != null" >
+        const_param1 = #{constParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam2 != null" >
+        const_param2 = #{constParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam3 != null" >
+        const_param3 = #{constParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam4 != null" >
+        const_param4 = #{constParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="constParam5 != null" >
+        const_param5 = #{constParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where const_id = #{constId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.ConstantBean" >
+    update constant_tbl
+    set const_type = #{constType,jdbcType=VARCHAR},
+      const_value = #{constValue,jdbcType=VARCHAR},
+      const_param1 = #{constParam1,jdbcType=VARCHAR},
+      const_param2 = #{constParam2,jdbcType=VARCHAR},
+      const_param3 = #{constParam3,jdbcType=VARCHAR},
+      const_param4 = #{constParam4,jdbcType=VARCHAR},
+      const_param5 = #{constParam5,jdbcType=VARCHAR}
+    where const_id = #{constId,jdbcType=INTEGER}
+  </update>
+</mapper>

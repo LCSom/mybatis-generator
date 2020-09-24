@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.ChartBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.ChartBean" >
+    <id column="ct_id" property="ctId" jdbcType="INTEGER" />
+    <result column="ct_ut_id" property="ctUtId" jdbcType="INTEGER" />
+    <result column="ct_chart_type" property="ctChartType" jdbcType="VARCHAR" />
+    <result column="ct_chart_size" property="ctChartSize" jdbcType="VARCHAR" />
+    <result column="ct_chart_title" property="ctChartTitle" jdbcType="VARCHAR" />
+    <result column="ct_param1" property="ctParam1" jdbcType="VARCHAR" />
+    <result column="ct_param2" property="ctParam2" jdbcType="VARCHAR" />
+    <result column="ct_param3" property="ctParam3" jdbcType="VARCHAR" />
+    <result column="ct_param4" property="ctParam4" jdbcType="VARCHAR" />
+    <result column="ct_param5" property="ctParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ct_id, ct_ut_id, ct_chart_type, ct_chart_size, ct_chart_title, ct_param1, ct_param2, 
+    ct_param3, ct_param4, ct_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.ChartBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_chart_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_chart_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_chart_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.ChartBeanExample" >
+    delete from newcems_chart_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.ChartBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_chart_tbl (ct_ut_id, ct_chart_type, ct_chart_size, 
+      ct_chart_title, ct_param1, ct_param2, 
+      ct_param3, ct_param4, ct_param5
+      )
+    values (#{ctUtId,jdbcType=INTEGER}, #{ctChartType,jdbcType=VARCHAR}, #{ctChartSize,jdbcType=VARCHAR}, 
+      #{ctChartTitle,jdbcType=VARCHAR}, #{ctParam1,jdbcType=VARCHAR}, #{ctParam2,jdbcType=VARCHAR}, 
+      #{ctParam3,jdbcType=VARCHAR}, #{ctParam4,jdbcType=VARCHAR}, #{ctParam5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.ChartBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_chart_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ctUtId != null" >
+        ct_ut_id,
+      </if>
+      <if test="ctChartType != null" >
+        ct_chart_type,
+      </if>
+      <if test="ctChartSize != null" >
+        ct_chart_size,
+      </if>
+      <if test="ctChartTitle != null" >
+        ct_chart_title,
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1,
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2,
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3,
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4,
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ctUtId != null" >
+        #{ctUtId,jdbcType=INTEGER},
+      </if>
+      <if test="ctChartType != null" >
+        #{ctChartType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctChartSize != null" >
+        #{ctChartSize,jdbcType=VARCHAR},
+      </if>
+      <if test="ctChartTitle != null" >
+        #{ctChartTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam1 != null" >
+        #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        #{ctParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.ChartBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_chart_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_chart_tbl
+    <set >
+      <if test="record.ctId != null" >
+        ct_id = #{record.ctId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctUtId != null" >
+        ct_ut_id = #{record.ctUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctChartType != null" >
+        ct_chart_type = #{record.ctChartType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctChartSize != null" >
+        ct_chart_size = #{record.ctChartSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctChartTitle != null" >
+        ct_chart_title = #{record.ctChartTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam1 != null" >
+        ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam2 != null" >
+        ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam3 != null" >
+        ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam4 != null" >
+        ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam5 != null" >
+        ct_param5 = #{record.ctParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_chart_tbl
+    set ct_id = #{record.ctId,jdbcType=INTEGER},
+      ct_ut_id = #{record.ctUtId,jdbcType=INTEGER},
+      ct_chart_type = #{record.ctChartType,jdbcType=VARCHAR},
+      ct_chart_size = #{record.ctChartSize,jdbcType=VARCHAR},
+      ct_chart_title = #{record.ctChartTitle,jdbcType=VARCHAR},
+      ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{record.ctParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.ChartBean" >
+    update newcems_chart_tbl
+    <set >
+      <if test="ctUtId != null" >
+        ct_ut_id = #{ctUtId,jdbcType=INTEGER},
+      </if>
+      <if test="ctChartType != null" >
+        ct_chart_type = #{ctChartType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctChartSize != null" >
+        ct_chart_size = #{ctChartSize,jdbcType=VARCHAR},
+      </if>
+      <if test="ctChartTitle != null" >
+        ct_chart_title = #{ctChartTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5 = #{ctParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.ChartBean" >
+    update newcems_chart_tbl
+    set ct_ut_id = #{ctUtId,jdbcType=INTEGER},
+      ct_chart_type = #{ctChartType,jdbcType=VARCHAR},
+      ct_chart_size = #{ctChartSize,jdbcType=VARCHAR},
+      ct_chart_title = #{ctChartTitle,jdbcType=VARCHAR},
+      ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{ctParam5,jdbcType=VARCHAR}
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+</mapper>

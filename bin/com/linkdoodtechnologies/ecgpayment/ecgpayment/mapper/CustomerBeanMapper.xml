@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.CustomerBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBean" >
+    <id column="ct_id" property="ctId" jdbcType="INTEGER" />
+    <result column="ct_user_id" property="ctUserId" jdbcType="VARCHAR" />
+    <result column="ct_att_id" property="ctAttId" jdbcType="VARCHAR" />
+    <result column="ct_invoice_id" property="ctInvoiceId" jdbcType="VARCHAR" />
+    <result column="ct_username" property="ctUsername" jdbcType="VARCHAR" />
+    <result column="ct_email" property="ctEmail" jdbcType="VARCHAR" />
+    <result column="ct_phone" property="ctPhone" jdbcType="VARCHAR" />
+    <result column="ct_cc_name" property="ctCcName" jdbcType="VARCHAR" />
+    <result column="ct_cc_no" property="ctCcNo" jdbcType="VARCHAR" />
+    <result column="ct_bank" property="ctBank" jdbcType="VARCHAR" />
+    <result column="ct_country" property="ctCountry" jdbcType="VARCHAR" />
+    <result column="ct_last_payment_time" property="ctLastPaymentTime" jdbcType="VARCHAR" />
+    <result column="ct_created_time" property="ctCreatedTime" jdbcType="VARCHAR" />
+    <result column="ct_updated_time" property="ctUpdatedTime" jdbcType="VARCHAR" />
+    <result column="ct_status" property="ctStatus" jdbcType="INTEGER" />
+    <result column="ct_param1" property="ctParam1" jdbcType="VARCHAR" />
+    <result column="ct_param2" property="ctParam2" jdbcType="VARCHAR" />
+    <result column="ct_param3" property="ctParam3" jdbcType="VARCHAR" />
+    <result column="ct_param4" property="ctParam4" jdbcType="VARCHAR" />
+    <result column="ct_param5" property="ctParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ct_id, ct_user_id, ct_att_id, ct_invoice_id, ct_username, ct_email, ct_phone, ct_cc_name, 
+    ct_cc_no, ct_bank, ct_country, ct_last_payment_time, ct_created_time, ct_updated_time, 
+    ct_status, ct_param1, ct_param2, ct_param3, ct_param4, ct_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBeanExample" >
+    delete from customer_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into customer_tbl (ct_user_id, ct_att_id, ct_invoice_id, 
+      ct_username, ct_email, ct_phone, 
+      ct_cc_name, ct_cc_no, ct_bank, 
+      ct_country, ct_last_payment_time, ct_created_time, 
+      ct_updated_time, ct_status, ct_param1, 
+      ct_param2, ct_param3, ct_param4, 
+      ct_param5)
+    values (#{ctUserId,jdbcType=VARCHAR}, #{ctAttId,jdbcType=VARCHAR}, #{ctInvoiceId,jdbcType=VARCHAR}, 
+      #{ctUsername,jdbcType=VARCHAR}, #{ctEmail,jdbcType=VARCHAR}, #{ctPhone,jdbcType=VARCHAR}, 
+      #{ctCcName,jdbcType=VARCHAR}, #{ctCcNo,jdbcType=VARCHAR}, #{ctBank,jdbcType=VARCHAR}, 
+      #{ctCountry,jdbcType=VARCHAR}, #{ctLastPaymentTime,jdbcType=VARCHAR}, #{ctCreatedTime,jdbcType=VARCHAR}, 
+      #{ctUpdatedTime,jdbcType=VARCHAR}, #{ctStatus,jdbcType=INTEGER}, #{ctParam1,jdbcType=VARCHAR}, 
+      #{ctParam2,jdbcType=VARCHAR}, #{ctParam3,jdbcType=VARCHAR}, #{ctParam4,jdbcType=VARCHAR}, 
+      #{ctParam5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into customer_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ctUserId != null" >
+        ct_user_id,
+      </if>
+      <if test="ctAttId != null" >
+        ct_att_id,
+      </if>
+      <if test="ctInvoiceId != null" >
+        ct_invoice_id,
+      </if>
+      <if test="ctUsername != null" >
+        ct_username,
+      </if>
+      <if test="ctEmail != null" >
+        ct_email,
+      </if>
+      <if test="ctPhone != null" >
+        ct_phone,
+      </if>
+      <if test="ctCcName != null" >
+        ct_cc_name,
+      </if>
+      <if test="ctCcNo != null" >
+        ct_cc_no,
+      </if>
+      <if test="ctBank != null" >
+        ct_bank,
+      </if>
+      <if test="ctCountry != null" >
+        ct_country,
+      </if>
+      <if test="ctLastPaymentTime != null" >
+        ct_last_payment_time,
+      </if>
+      <if test="ctCreatedTime != null" >
+        ct_created_time,
+      </if>
+      <if test="ctUpdatedTime != null" >
+        ct_updated_time,
+      </if>
+      <if test="ctStatus != null" >
+        ct_status,
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1,
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2,
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3,
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4,
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ctUserId != null" >
+        #{ctUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctAttId != null" >
+        #{ctAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctInvoiceId != null" >
+        #{ctInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctUsername != null" >
+        #{ctUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="ctEmail != null" >
+        #{ctEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ctPhone != null" >
+        #{ctPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCcName != null" >
+        #{ctCcName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCcNo != null" >
+        #{ctCcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctBank != null" >
+        #{ctBank,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCountry != null" >
+        #{ctCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="ctLastPaymentTime != null" >
+        #{ctLastPaymentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCreatedTime != null" >
+        #{ctCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctUpdatedTime != null" >
+        #{ctUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctStatus != null" >
+        #{ctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="ctParam1 != null" >
+        #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        #{ctParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBeanExample" resultType="java.lang.Integer" >
+    select count(*) from customer_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_tbl
+    <set >
+      <if test="record.ctId != null" >
+        ct_id = #{record.ctId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctUserId != null" >
+        ct_user_id = #{record.ctUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctAttId != null" >
+        ct_att_id = #{record.ctAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctInvoiceId != null" >
+        ct_invoice_id = #{record.ctInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctUsername != null" >
+        ct_username = #{record.ctUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctEmail != null" >
+        ct_email = #{record.ctEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctPhone != null" >
+        ct_phone = #{record.ctPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctCcName != null" >
+        ct_cc_name = #{record.ctCcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctCcNo != null" >
+        ct_cc_no = #{record.ctCcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctBank != null" >
+        ct_bank = #{record.ctBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctCountry != null" >
+        ct_country = #{record.ctCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctLastPaymentTime != null" >
+        ct_last_payment_time = #{record.ctLastPaymentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctCreatedTime != null" >
+        ct_created_time = #{record.ctCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctUpdatedTime != null" >
+        ct_updated_time = #{record.ctUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctStatus != null" >
+        ct_status = #{record.ctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctParam1 != null" >
+        ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam2 != null" >
+        ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam3 != null" >
+        ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam4 != null" >
+        ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam5 != null" >
+        ct_param5 = #{record.ctParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_tbl
+    set ct_id = #{record.ctId,jdbcType=INTEGER},
+      ct_user_id = #{record.ctUserId,jdbcType=VARCHAR},
+      ct_att_id = #{record.ctAttId,jdbcType=VARCHAR},
+      ct_invoice_id = #{record.ctInvoiceId,jdbcType=VARCHAR},
+      ct_username = #{record.ctUsername,jdbcType=VARCHAR},
+      ct_email = #{record.ctEmail,jdbcType=VARCHAR},
+      ct_phone = #{record.ctPhone,jdbcType=VARCHAR},
+      ct_cc_name = #{record.ctCcName,jdbcType=VARCHAR},
+      ct_cc_no = #{record.ctCcNo,jdbcType=VARCHAR},
+      ct_bank = #{record.ctBank,jdbcType=VARCHAR},
+      ct_country = #{record.ctCountry,jdbcType=VARCHAR},
+      ct_last_payment_time = #{record.ctLastPaymentTime,jdbcType=VARCHAR},
+      ct_created_time = #{record.ctCreatedTime,jdbcType=VARCHAR},
+      ct_updated_time = #{record.ctUpdatedTime,jdbcType=VARCHAR},
+      ct_status = #{record.ctStatus,jdbcType=INTEGER},
+      ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{record.ctParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBean" >
+    update customer_tbl
+    <set >
+      <if test="ctUserId != null" >
+        ct_user_id = #{ctUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctAttId != null" >
+        ct_att_id = #{ctAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctInvoiceId != null" >
+        ct_invoice_id = #{ctInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="ctUsername != null" >
+        ct_username = #{ctUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="ctEmail != null" >
+        ct_email = #{ctEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ctPhone != null" >
+        ct_phone = #{ctPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCcName != null" >
+        ct_cc_name = #{ctCcName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCcNo != null" >
+        ct_cc_no = #{ctCcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctBank != null" >
+        ct_bank = #{ctBank,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCountry != null" >
+        ct_country = #{ctCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="ctLastPaymentTime != null" >
+        ct_last_payment_time = #{ctLastPaymentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCreatedTime != null" >
+        ct_created_time = #{ctCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctUpdatedTime != null" >
+        ct_updated_time = #{ctUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="ctStatus != null" >
+        ct_status = #{ctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5 = #{ctParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.CustomerBean" >
+    update customer_tbl
+    set ct_user_id = #{ctUserId,jdbcType=VARCHAR},
+      ct_att_id = #{ctAttId,jdbcType=VARCHAR},
+      ct_invoice_id = #{ctInvoiceId,jdbcType=VARCHAR},
+      ct_username = #{ctUsername,jdbcType=VARCHAR},
+      ct_email = #{ctEmail,jdbcType=VARCHAR},
+      ct_phone = #{ctPhone,jdbcType=VARCHAR},
+      ct_cc_name = #{ctCcName,jdbcType=VARCHAR},
+      ct_cc_no = #{ctCcNo,jdbcType=VARCHAR},
+      ct_bank = #{ctBank,jdbcType=VARCHAR},
+      ct_country = #{ctCountry,jdbcType=VARCHAR},
+      ct_last_payment_time = #{ctLastPaymentTime,jdbcType=VARCHAR},
+      ct_created_time = #{ctCreatedTime,jdbcType=VARCHAR},
+      ct_updated_time = #{ctUpdatedTime,jdbcType=VARCHAR},
+      ct_status = #{ctStatus,jdbcType=INTEGER},
+      ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{ctParam5,jdbcType=VARCHAR}
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+</mapper>

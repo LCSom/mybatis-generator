@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.HolidayUserBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.HolidayUserBean" >
+    <id column="hut_id" property="hutId" jdbcType="INTEGER" />
+    <result column="hut_ut_id" property="hutUtId" jdbcType="INTEGER" />
+    <result column="hut_name" property="hutName" jdbcType="VARCHAR" />
+    <result column="hut_description" property="hutDescription" jdbcType="VARCHAR" />
+    <result column="hut_date" property="hutDate" jdbcType="VARCHAR" />
+    <result column="hut_year" property="hutYear" jdbcType="INTEGER" />
+    <result column="hut_month" property="hutMonth" jdbcType="INTEGER" />
+    <result column="hut_day" property="hutDay" jdbcType="INTEGER" />
+    <result column="hut_type" property="hutType" jdbcType="VARCHAR" />
+    <result column="hut_location" property="hutLocation" jdbcType="VARCHAR" />
+    <result column="hut_status" property="hutStatus" jdbcType="INTEGER" />
+    <result column="hut_created_time" property="hutCreatedTime" jdbcType="VARCHAR" />
+    <result column="hut_updated_time" property="hutUpdatedTime" jdbcType="VARCHAR" />
+    <result column="hut_param1" property="hutParam1" jdbcType="VARCHAR" />
+    <result column="hut_param2" property="hutParam2" jdbcType="VARCHAR" />
+    <result column="hut_param3" property="hutParam3" jdbcType="VARCHAR" />
+    <result column="hut_param4" property="hutParam4" jdbcType="VARCHAR" />
+    <result column="hut_param5" property="hutParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hut_id, hut_ut_id, hut_name, hut_description, hut_date, hut_year, hut_month, hut_day, 
+    hut_type, hut_location, hut_status, hut_created_time, hut_updated_time, hut_param1, 
+    hut_param2, hut_param3, hut_param4, hut_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.HolidayUserBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from holiday_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from holiday_user_tbl
+    where hut_id = #{hutId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from holiday_user_tbl
+    where hut_id = #{hutId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.HolidayUserBeanExample" >
+    delete from holiday_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.HolidayUserBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="hutId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into holiday_user_tbl (hut_ut_id, hut_name, hut_description, 
+      hut_date, hut_year, hut_month, 
+      hut_day, hut_type, hut_location, 
+      hut_status, hut_created_time, hut_updated_time, 
+      hut_param1, hut_param2, hut_param3, 
+      hut_param4, hut_param5)
+    values (#{hutUtId,jdbcType=INTEGER}, #{hutName,jdbcType=VARCHAR}, #{hutDescription,jdbcType=VARCHAR}, 
+      #{hutDate,jdbcType=VARCHAR}, #{hutYear,jdbcType=INTEGER}, #{hutMonth,jdbcType=INTEGER}, 
+      #{hutDay,jdbcType=INTEGER}, #{hutType,jdbcType=VARCHAR}, #{hutLocation,jdbcType=VARCHAR}, 
+      #{hutStatus,jdbcType=INTEGER}, #{hutCreatedTime,jdbcType=VARCHAR}, #{hutUpdatedTime,jdbcType=VARCHAR}, 
+      #{hutParam1,jdbcType=VARCHAR}, #{hutParam2,jdbcType=VARCHAR}, #{hutParam3,jdbcType=VARCHAR}, 
+      #{hutParam4,jdbcType=VARCHAR}, #{hutParam5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.HolidayUserBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="hutId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into holiday_user_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hutUtId != null" >
+        hut_ut_id,
+      </if>
+      <if test="hutName != null" >
+        hut_name,
+      </if>
+      <if test="hutDescription != null" >
+        hut_description,
+      </if>
+      <if test="hutDate != null" >
+        hut_date,
+      </if>
+      <if test="hutYear != null" >
+        hut_year,
+      </if>
+      <if test="hutMonth != null" >
+        hut_month,
+      </if>
+      <if test="hutDay != null" >
+        hut_day,
+      </if>
+      <if test="hutType != null" >
+        hut_type,
+      </if>
+      <if test="hutLocation != null" >
+        hut_location,
+      </if>
+      <if test="hutStatus != null" >
+        hut_status,
+      </if>
+      <if test="hutCreatedTime != null" >
+        hut_created_time,
+      </if>
+      <if test="hutUpdatedTime != null" >
+        hut_updated_time,
+      </if>
+      <if test="hutParam1 != null" >
+        hut_param1,
+      </if>
+      <if test="hutParam2 != null" >
+        hut_param2,
+      </if>
+      <if test="hutParam3 != null" >
+        hut_param3,
+      </if>
+      <if test="hutParam4 != null" >
+        hut_param4,
+      </if>
+      <if test="hutParam5 != null" >
+        hut_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hutUtId != null" >
+        #{hutUtId,jdbcType=INTEGER},
+      </if>
+      <if test="hutName != null" >
+        #{hutName,jdbcType=VARCHAR},
+      </if>
+      <if test="hutDescription != null" >
+        #{hutDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="hutDate != null" >
+        #{hutDate,jdbcType=VARCHAR},
+      </if>
+      <if test="hutYear != null" >
+        #{hutYear,jdbcType=INTEGER},
+      </if>
+      <if test="hutMonth != null" >
+        #{hutMonth,jdbcType=INTEGER},
+      </if>
+      <if test="hutDay != null" >
+        #{hutDay,jdbcType=INTEGER},
+      </if>
+      <if test="hutType != null" >
+        #{hutType,jdbcType=VARCHAR},
+      </if>
+      <if test="hutLocation != null" >
+        #{hutLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="hutStatus != null" >
+        #{hutStatus,jdbcType=INTEGER},
+      </if>
+      <if test="hutCreatedTime != null" >
+        #{hutCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hutUpdatedTime != null" >
+        #{hutUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam1 != null" >
+        #{hutParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam2 != null" >
+        #{hutParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam3 != null" >
+        #{hutParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam4 != null" >
+        #{hutParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam5 != null" >
+        #{hutParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.HolidayUserBeanExample" resultType="java.lang.Integer" >
+    select count(*) from holiday_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update holiday_user_tbl
+    <set >
+      <if test="record.hutId != null" >
+        hut_id = #{record.hutId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutUtId != null" >
+        hut_ut_id = #{record.hutUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutName != null" >
+        hut_name = #{record.hutName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutDescription != null" >
+        hut_description = #{record.hutDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutDate != null" >
+        hut_date = #{record.hutDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutYear != null" >
+        hut_year = #{record.hutYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutMonth != null" >
+        hut_month = #{record.hutMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutDay != null" >
+        hut_day = #{record.hutDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutType != null" >
+        hut_type = #{record.hutType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutLocation != null" >
+        hut_location = #{record.hutLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutStatus != null" >
+        hut_status = #{record.hutStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.hutCreatedTime != null" >
+        hut_created_time = #{record.hutCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutUpdatedTime != null" >
+        hut_updated_time = #{record.hutUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutParam1 != null" >
+        hut_param1 = #{record.hutParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutParam2 != null" >
+        hut_param2 = #{record.hutParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutParam3 != null" >
+        hut_param3 = #{record.hutParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutParam4 != null" >
+        hut_param4 = #{record.hutParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hutParam5 != null" >
+        hut_param5 = #{record.hutParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update holiday_user_tbl
+    set hut_id = #{record.hutId,jdbcType=INTEGER},
+      hut_ut_id = #{record.hutUtId,jdbcType=INTEGER},
+      hut_name = #{record.hutName,jdbcType=VARCHAR},
+      hut_description = #{record.hutDescription,jdbcType=VARCHAR},
+      hut_date = #{record.hutDate,jdbcType=VARCHAR},
+      hut_year = #{record.hutYear,jdbcType=INTEGER},
+      hut_month = #{record.hutMonth,jdbcType=INTEGER},
+      hut_day = #{record.hutDay,jdbcType=INTEGER},
+      hut_type = #{record.hutType,jdbcType=VARCHAR},
+      hut_location = #{record.hutLocation,jdbcType=VARCHAR},
+      hut_status = #{record.hutStatus,jdbcType=INTEGER},
+      hut_created_time = #{record.hutCreatedTime,jdbcType=VARCHAR},
+      hut_updated_time = #{record.hutUpdatedTime,jdbcType=VARCHAR},
+      hut_param1 = #{record.hutParam1,jdbcType=VARCHAR},
+      hut_param2 = #{record.hutParam2,jdbcType=VARCHAR},
+      hut_param3 = #{record.hutParam3,jdbcType=VARCHAR},
+      hut_param4 = #{record.hutParam4,jdbcType=VARCHAR},
+      hut_param5 = #{record.hutParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.HolidayUserBean" >
+    update holiday_user_tbl
+    <set >
+      <if test="hutUtId != null" >
+        hut_ut_id = #{hutUtId,jdbcType=INTEGER},
+      </if>
+      <if test="hutName != null" >
+        hut_name = #{hutName,jdbcType=VARCHAR},
+      </if>
+      <if test="hutDescription != null" >
+        hut_description = #{hutDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="hutDate != null" >
+        hut_date = #{hutDate,jdbcType=VARCHAR},
+      </if>
+      <if test="hutYear != null" >
+        hut_year = #{hutYear,jdbcType=INTEGER},
+      </if>
+      <if test="hutMonth != null" >
+        hut_month = #{hutMonth,jdbcType=INTEGER},
+      </if>
+      <if test="hutDay != null" >
+        hut_day = #{hutDay,jdbcType=INTEGER},
+      </if>
+      <if test="hutType != null" >
+        hut_type = #{hutType,jdbcType=VARCHAR},
+      </if>
+      <if test="hutLocation != null" >
+        hut_location = #{hutLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="hutStatus != null" >
+        hut_status = #{hutStatus,jdbcType=INTEGER},
+      </if>
+      <if test="hutCreatedTime != null" >
+        hut_created_time = #{hutCreatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hutUpdatedTime != null" >
+        hut_updated_time = #{hutUpdatedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam1 != null" >
+        hut_param1 = #{hutParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam2 != null" >
+        hut_param2 = #{hutParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam3 != null" >
+        hut_param3 = #{hutParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam4 != null" >
+        hut_param4 = #{hutParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="hutParam5 != null" >
+        hut_param5 = #{hutParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hut_id = #{hutId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.HolidayUserBean" >
+    update holiday_user_tbl
+    set hut_ut_id = #{hutUtId,jdbcType=INTEGER},
+      hut_name = #{hutName,jdbcType=VARCHAR},
+      hut_description = #{hutDescription,jdbcType=VARCHAR},
+      hut_date = #{hutDate,jdbcType=VARCHAR},
+      hut_year = #{hutYear,jdbcType=INTEGER},
+      hut_month = #{hutMonth,jdbcType=INTEGER},
+      hut_day = #{hutDay,jdbcType=INTEGER},
+      hut_type = #{hutType,jdbcType=VARCHAR},
+      hut_location = #{hutLocation,jdbcType=VARCHAR},
+      hut_status = #{hutStatus,jdbcType=INTEGER},
+      hut_created_time = #{hutCreatedTime,jdbcType=VARCHAR},
+      hut_updated_time = #{hutUpdatedTime,jdbcType=VARCHAR},
+      hut_param1 = #{hutParam1,jdbcType=VARCHAR},
+      hut_param2 = #{hutParam2,jdbcType=VARCHAR},
+      hut_param3 = #{hutParam3,jdbcType=VARCHAR},
+      hut_param4 = #{hutParam4,jdbcType=VARCHAR},
+      hut_param5 = #{hutParam5,jdbcType=VARCHAR}
+    where hut_id = #{hutId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.DeviceOnlineBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.DeviceOnlineBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="sessionId" property="sessionid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devOnlyId, loginTime, sessionId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.DeviceOnlineBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_device_online
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_device_online
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_device_online
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.DeviceOnlineBeanExample" >
+    delete from cems_device_online
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.DeviceOnlineBean" >
+    insert into cems_device_online (id, devOnlyId, loginTime, 
+      sessionId)
+    values (#{id,jdbcType=VARCHAR}, #{devonlyid,jdbcType=VARCHAR}, #{logintime,jdbcType=TIMESTAMP}, 
+      #{sessionid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.DeviceOnlineBean" >
+    insert into cems_device_online
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="sessionid != null" >
+        sessionId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sessionid != null" >
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.DeviceOnlineBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_device_online
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_device_online
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logintime != null" >
+        loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sessionid != null" >
+        sessionId = #{record.sessionid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_device_online
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      loginTime = #{record.logintime,jdbcType=TIMESTAMP},
+      sessionId = #{record.sessionid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.DeviceOnlineBean" >
+    update cems_device_online
+    <set >
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sessionid != null" >
+        sessionId = #{sessionid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.DeviceOnlineBean" >
+    update cems_device_online
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      sessionId = #{sessionid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.MailMonitorLogBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.MailMonitorLogBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="orgId" property="orgid" jdbcType="VARCHAR" />
+    <result column="orgName" property="orgname" jdbcType="VARCHAR" />
+    <result column="regUserOnlyId" property="reguseronlyid" jdbcType="VARCHAR" />
+    <result column="regUserAccount" property="reguseraccount" jdbcType="VARCHAR" />
+    <result column="userOnlyId" property="useronlyid" jdbcType="VARCHAR" />
+    <result column="userAccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="osLoginAccount" property="osloginaccount" jdbcType="VARCHAR" />
+    <result column="clientTime" property="clienttime" jdbcType="TIMESTAMP" />
+    <result column="reportTime" property="reporttime" jdbcType="TIMESTAMP" />
+    <result column="policyId" property="policyid" jdbcType="VARCHAR" />
+    <result column="ret" property="ret" jdbcType="TINYINT" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="SUBJECT" property="subject" jdbcType="VARCHAR" />
+    <result column="violate" property="violate" jdbcType="TINYINT" />
+    <result column="sensitiveKey" property="sensitivekey" jdbcType="VARCHAR" />
+    <result column="attachmentId" property="attachmentid" jdbcType="VARCHAR" />
+    <result column="field1" property="field1" jdbcType="VARCHAR" />
+    <result column="field2" property="field2" jdbcType="VARCHAR" />
+    <result column="field3" property="field3" jdbcType="VARCHAR" />
+    <result column="field4" property="field4" jdbcType="VARCHAR" />
+    <result column="regUserName" property="regusername" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userOrgId" property="userorgid" jdbcType="VARCHAR" />
+    <result column="userOrgCodeUI" property="userorgcodeui" jdbcType="VARCHAR" />
+    <result column="devOrgCodeUI" property="devorgcodeui" jdbcType="VARCHAR" />
+    <result column="devOrgPath" property="devorgpath" jdbcType="VARCHAR" />
+    <result column="ipType" property="iptype" jdbcType="INTEGER" />
+    <result column="holdName" property="holdname" jdbcType="VARCHAR" />
+    <result column="bread" property="bread" jdbcType="INTEGER" />
+    <result column="cyrip" property="cyrip" jdbcType="VARCHAR" />
+    <result column="curmac" property="curmac" jdbcType="VARCHAR" />
+    <result column="optAudit" property="optaudit" jdbcType="INTEGER" />
+    <result column="groupid" property="groupid" jdbcType="VARCHAR" />
+    <result column="policyName" property="policyname" jdbcType="VARCHAR" />
+    <result column="groupname" property="groupname" jdbcType="VARCHAR" />
+    <result column="netState" property="netstate" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.MailMonitorLogBeanWithBLOBs" extends="BaseResultMap" >
+    <result column="mainbody" property="mainbody" jdbcType="LONGVARCHAR" />
+    <result column="sensitivecontent" property="sensitivecontent" jdbcType="LONGVARCHAR" />
+    <result column="ipNumber" property="ipnumber" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devOnlyId, ip, mac, NAME, orgId, orgName, regUserOnlyId, regUserAccount, userOnlyId, 
+    userAccount, osLoginAccount, clientTime, reportTime, policyId, ret, sender, receiver, 
+    SUBJECT, violate, sensitiveKey, attachmentId, field1, field2, field3, field4, regUserName, 
+    userName, userOrgId, userOrgCodeUI, devOrgCodeUI, devOrgPath, ipType, holdName, bread, 
+    cyrip, curmac, optAudit, groupid, policyName, groupname, netState
+  </sql>
+  <sql id="Blob_Column_List" >
+    mainbody, sensitivecontent, ipNumber
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.MailMonitorLogBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_log_device_mailmonitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.MailMonitorLogBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_log_device_mailmonitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_log_device_mailmonitor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_log_device_mailmonitor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.MailMonitorLogBeanExample" >
+    delete from cems_log_device_mailmonitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.MailMonitorLogBeanWithBLOBs" >
+    insert into cems_log_device_mailmonitor (id, devOnlyId, ip, 
+      mac, NAME, orgId, orgName, 
+      regUserOnlyId, regUserAccount, userOnlyId, 
+      userAccount, osLoginAccount, clientTime, 
+      reportTime, policyId, ret, 
+      sender, receiver, SUBJECT, 
+      violate, sensitiveKey, attachmentId, 
+      field1, field2, field3, 
+      field4, regUserName, userName, 
+      userOrgId, userOrgCodeUI, devOrgCodeUI, 
+      devOrgPath, ipType, holdName, 
+      bread, cyrip, curmac, 
+      optAudit, groupid, policyName, 
+      groupname, netState, mainbody, 
+      sensitivecontent, ipNumber)
+    values (#{id,jdbcType=VARCHAR}, #{devonlyid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{mac,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{reguseronlyid,jdbcType=VARCHAR}, #{reguseraccount,jdbcType=VARCHAR}, #{useronlyid,jdbcType=VARCHAR}, 
+      #{useraccount,jdbcType=VARCHAR}, #{osloginaccount,jdbcType=VARCHAR}, #{clienttime,jdbcType=TIMESTAMP}, 
+      #{reporttime,jdbcType=TIMESTAMP}, #{policyid,jdbcType=VARCHAR}, #{ret,jdbcType=TINYINT}, 
+      #{sender,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{violate,jdbcType=TINYINT}, #{sensitivekey,jdbcType=VARCHAR}, #{attachmentid,jdbcType=VARCHAR}, 
+      #{field1,jdbcType=VARCHAR}, #{field2,jdbcType=VARCHAR}, #{field3,jdbcType=VARCHAR}, 
+      #{field4,jdbcType=VARCHAR}, #{regusername,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userorgid,jdbcType=VARCHAR}, #{userorgcodeui,jdbcType=VARCHAR}, #{devorgcodeui,jdbcType=VARCHAR}, 
+      #{devorgpath,jdbcType=VARCHAR}, #{iptype,jdbcType=INTEGER}, #{holdname,jdbcType=VARCHAR}, 
+      #{bread,jdbcType=INTEGER}, #{cyrip,jdbcType=VARCHAR}, #{curmac,jdbcType=VARCHAR}, 
+      #{optaudit,jdbcType=INTEGER}, #{groupid,jdbcType=VARCHAR}, #{policyname,jdbcType=VARCHAR}, 
+      #{groupname,jdbcType=VARCHAR}, #{netstate,jdbcType=INTEGER}, #{mainbody,jdbcType=LONGVARCHAR}, 
+      #{sensitivecontent,jdbcType=LONGVARCHAR}, #{ipnumber,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.MailMonitorLogBeanWithBLOBs" >
+    insert into cems_log_device_mailmonitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="orgname != null" >
+        orgName,
+      </if>
+      <if test="reguseronlyid != null" >
+        regUserOnlyId,
+      </if>
+      <if test="reguseraccount != null" >
+        regUserAccount,
+      </if>
+      <if test="useronlyid != null" >
+        userOnlyId,
+      </if>
+      <if test="useraccount != null" >
+        userAccount,
+      </if>
+      <if test="osloginaccount != null" >
+        osLoginAccount,
+      </if>
+      <if test="clienttime != null" >
+        clientTime,
+      </if>
+      <if test="reporttime != null" >
+        reportTime,
+      </if>
+      <if test="policyid != null" >
+        policyId,
+      </if>
+      <if test="ret != null" >
+        ret,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="subject != null" >
+        SUBJECT,
+      </if>
+      <if test="violate != null" >
+        violate,
+      </if>
+      <if test="sensitivekey != null" >
+        sensitiveKey,
+      </if>
+      <if test="attachmentid != null" >
+        attachmentId,
+      </if>
+      <if test="field1 != null" >
+        field1,
+      </if>
+      <if test="field2 != null" >
+        field2,
+      </if>
+      <if test="field3 != null" >
+        field3,
+      </if>
+      <if test="field4 != null" >
+        field4,
+      </if>
+      <if test="regusername != null" >
+        regUserName,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userorgid != null" >
+        userOrgId,
+      </if>
+      <if test="userorgcodeui != null" >
+        userOrgCodeUI,
+      </if>
+      <if test="devorgcodeui != null" >
+        devOrgCodeUI,
+      </if>
+      <if test="devorgpath != null" >
+        devOrgPath,
+      </if>
+      <if test="iptype != null" >
+        ipType,
+      </if>
+      <if test="holdname != null" >
+        holdName,
+      </if>
+      <if test="bread != null" >
+        bread,
+      </if>
+      <if test="cyrip != null" >
+        cyrip,
+      </if>
+      <if test="curmac != null" >
+        curmac,
+      </if>
+      <if test="optaudit != null" >
+        optAudit,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+      <if test="policyname != null" >
+        policyName,
+      </if>
+      <if test="groupname != null" >
+        groupname,
+      </if>
+      <if test="netstate != null" >
+        netState,
+      </if>
+      <if test="mainbody != null" >
+        mainbody,
+      </if>
+      <if test="sensitivecontent != null" >
+        sensitivecontent,
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseronlyid != null" >
+        #{reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseraccount != null" >
+        #{reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="useronlyid != null" >
+        #{useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="useraccount != null" >
+        #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="osloginaccount != null" >
+        #{osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttime != null" >
+        #{clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="policyid != null" >
+        #{policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ret != null" >
+        #{ret,jdbcType=TINYINT},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="violate != null" >
+        #{violate,jdbcType=TINYINT},
+      </if>
+      <if test="sensitivekey != null" >
+        #{sensitivekey,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentid != null" >
+        #{attachmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null" >
+        #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null" >
+        #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null" >
+        #{field3,jdbcType=VARCHAR},
+      </if>
+      <if test="field4 != null" >
+        #{field4,jdbcType=VARCHAR},
+      </if>
+      <if test="regusername != null" >
+        #{regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgid != null" >
+        #{userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgcodeui != null" >
+        #{userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgcodeui != null" >
+        #{devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgpath != null" >
+        #{devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="holdname != null" >
+        #{holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bread != null" >
+        #{bread,jdbcType=INTEGER},
+      </if>
+      <if test="cyrip != null" >
+        #{cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="curmac != null" >
+        #{curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="optaudit != null" >
+        #{optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="policyname != null" >
+        #{policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="netstate != null" >
+        #{netstate,jdbcType=INTEGER},
+      </if>
+      <if test="mainbody != null" >
+        #{mainbody,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sensitivecontent != null" >
+        #{sensitivecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ipnumber != null" >
+        #{ipnumber,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.MailMonitorLogBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_log_device_mailmonitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_log_device_mailmonitor
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgid != null" >
+        orgId = #{record.orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgname != null" >
+        orgName = #{record.orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reguseronlyid != null" >
+        regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reguseraccount != null" >
+        regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useronlyid != null" >
+        userOnlyId = #{record.useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useraccount != null" >
+        userAccount = #{record.useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osloginaccount != null" >
+        osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clienttime != null" >
+        clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reporttime != null" >
+        reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.policyid != null" >
+        policyId = #{record.policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ret != null" >
+        ret = #{record.ret,jdbcType=TINYINT},
+      </if>
+      <if test="record.sender != null" >
+        sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subject != null" >
+        SUBJECT = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.violate != null" >
+        violate = #{record.violate,jdbcType=TINYINT},
+      </if>
+      <if test="record.sensitivekey != null" >
+        sensitiveKey = #{record.sensitivekey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentid != null" >
+        attachmentId = #{record.attachmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field1 != null" >
+        field1 = #{record.field1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field2 != null" >
+        field2 = #{record.field2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field3 != null" >
+        field3 = #{record.field3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field4 != null" >
+        field4 = #{record.field4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regusername != null" >
+        regUserName = #{record.regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userorgid != null" >
+        userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userorgcodeui != null" >
+        userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devorgcodeui != null" >
+        devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devorgpath != null" >
+        devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iptype != null" >
+        ipType = #{record.iptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.holdname != null" >
+        holdName = #{record.holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bread != null" >
+        bread = #{record.bread,jdbcType=INTEGER},
+      </if>
+      <if test="record.cyrip != null" >
+        cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curmac != null" >
+        curmac = #{record.curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optaudit != null" >
+        optAudit = #{record.optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyname != null" >
+        policyName = #{record.policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        groupname = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netstate != null" >
+        netState = #{record.netstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.mainbody != null" >
+        mainbody = #{record.mainbody,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sensitivecontent != null" >
+        sensitivecontent = #{record.sensitivecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ipnumber != null" >
+        ipNumber = #{record.ipnumber,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_log_device_mailmonitor
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      orgId = #{record.orgid,jdbcType=VARCHAR},
+      orgName = #{record.orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      userOnlyId = #{record.useronlyid,jdbcType=VARCHAR},
+      userAccount = #{record.useraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      policyId = #{record.policyid,jdbcType=VARCHAR},
+      ret = #{record.ret,jdbcType=TINYINT},
+      sender = #{record.sender,jdbcType=VARCHAR},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      SUBJECT = #{record.subject,jdbcType=VARCHAR},
+      violate = #{record.violate,jdbcType=TINYINT},
+      sensitiveKey = #{record.sensitivekey,jdbcType=VARCHAR},
+      attachmentId = #{record.attachmentid,jdbcType=VARCHAR},
+      field1 = #{record.field1,jdbcType=VARCHAR},
+      field2 = #{record.field2,jdbcType=VARCHAR},
+      field3 = #{record.field3,jdbcType=VARCHAR},
+      field4 = #{record.field4,jdbcType=VARCHAR},
+      regUserName = #{record.regusername,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      ipType = #{record.iptype,jdbcType=INTEGER},
+      holdName = #{record.holdname,jdbcType=VARCHAR},
+      bread = #{record.bread,jdbcType=INTEGER},
+      cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      curmac = #{record.curmac,jdbcType=VARCHAR},
+      optAudit = #{record.optaudit,jdbcType=INTEGER},
+      groupid = #{record.groupid,jdbcType=VARCHAR},
+      policyName = #{record.policyname,jdbcType=VARCHAR},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
+      netState = #{record.netstate,jdbcType=INTEGER},
+      mainbody = #{record.mainbody,jdbcType=LONGVARCHAR},
+      sensitivecontent = #{record.sensitivecontent,jdbcType=LONGVARCHAR},
+      ipNumber = #{record.ipnumber,jdbcType=BINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_log_device_mailmonitor
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      orgId = #{record.orgid,jdbcType=VARCHAR},
+      orgName = #{record.orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      userOnlyId = #{record.useronlyid,jdbcType=VARCHAR},
+      userAccount = #{record.useraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      policyId = #{record.policyid,jdbcType=VARCHAR},
+      ret = #{record.ret,jdbcType=TINYINT},
+      sender = #{record.sender,jdbcType=VARCHAR},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      SUBJECT = #{record.subject,jdbcType=VARCHAR},
+      violate = #{record.violate,jdbcType=TINYINT},
+      sensitiveKey = #{record.sensitivekey,jdbcType=VARCHAR},
+      attachmentId = #{record.attachmentid,jdbcType=VARCHAR},
+      field1 = #{record.field1,jdbcType=VARCHAR},
+      field2 = #{record.field2,jdbcType=VARCHAR},
+      field3 = #{record.field3,jdbcType=VARCHAR},
+      field4 = #{record.field4,jdbcType=VARCHAR},
+      regUserName = #{record.regusername,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      ipType = #{record.iptype,jdbcType=INTEGER},
+      holdName = #{record.holdname,jdbcType=VARCHAR},
+      bread = #{record.bread,jdbcType=INTEGER},
+      cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      curmac = #{record.curmac,jdbcType=VARCHAR},
+      optAudit = #{record.optaudit,jdbcType=INTEGER},
+      groupid = #{record.groupid,jdbcType=VARCHAR},
+      policyName = #{record.policyname,jdbcType=VARCHAR},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
+      netState = #{record.netstate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.MailMonitorLogBeanWithBLOBs" >
+    update cems_log_device_mailmonitor
+    <set >
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        orgName = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseronlyid != null" >
+        regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseraccount != null" >
+        regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="useronlyid != null" >
+        userOnlyId = #{useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="useraccount != null" >
+        userAccount = #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="osloginaccount != null" >
+        osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttime != null" >
+        clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="policyid != null" >
+        policyId = #{policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ret != null" >
+        ret = #{ret,jdbcType=TINYINT},
+      </if>
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="violate != null" >
+        violate = #{violate,jdbcType=TINYINT},
+      </if>
+      <if test="sensitivekey != null" >
+        sensitiveKey = #{sensitivekey,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentid != null" >
+        attachmentId = #{attachmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null" >
+        field1 = #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null" >
+        field2 = #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null" >
+        field3 = #{field3,jdbcType=VARCHAR},
+      </if>
+      <if test="field4 != null" >
+        field4 = #{field4,jdbcType=VARCHAR},
+      </if>
+      <if test="regusername != null" >
+        regUserName = #{regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgid != null" >
+        userOrgId = #{userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgcodeui != null" >
+        userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgcodeui != null" >
+        devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgpath != null" >
+        devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        ipType = #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="holdname != null" >
+        holdName = #{holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bread != null" >
+        bread = #{bread,jdbcType=INTEGER},
+      </if>
+      <if test="cyrip != null" >
+        cyrip = #{cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="curmac != null" >
+        curmac = #{curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="optaudit != null" >
+        optAudit = #{optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="policyname != null" >
+        policyName = #{policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        groupname = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="netstate != null" >
+        netState = #{netstate,jdbcType=INTEGER},
+      </if>
+      <if test="mainbody != null" >
+        mainbody = #{mainbody,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sensitivecontent != null" >
+        sensitivecontent = #{sensitivecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber = #{ipnumber,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.MailMonitorLogBeanWithBLOBs" >
+    update cems_log_device_mailmonitor
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      orgId = #{orgid,jdbcType=VARCHAR},
+      orgName = #{orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      userOnlyId = #{useronlyid,jdbcType=VARCHAR},
+      userAccount = #{useraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      policyId = #{policyid,jdbcType=VARCHAR},
+      ret = #{ret,jdbcType=TINYINT},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      violate = #{violate,jdbcType=TINYINT},
+      sensitiveKey = #{sensitivekey,jdbcType=VARCHAR},
+      attachmentId = #{attachmentid,jdbcType=VARCHAR},
+      field1 = #{field1,jdbcType=VARCHAR},
+      field2 = #{field2,jdbcType=VARCHAR},
+      field3 = #{field3,jdbcType=VARCHAR},
+      field4 = #{field4,jdbcType=VARCHAR},
+      regUserName = #{regusername,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userOrgId = #{userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      ipType = #{iptype,jdbcType=INTEGER},
+      holdName = #{holdname,jdbcType=VARCHAR},
+      bread = #{bread,jdbcType=INTEGER},
+      cyrip = #{cyrip,jdbcType=VARCHAR},
+      curmac = #{curmac,jdbcType=VARCHAR},
+      optAudit = #{optaudit,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=VARCHAR},
+      policyName = #{policyname,jdbcType=VARCHAR},
+      groupname = #{groupname,jdbcType=VARCHAR},
+      netState = #{netstate,jdbcType=INTEGER},
+      mainbody = #{mainbody,jdbcType=LONGVARCHAR},
+      sensitivecontent = #{sensitivecontent,jdbcType=LONGVARCHAR},
+      ipNumber = #{ipnumber,jdbcType=BINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.MailMonitorLogBean" >
+    update cems_log_device_mailmonitor
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      orgId = #{orgid,jdbcType=VARCHAR},
+      orgName = #{orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      userOnlyId = #{useronlyid,jdbcType=VARCHAR},
+      userAccount = #{useraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      policyId = #{policyid,jdbcType=VARCHAR},
+      ret = #{ret,jdbcType=TINYINT},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      violate = #{violate,jdbcType=TINYINT},
+      sensitiveKey = #{sensitivekey,jdbcType=VARCHAR},
+      attachmentId = #{attachmentid,jdbcType=VARCHAR},
+      field1 = #{field1,jdbcType=VARCHAR},
+      field2 = #{field2,jdbcType=VARCHAR},
+      field3 = #{field3,jdbcType=VARCHAR},
+      field4 = #{field4,jdbcType=VARCHAR},
+      regUserName = #{regusername,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userOrgId = #{userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      ipType = #{iptype,jdbcType=INTEGER},
+      holdName = #{holdname,jdbcType=VARCHAR},
+      bread = #{bread,jdbcType=INTEGER},
+      cyrip = #{cyrip,jdbcType=VARCHAR},
+      curmac = #{curmac,jdbcType=VARCHAR},
+      optAudit = #{optaudit,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=VARCHAR},
+      policyName = #{policyname,jdbcType=VARCHAR},
+      groupname = #{groupname,jdbcType=VARCHAR},
+      netState = #{netstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

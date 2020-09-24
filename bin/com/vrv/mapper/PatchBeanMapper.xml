@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.PatchBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.PatchBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="updateId" property="updateid" jdbcType="VARCHAR" />
+    <result column="bulletinId" property="bulletinid" jdbcType="VARCHAR" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="distributeTime" property="distributetime" jdbcType="TIMESTAMP" />
+    <result column="patchCode" property="patchcode" jdbcType="VARCHAR" />
+    <result column="patchName" property="patchname" jdbcType="VARCHAR" />
+    <result column="patchPath" property="patchpath" jdbcType="VARCHAR" />
+    <result column="patchLevel" property="patchlevel" jdbcType="INTEGER" />
+    <result column="patchType" property="patchtype" jdbcType="VARCHAR" />
+    <result column="isDistribute" property="isdistribute" jdbcType="INTEGER" />
+    <result column="osType" property="ostype" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="productFamily" property="productfamily" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="updateType" property="updatetype" jdbcType="VARCHAR" />
+    <result column="crc" property="crc" jdbcType="VARCHAR" />
+    <result column="cpuArch" property="cpuarch" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="patchClass" property="patchclass" jdbcType="VARCHAR" />
+    <result column="fromIndex" property="fromindex" jdbcType="VARCHAR" />
+    <result column="isBlacklist" property="isblacklist" jdbcType="INTEGER" />
+    <result column="isSync" property="issync" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.PatchBeanWithBLOBs" extends="BaseResultMap" >
+    <result column="superceded" property="superceded" jdbcType="LONGVARCHAR" />
+    <result column="supercededBy" property="supercededby" jdbcType="LONGVARCHAR" />
+    <result column="patchCVE" property="patchcve" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, updateId, bulletinId, publishTime, distributeTime, patchCode, patchName, patchPath, 
+    patchLevel, patchType, isDistribute, osType, company, productFamily, product, updateType, 
+    crc, cpuArch, createTime, updateTime, patchClass, fromIndex, isBlacklist, isSync
+  </sql>
+  <sql id="Blob_Column_List" >
+    superceded, supercededBy, patchCVE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.PatchBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_patch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.PatchBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_patch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_patch
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_patch
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.PatchBeanExample" >
+    delete from cems_patch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.PatchBeanWithBLOBs" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch (updateId, bulletinId, publishTime, 
+      distributeTime, patchCode, patchName, 
+      patchPath, patchLevel, patchType, 
+      isDistribute, osType, company, 
+      productFamily, product, updateType, 
+      crc, cpuArch, createTime, 
+      updateTime, patchClass, fromIndex, 
+      isBlacklist, isSync, superceded, 
+      supercededBy, patchCVE)
+    values (#{updateid,jdbcType=VARCHAR}, #{bulletinid,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, 
+      #{distributetime,jdbcType=TIMESTAMP}, #{patchcode,jdbcType=VARCHAR}, #{patchname,jdbcType=VARCHAR}, 
+      #{patchpath,jdbcType=VARCHAR}, #{patchlevel,jdbcType=INTEGER}, #{patchtype,jdbcType=VARCHAR}, 
+      #{isdistribute,jdbcType=INTEGER}, #{ostype,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{productfamily,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, #{updatetype,jdbcType=VARCHAR}, 
+      #{crc,jdbcType=VARCHAR}, #{cpuarch,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{patchclass,jdbcType=VARCHAR}, #{fromindex,jdbcType=VARCHAR}, 
+      #{isblacklist,jdbcType=INTEGER}, #{issync,jdbcType=BIT}, #{superceded,jdbcType=LONGVARCHAR}, 
+      #{supercededby,jdbcType=LONGVARCHAR}, #{patchcve,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.PatchBeanWithBLOBs" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="updateid != null" >
+        updateId,
+      </if>
+      <if test="bulletinid != null" >
+        bulletinId,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="distributetime != null" >
+        distributeTime,
+      </if>
+      <if test="patchcode != null" >
+        patchCode,
+      </if>
+      <if test="patchname != null" >
+        patchName,
+      </if>
+      <if test="patchpath != null" >
+        patchPath,
+      </if>
+      <if test="patchlevel != null" >
+        patchLevel,
+      </if>
+      <if test="patchtype != null" >
+        patchType,
+      </if>
+      <if test="isdistribute != null" >
+        isDistribute,
+      </if>
+      <if test="ostype != null" >
+        osType,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="productfamily != null" >
+        productFamily,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="updatetype != null" >
+        updateType,
+      </if>
+      <if test="crc != null" >
+        crc,
+      </if>
+      <if test="cpuarch != null" >
+        cpuArch,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="patchclass != null" >
+        patchClass,
+      </if>
+      <if test="fromindex != null" >
+        fromIndex,
+      </if>
+      <if test="isblacklist != null" >
+        isBlacklist,
+      </if>
+      <if test="issync != null" >
+        isSync,
+      </if>
+      <if test="superceded != null" >
+        superceded,
+      </if>
+      <if test="supercededby != null" >
+        supercededBy,
+      </if>
+      <if test="patchcve != null" >
+        patchCVE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="updateid != null" >
+        #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletinid != null" >
+        #{bulletinid,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="distributetime != null" >
+        #{distributetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patchcode != null" >
+        #{patchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="patchname != null" >
+        #{patchname,jdbcType=VARCHAR},
+      </if>
+      <if test="patchpath != null" >
+        #{patchpath,jdbcType=VARCHAR},
+      </if>
+      <if test="patchlevel != null" >
+        #{patchlevel,jdbcType=INTEGER},
+      </if>
+      <if test="patchtype != null" >
+        #{patchtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdistribute != null" >
+        #{isdistribute,jdbcType=INTEGER},
+      </if>
+      <if test="ostype != null" >
+        #{ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="productfamily != null" >
+        #{productfamily,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetype != null" >
+        #{updatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="crc != null" >
+        #{crc,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuarch != null" >
+        #{cpuarch,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patchclass != null" >
+        #{patchclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fromindex != null" >
+        #{fromindex,jdbcType=VARCHAR},
+      </if>
+      <if test="isblacklist != null" >
+        #{isblacklist,jdbcType=INTEGER},
+      </if>
+      <if test="issync != null" >
+        #{issync,jdbcType=BIT},
+      </if>
+      <if test="superceded != null" >
+        #{superceded,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supercededby != null" >
+        #{supercededby,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patchcve != null" >
+        #{patchcve,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.PatchBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_patch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_patch
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateid != null" >
+        updateId = #{record.updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bulletinid != null" >
+        bulletinId = #{record.bulletinid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishtime != null" >
+        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.distributetime != null" >
+        distributeTime = #{record.distributetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patchcode != null" >
+        patchCode = #{record.patchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patchname != null" >
+        patchName = #{record.patchname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patchpath != null" >
+        patchPath = #{record.patchpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patchlevel != null" >
+        patchLevel = #{record.patchlevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.patchtype != null" >
+        patchType = #{record.patchtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdistribute != null" >
+        isDistribute = #{record.isdistribute,jdbcType=INTEGER},
+      </if>
+      <if test="record.ostype != null" >
+        osType = #{record.ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productfamily != null" >
+        productFamily = #{record.productfamily,jdbcType=VARCHAR},
+      </if>
+      <if test="record.product != null" >
+        product = #{record.product,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetype != null" >
+        updateType = #{record.updatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crc != null" >
+        crc = #{record.crc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuarch != null" >
+        cpuArch = #{record.cpuarch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patchclass != null" >
+        patchClass = #{record.patchclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromindex != null" >
+        fromIndex = #{record.fromindex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isblacklist != null" >
+        isBlacklist = #{record.isblacklist,jdbcType=INTEGER},
+      </if>
+      <if test="record.issync != null" >
+        isSync = #{record.issync,jdbcType=BIT},
+      </if>
+      <if test="record.superceded != null" >
+        superceded = #{record.superceded,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.supercededby != null" >
+        supercededBy = #{record.supercededby,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patchcve != null" >
+        patchCVE = #{record.patchcve,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_patch
+    set id = #{record.id,jdbcType=VARCHAR},
+      updateId = #{record.updateid,jdbcType=VARCHAR},
+      bulletinId = #{record.bulletinid,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      distributeTime = #{record.distributetime,jdbcType=TIMESTAMP},
+      patchCode = #{record.patchcode,jdbcType=VARCHAR},
+      patchName = #{record.patchname,jdbcType=VARCHAR},
+      patchPath = #{record.patchpath,jdbcType=VARCHAR},
+      patchLevel = #{record.patchlevel,jdbcType=INTEGER},
+      patchType = #{record.patchtype,jdbcType=VARCHAR},
+      isDistribute = #{record.isdistribute,jdbcType=INTEGER},
+      osType = #{record.ostype,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      productFamily = #{record.productfamily,jdbcType=VARCHAR},
+      product = #{record.product,jdbcType=VARCHAR},
+      updateType = #{record.updatetype,jdbcType=VARCHAR},
+      crc = #{record.crc,jdbcType=VARCHAR},
+      cpuArch = #{record.cpuarch,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      patchClass = #{record.patchclass,jdbcType=VARCHAR},
+      fromIndex = #{record.fromindex,jdbcType=VARCHAR},
+      isBlacklist = #{record.isblacklist,jdbcType=INTEGER},
+      isSync = #{record.issync,jdbcType=BIT},
+      superceded = #{record.superceded,jdbcType=LONGVARCHAR},
+      supercededBy = #{record.supercededby,jdbcType=LONGVARCHAR},
+      patchCVE = #{record.patchcve,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_patch
+    set id = #{record.id,jdbcType=VARCHAR},
+      updateId = #{record.updateid,jdbcType=VARCHAR},
+      bulletinId = #{record.bulletinid,jdbcType=VARCHAR},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      distributeTime = #{record.distributetime,jdbcType=TIMESTAMP},
+      patchCode = #{record.patchcode,jdbcType=VARCHAR},
+      patchName = #{record.patchname,jdbcType=VARCHAR},
+      patchPath = #{record.patchpath,jdbcType=VARCHAR},
+      patchLevel = #{record.patchlevel,jdbcType=INTEGER},
+      patchType = #{record.patchtype,jdbcType=VARCHAR},
+      isDistribute = #{record.isdistribute,jdbcType=INTEGER},
+      osType = #{record.ostype,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      productFamily = #{record.productfamily,jdbcType=VARCHAR},
+      product = #{record.product,jdbcType=VARCHAR},
+      updateType = #{record.updatetype,jdbcType=VARCHAR},
+      crc = #{record.crc,jdbcType=VARCHAR},
+      cpuArch = #{record.cpuarch,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      patchClass = #{record.patchclass,jdbcType=VARCHAR},
+      fromIndex = #{record.fromindex,jdbcType=VARCHAR},
+      isBlacklist = #{record.isblacklist,jdbcType=INTEGER},
+      isSync = #{record.issync,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.PatchBeanWithBLOBs" >
+    update cems_patch
+    <set >
+      <if test="updateid != null" >
+        updateId = #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletinid != null" >
+        bulletinId = #{bulletinid,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="distributetime != null" >
+        distributeTime = #{distributetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patchcode != null" >
+        patchCode = #{patchcode,jdbcType=VARCHAR},
+      </if>
+      <if test="patchname != null" >
+        patchName = #{patchname,jdbcType=VARCHAR},
+      </if>
+      <if test="patchpath != null" >
+        patchPath = #{patchpath,jdbcType=VARCHAR},
+      </if>
+      <if test="patchlevel != null" >
+        patchLevel = #{patchlevel,jdbcType=INTEGER},
+      </if>
+      <if test="patchtype != null" >
+        patchType = #{patchtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdistribute != null" >
+        isDistribute = #{isdistribute,jdbcType=INTEGER},
+      </if>
+      <if test="ostype != null" >
+        osType = #{ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="productfamily != null" >
+        productFamily = #{productfamily,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetype != null" >
+        updateType = #{updatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="crc != null" >
+        crc = #{crc,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuarch != null" >
+        cpuArch = #{cpuarch,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patchclass != null" >
+        patchClass = #{patchclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fromindex != null" >
+        fromIndex = #{fromindex,jdbcType=VARCHAR},
+      </if>
+      <if test="isblacklist != null" >
+        isBlacklist = #{isblacklist,jdbcType=INTEGER},
+      </if>
+      <if test="issync != null" >
+        isSync = #{issync,jdbcType=BIT},
+      </if>
+      <if test="superceded != null" >
+        superceded = #{superceded,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supercededby != null" >
+        supercededBy = #{supercededby,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patchcve != null" >
+        patchCVE = #{patchcve,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.PatchBeanWithBLOBs" >
+    update cems_patch
+    set updateId = #{updateid,jdbcType=VARCHAR},
+      bulletinId = #{bulletinid,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      distributeTime = #{distributetime,jdbcType=TIMESTAMP},
+      patchCode = #{patchcode,jdbcType=VARCHAR},
+      patchName = #{patchname,jdbcType=VARCHAR},
+      patchPath = #{patchpath,jdbcType=VARCHAR},
+      patchLevel = #{patchlevel,jdbcType=INTEGER},
+      patchType = #{patchtype,jdbcType=VARCHAR},
+      isDistribute = #{isdistribute,jdbcType=INTEGER},
+      osType = #{ostype,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      productFamily = #{productfamily,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      updateType = #{updatetype,jdbcType=VARCHAR},
+      crc = #{crc,jdbcType=VARCHAR},
+      cpuArch = #{cpuarch,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      patchClass = #{patchclass,jdbcType=VARCHAR},
+      fromIndex = #{fromindex,jdbcType=VARCHAR},
+      isBlacklist = #{isblacklist,jdbcType=INTEGER},
+      isSync = #{issync,jdbcType=BIT},
+      superceded = #{superceded,jdbcType=LONGVARCHAR},
+      supercededBy = #{supercededby,jdbcType=LONGVARCHAR},
+      patchCVE = #{patchcve,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.PatchBean" >
+    update cems_patch
+    set updateId = #{updateid,jdbcType=VARCHAR},
+      bulletinId = #{bulletinid,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      distributeTime = #{distributetime,jdbcType=TIMESTAMP},
+      patchCode = #{patchcode,jdbcType=VARCHAR},
+      patchName = #{patchname,jdbcType=VARCHAR},
+      patchPath = #{patchpath,jdbcType=VARCHAR},
+      patchLevel = #{patchlevel,jdbcType=INTEGER},
+      patchType = #{patchtype,jdbcType=VARCHAR},
+      isDistribute = #{isdistribute,jdbcType=INTEGER},
+      osType = #{ostype,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      productFamily = #{productfamily,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      updateType = #{updatetype,jdbcType=VARCHAR},
+      crc = #{crc,jdbcType=VARCHAR},
+      cpuArch = #{cpuarch,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      patchClass = #{patchclass,jdbcType=VARCHAR},
+      fromIndex = #{fromindex,jdbcType=VARCHAR},
+      isBlacklist = #{isblacklist,jdbcType=INTEGER},
+      isSync = #{issync,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

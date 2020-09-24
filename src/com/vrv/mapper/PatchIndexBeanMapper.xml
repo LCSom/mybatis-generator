@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.PatchIndexBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.PatchIndexBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="CHECKSUM" property="checksum" jdbcType="VARCHAR" />
+    <result column="crc" property="crc" jdbcType="VARCHAR" />
+    <result column="uploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="lastUploadTime" property="lastuploadtime" jdbcType="TIMESTAMP" />
+    <result column="fromIndex" property="fromindex" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, NAME, path, CHECKSUM, crc, uploadTime, lastUploadTime, fromIndex
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.PatchIndexBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_patch_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_patch_index
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_patch_index
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.PatchIndexBeanExample" >
+    delete from cems_patch_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.PatchIndexBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch_index (NAME, path, CHECKSUM, 
+      crc, uploadTime, lastUploadTime, 
+      fromIndex)
+    values (#{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{checksum,jdbcType=VARCHAR}, 
+      #{crc,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, #{lastuploadtime,jdbcType=TIMESTAMP}, 
+      #{fromindex,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.PatchIndexBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM,
+      </if>
+      <if test="crc != null" >
+        crc,
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime,
+      </if>
+      <if test="lastuploadtime != null" >
+        lastUploadTime,
+      </if>
+      <if test="fromindex != null" >
+        fromIndex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null" >
+        #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="crc != null" >
+        #{crc,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastuploadtime != null" >
+        #{lastuploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromindex != null" >
+        #{fromindex,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.PatchIndexBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_patch_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_patch_index
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checksum != null" >
+        CHECKSUM = #{record.checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crc != null" >
+        crc = #{record.crc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastuploadtime != null" >
+        lastUploadTime = #{record.lastuploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fromindex != null" >
+        fromIndex = #{record.fromindex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_patch_index
+    set id = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      CHECKSUM = #{record.checksum,jdbcType=VARCHAR},
+      crc = #{record.crc,jdbcType=VARCHAR},
+      uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      lastUploadTime = #{record.lastuploadtime,jdbcType=TIMESTAMP},
+      fromIndex = #{record.fromindex,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.PatchIndexBean" >
+    update cems_patch_index
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM = #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="crc != null" >
+        crc = #{crc,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastuploadtime != null" >
+        lastUploadTime = #{lastuploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fromindex != null" >
+        fromIndex = #{fromindex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.PatchIndexBean" >
+    update cems_patch_index
+    set NAME = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      CHECKSUM = #{checksum,jdbcType=VARCHAR},
+      crc = #{crc,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      lastUploadTime = #{lastuploadtime,jdbcType=TIMESTAMP},
+      fromIndex = #{fromindex,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

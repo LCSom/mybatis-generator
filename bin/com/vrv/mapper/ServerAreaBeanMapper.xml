@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.ServerAreaBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.ServerAreaBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="creatorId" property="creatorid" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updaterId" property="updaterid" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="isMain" property="ismain" jdbcType="INTEGER" />
+    <result column="managerId" property="managerid" jdbcType="VARCHAR" />
+    <result column="maintainer" property="maintainer" jdbcType="VARCHAR" />
+    <result column="maintainerPhone" property="maintainerphone" jdbcType="VARCHAR" />
+    <result column="maintainerEmail" property="maintaineremail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, creatorId, createTime, updaterId, updateTime, description, isMain, managerId, 
+    maintainer, maintainerPhone, maintainerEmail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.ServerAreaBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_serverarea
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_serverarea
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_serverarea
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.ServerAreaBeanExample" >
+    delete from cems_serverarea
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.ServerAreaBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_serverarea (name, creatorId, createTime, 
+      updaterId, updateTime, description, 
+      isMain, managerId, maintainer, 
+      maintainerPhone, maintainerEmail)
+    values (#{name,jdbcType=VARCHAR}, #{creatorid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updaterid,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{ismain,jdbcType=INTEGER}, #{managerid,jdbcType=VARCHAR}, #{maintainer,jdbcType=VARCHAR}, 
+      #{maintainerphone,jdbcType=VARCHAR}, #{maintaineremail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.ServerAreaBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_serverarea
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="creatorid != null" >
+        creatorId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updaterid != null" >
+        updaterId,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="ismain != null" >
+        isMain,
+      </if>
+      <if test="managerid != null" >
+        managerId,
+      </if>
+      <if test="maintainer != null" >
+        maintainer,
+      </if>
+      <if test="maintainerphone != null" >
+        maintainerPhone,
+      </if>
+      <if test="maintaineremail != null" >
+        maintainerEmail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterid != null" >
+        #{updaterid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ismain != null" >
+        #{ismain,jdbcType=INTEGER},
+      </if>
+      <if test="managerid != null" >
+        #{managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainer != null" >
+        #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainerphone != null" >
+        #{maintainerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="maintaineremail != null" >
+        #{maintaineremail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.ServerAreaBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_serverarea
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_serverarea
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorId = #{record.creatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updaterid != null" >
+        updaterId = #{record.updaterid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismain != null" >
+        isMain = #{record.ismain,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerid != null" >
+        managerId = #{record.managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainer != null" >
+        maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainerphone != null" >
+        maintainerPhone = #{record.maintainerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintaineremail != null" >
+        maintainerEmail = #{record.maintaineremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_serverarea
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      creatorId = #{record.creatorid,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updaterId = #{record.updaterid,jdbcType=VARCHAR},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR},
+      isMain = #{record.ismain,jdbcType=INTEGER},
+      managerId = #{record.managerid,jdbcType=VARCHAR},
+      maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      maintainerPhone = #{record.maintainerphone,jdbcType=VARCHAR},
+      maintainerEmail = #{record.maintaineremail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.ServerAreaBean" >
+    update cems_serverarea
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorid != null" >
+        creatorId = #{creatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterid != null" >
+        updaterId = #{updaterid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ismain != null" >
+        isMain = #{ismain,jdbcType=INTEGER},
+      </if>
+      <if test="managerid != null" >
+        managerId = #{managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainer != null" >
+        maintainer = #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainerphone != null" >
+        maintainerPhone = #{maintainerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="maintaineremail != null" >
+        maintainerEmail = #{maintaineremail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.ServerAreaBean" >
+    update cems_serverarea
+    set name = #{name,jdbcType=VARCHAR},
+      creatorId = #{creatorid,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updaterId = #{updaterid,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      isMain = #{ismain,jdbcType=INTEGER},
+      managerId = #{managerid,jdbcType=VARCHAR},
+      maintainer = #{maintainer,jdbcType=VARCHAR},
+      maintainerPhone = #{maintainerphone,jdbcType=VARCHAR},
+      maintainerEmail = #{maintaineremail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

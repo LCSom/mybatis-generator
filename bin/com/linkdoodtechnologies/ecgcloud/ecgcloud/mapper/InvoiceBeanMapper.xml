@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.InvoiceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBean" >
+    <id column="it_id" property="itId" jdbcType="INTEGER" />
+    <result column="it_ut_id" property="itUtId" jdbcType="INTEGER" />
+    <result column="it_ot_id" property="itOtId" jdbcType="INTEGER" />
+    <result column="it_name" property="itName" jdbcType="VARCHAR" />
+    <result column="it_address1" property="itAddress1" jdbcType="VARCHAR" />
+    <result column="it_address2" property="itAddress2" jdbcType="VARCHAR" />
+    <result column="it_address3" property="itAddress3" jdbcType="VARCHAR" />
+    <result column="it_phone_no" property="itPhoneNo" jdbcType="VARCHAR" />
+    <result column="it_fax" property="itFax" jdbcType="VARCHAR" />
+    <result column="it_param1" property="itParam1" jdbcType="VARCHAR" />
+    <result column="it_param2" property="itParam2" jdbcType="VARCHAR" />
+    <result column="it_param3" property="itParam3" jdbcType="VARCHAR" />
+    <result column="it_param4" property="itParam4" jdbcType="VARCHAR" />
+    <result column="it_param5" property="itParam5" jdbcType="VARCHAR" />
+    <result column="it_param6" property="itParam6" jdbcType="VARCHAR" />
+    <result column="it_status" property="itStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    it_id, it_ut_id, it_ot_id, it_name, it_address1, it_address2, it_address3, it_phone_no, 
+    it_fax, it_param1, it_param2, it_param3, it_param4, it_param5, it_param6, it_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invoice_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from invoice_tbl
+    where it_id = #{itId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from invoice_tbl
+    where it_id = #{itId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBeanExample" >
+    delete from invoice_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="itId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invoice_tbl (it_ut_id, it_ot_id, it_name, 
+      it_address1, it_address2, it_address3, 
+      it_phone_no, it_fax, it_param1, 
+      it_param2, it_param3, it_param4, 
+      it_param5, it_param6, it_status
+      )
+    values (#{itUtId,jdbcType=INTEGER}, #{itOtId,jdbcType=INTEGER}, #{itName,jdbcType=VARCHAR}, 
+      #{itAddress1,jdbcType=VARCHAR}, #{itAddress2,jdbcType=VARCHAR}, #{itAddress3,jdbcType=VARCHAR}, 
+      #{itPhoneNo,jdbcType=VARCHAR}, #{itFax,jdbcType=VARCHAR}, #{itParam1,jdbcType=VARCHAR}, 
+      #{itParam2,jdbcType=VARCHAR}, #{itParam3,jdbcType=VARCHAR}, #{itParam4,jdbcType=VARCHAR}, 
+      #{itParam5,jdbcType=VARCHAR}, #{itParam6,jdbcType=VARCHAR}, #{itStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="itId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invoice_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itUtId != null" >
+        it_ut_id,
+      </if>
+      <if test="itOtId != null" >
+        it_ot_id,
+      </if>
+      <if test="itName != null" >
+        it_name,
+      </if>
+      <if test="itAddress1 != null" >
+        it_address1,
+      </if>
+      <if test="itAddress2 != null" >
+        it_address2,
+      </if>
+      <if test="itAddress3 != null" >
+        it_address3,
+      </if>
+      <if test="itPhoneNo != null" >
+        it_phone_no,
+      </if>
+      <if test="itFax != null" >
+        it_fax,
+      </if>
+      <if test="itParam1 != null" >
+        it_param1,
+      </if>
+      <if test="itParam2 != null" >
+        it_param2,
+      </if>
+      <if test="itParam3 != null" >
+        it_param3,
+      </if>
+      <if test="itParam4 != null" >
+        it_param4,
+      </if>
+      <if test="itParam5 != null" >
+        it_param5,
+      </if>
+      <if test="itParam6 != null" >
+        it_param6,
+      </if>
+      <if test="itStatus != null" >
+        it_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itUtId != null" >
+        #{itUtId,jdbcType=INTEGER},
+      </if>
+      <if test="itOtId != null" >
+        #{itOtId,jdbcType=INTEGER},
+      </if>
+      <if test="itName != null" >
+        #{itName,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress1 != null" >
+        #{itAddress1,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress2 != null" >
+        #{itAddress2,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress3 != null" >
+        #{itAddress3,jdbcType=VARCHAR},
+      </if>
+      <if test="itPhoneNo != null" >
+        #{itPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itFax != null" >
+        #{itFax,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam1 != null" >
+        #{itParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam2 != null" >
+        #{itParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam3 != null" >
+        #{itParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam4 != null" >
+        #{itParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam5 != null" >
+        #{itParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam6 != null" >
+        #{itParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="itStatus != null" >
+        #{itStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBeanExample" resultType="java.lang.Integer" >
+    select count(*) from invoice_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update invoice_tbl
+    <set >
+      <if test="record.itId != null" >
+        it_id = #{record.itId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itUtId != null" >
+        it_ut_id = #{record.itUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itOtId != null" >
+        it_ot_id = #{record.itOtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itName != null" >
+        it_name = #{record.itName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itAddress1 != null" >
+        it_address1 = #{record.itAddress1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itAddress2 != null" >
+        it_address2 = #{record.itAddress2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itAddress3 != null" >
+        it_address3 = #{record.itAddress3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itPhoneNo != null" >
+        it_phone_no = #{record.itPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itFax != null" >
+        it_fax = #{record.itFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam1 != null" >
+        it_param1 = #{record.itParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam2 != null" >
+        it_param2 = #{record.itParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam3 != null" >
+        it_param3 = #{record.itParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam4 != null" >
+        it_param4 = #{record.itParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam5 != null" >
+        it_param5 = #{record.itParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itParam6 != null" >
+        it_param6 = #{record.itParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itStatus != null" >
+        it_status = #{record.itStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update invoice_tbl
+    set it_id = #{record.itId,jdbcType=INTEGER},
+      it_ut_id = #{record.itUtId,jdbcType=INTEGER},
+      it_ot_id = #{record.itOtId,jdbcType=INTEGER},
+      it_name = #{record.itName,jdbcType=VARCHAR},
+      it_address1 = #{record.itAddress1,jdbcType=VARCHAR},
+      it_address2 = #{record.itAddress2,jdbcType=VARCHAR},
+      it_address3 = #{record.itAddress3,jdbcType=VARCHAR},
+      it_phone_no = #{record.itPhoneNo,jdbcType=VARCHAR},
+      it_fax = #{record.itFax,jdbcType=VARCHAR},
+      it_param1 = #{record.itParam1,jdbcType=VARCHAR},
+      it_param2 = #{record.itParam2,jdbcType=VARCHAR},
+      it_param3 = #{record.itParam3,jdbcType=VARCHAR},
+      it_param4 = #{record.itParam4,jdbcType=VARCHAR},
+      it_param5 = #{record.itParam5,jdbcType=VARCHAR},
+      it_param6 = #{record.itParam6,jdbcType=VARCHAR},
+      it_status = #{record.itStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBean" >
+    update invoice_tbl
+    <set >
+      <if test="itUtId != null" >
+        it_ut_id = #{itUtId,jdbcType=INTEGER},
+      </if>
+      <if test="itOtId != null" >
+        it_ot_id = #{itOtId,jdbcType=INTEGER},
+      </if>
+      <if test="itName != null" >
+        it_name = #{itName,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress1 != null" >
+        it_address1 = #{itAddress1,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress2 != null" >
+        it_address2 = #{itAddress2,jdbcType=VARCHAR},
+      </if>
+      <if test="itAddress3 != null" >
+        it_address3 = #{itAddress3,jdbcType=VARCHAR},
+      </if>
+      <if test="itPhoneNo != null" >
+        it_phone_no = #{itPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itFax != null" >
+        it_fax = #{itFax,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam1 != null" >
+        it_param1 = #{itParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam2 != null" >
+        it_param2 = #{itParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam3 != null" >
+        it_param3 = #{itParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam4 != null" >
+        it_param4 = #{itParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam5 != null" >
+        it_param5 = #{itParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="itParam6 != null" >
+        it_param6 = #{itParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="itStatus != null" >
+        it_status = #{itStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where it_id = #{itId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.InvoiceBean" >
+    update invoice_tbl
+    set it_ut_id = #{itUtId,jdbcType=INTEGER},
+      it_ot_id = #{itOtId,jdbcType=INTEGER},
+      it_name = #{itName,jdbcType=VARCHAR},
+      it_address1 = #{itAddress1,jdbcType=VARCHAR},
+      it_address2 = #{itAddress2,jdbcType=VARCHAR},
+      it_address3 = #{itAddress3,jdbcType=VARCHAR},
+      it_phone_no = #{itPhoneNo,jdbcType=VARCHAR},
+      it_fax = #{itFax,jdbcType=VARCHAR},
+      it_param1 = #{itParam1,jdbcType=VARCHAR},
+      it_param2 = #{itParam2,jdbcType=VARCHAR},
+      it_param3 = #{itParam3,jdbcType=VARCHAR},
+      it_param4 = #{itParam4,jdbcType=VARCHAR},
+      it_param5 = #{itParam5,jdbcType=VARCHAR},
+      it_param6 = #{itParam6,jdbcType=VARCHAR},
+      it_status = #{itStatus,jdbcType=INTEGER}
+    where it_id = #{itId,jdbcType=INTEGER}
+  </update>
+</mapper>

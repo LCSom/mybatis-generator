@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.AgentTypeBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.AgentTypeBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="typeName" property="typename" jdbcType="VARCHAR" />
+    <result column="typeCode" property="typecode" jdbcType="VARCHAR" />
+    <result column="agentPackType" property="agentpacktype" jdbcType="INTEGER" />
+    <result column="parentClass" property="parentclass" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.AgentTypeBean" extends="BaseResultMap" >
+    <result column="remarks" property="remarks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, typeName, typeCode, agentPackType, parentClass
+  </sql>
+  <sql id="Blob_Column_List" >
+    remarks
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.AgentTypeBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_dict_agenttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.AgentTypeBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_dict_agenttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_dict_agenttype
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_dict_agenttype
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.AgentTypeBeanExample" >
+    delete from cems_dict_agenttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.AgentTypeBean" >
+    insert into cems_dict_agenttype (id, typeName, typeCode, 
+      agentPackType, parentClass, remarks
+      )
+    values (#{id,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{typecode,jdbcType=VARCHAR}, 
+      #{agentpacktype,jdbcType=INTEGER}, #{parentclass,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.AgentTypeBean" >
+    insert into cems_dict_agenttype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typename != null" >
+        typeName,
+      </if>
+      <if test="typecode != null" >
+        typeCode,
+      </if>
+      <if test="agentpacktype != null" >
+        agentPackType,
+      </if>
+      <if test="parentclass != null" >
+        parentClass,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="agentpacktype != null" >
+        #{agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="parentclass != null" >
+        #{parentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.AgentTypeBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_dict_agenttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_dict_agenttype
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typename != null" >
+        typeName = #{record.typename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typecode != null" >
+        typeCode = #{record.typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentpacktype != null" >
+        agentPackType = #{record.agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentclass != null" >
+        parentClass = #{record.parentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_dict_agenttype
+    set id = #{record.id,jdbcType=VARCHAR},
+      typeName = #{record.typename,jdbcType=VARCHAR},
+      typeCode = #{record.typecode,jdbcType=VARCHAR},
+      agentPackType = #{record.agentpacktype,jdbcType=INTEGER},
+      parentClass = #{record.parentclass,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_dict_agenttype
+    set id = #{record.id,jdbcType=VARCHAR},
+      typeName = #{record.typename,jdbcType=VARCHAR},
+      typeCode = #{record.typecode,jdbcType=VARCHAR},
+      agentPackType = #{record.agentpacktype,jdbcType=INTEGER},
+      parentClass = #{record.parentclass,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.AgentTypeBean" >
+    update cems_dict_agenttype
+    <set >
+      <if test="typename != null" >
+        typeName = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        typeCode = #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="agentpacktype != null" >
+        agentPackType = #{agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="parentclass != null" >
+        parentClass = #{parentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.AgentTypeBean" >
+    update cems_dict_agenttype
+    set typeName = #{typename,jdbcType=VARCHAR},
+      typeCode = #{typecode,jdbcType=VARCHAR},
+      agentPackType = #{agentpacktype,jdbcType=INTEGER},
+      parentClass = #{parentclass,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.AgentTypeBean" >
+    update cems_dict_agenttype
+    set typeName = #{typename,jdbcType=VARCHAR},
+      typeCode = #{typecode,jdbcType=VARCHAR},
+      agentPackType = #{agentpacktype,jdbcType=INTEGER},
+      parentClass = #{parentclass,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

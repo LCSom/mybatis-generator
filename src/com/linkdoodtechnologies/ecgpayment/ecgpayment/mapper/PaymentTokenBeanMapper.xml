@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.PaymentTokenBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    <id column="ptt_id" property="pttId" jdbcType="INTEGER" />
+    <result column="ptt_att_id" property="pttAttId" jdbcType="VARCHAR" />
+    <result column="ptt_token" property="pttToken" jdbcType="VARCHAR" />
+    <result column="ptt_generated_time" property="pttGeneratedTime" jdbcType="VARCHAR" />
+    <result column="ptt_expired_time" property="pttExpiredTime" jdbcType="VARCHAR" />
+    <result column="ptt_status" property="pttStatus" jdbcType="INTEGER" />
+    <result column="ptt_param1" property="pttParam1" jdbcType="VARCHAR" />
+    <result column="ptt_param2" property="pttParam2" jdbcType="VARCHAR" />
+    <result column="ptt_param3" property="pttParam3" jdbcType="VARCHAR" />
+    <result column="ptt_param4" property="pttParam4" jdbcType="VARCHAR" />
+    <result column="ptt_param5" property="pttParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" extends="BaseResultMap" >
+    <result column="ptt_value" property="pttValue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ptt_id, ptt_att_id, ptt_token, ptt_generated_time, ptt_expired_time, ptt_status, 
+    ptt_param1, ptt_param2, ptt_param3, ptt_param4, ptt_param5
+  </sql>
+  <sql id="Blob_Column_List" >
+    ptt_value
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from payment_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payment_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from payment_token_tbl
+    where ptt_id = #{pttId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payment_token_tbl
+    where ptt_id = #{pttId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBeanExample" >
+    delete from payment_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="pttId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_token_tbl (ptt_att_id, ptt_token, ptt_generated_time, 
+      ptt_expired_time, ptt_status, ptt_param1, 
+      ptt_param2, ptt_param3, ptt_param4, 
+      ptt_param5, ptt_value)
+    values (#{pttAttId,jdbcType=VARCHAR}, #{pttToken,jdbcType=VARCHAR}, #{pttGeneratedTime,jdbcType=VARCHAR}, 
+      #{pttExpiredTime,jdbcType=VARCHAR}, #{pttStatus,jdbcType=INTEGER}, #{pttParam1,jdbcType=VARCHAR}, 
+      #{pttParam2,jdbcType=VARCHAR}, #{pttParam3,jdbcType=VARCHAR}, #{pttParam4,jdbcType=VARCHAR}, 
+      #{pttParam5,jdbcType=VARCHAR}, #{pttValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="pttId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_token_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pttAttId != null" >
+        ptt_att_id,
+      </if>
+      <if test="pttToken != null" >
+        ptt_token,
+      </if>
+      <if test="pttGeneratedTime != null" >
+        ptt_generated_time,
+      </if>
+      <if test="pttExpiredTime != null" >
+        ptt_expired_time,
+      </if>
+      <if test="pttStatus != null" >
+        ptt_status,
+      </if>
+      <if test="pttParam1 != null" >
+        ptt_param1,
+      </if>
+      <if test="pttParam2 != null" >
+        ptt_param2,
+      </if>
+      <if test="pttParam3 != null" >
+        ptt_param3,
+      </if>
+      <if test="pttParam4 != null" >
+        ptt_param4,
+      </if>
+      <if test="pttParam5 != null" >
+        ptt_param5,
+      </if>
+      <if test="pttValue != null" >
+        ptt_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pttAttId != null" >
+        #{pttAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="pttToken != null" >
+        #{pttToken,jdbcType=VARCHAR},
+      </if>
+      <if test="pttGeneratedTime != null" >
+        #{pttGeneratedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pttExpiredTime != null" >
+        #{pttExpiredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pttStatus != null" >
+        #{pttStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pttParam1 != null" >
+        #{pttParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam2 != null" >
+        #{pttParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam3 != null" >
+        #{pttParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam4 != null" >
+        #{pttParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam5 != null" >
+        #{pttParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="pttValue != null" >
+        #{pttValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBeanExample" resultType="java.lang.Integer" >
+    select count(*) from payment_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payment_token_tbl
+    <set >
+      <if test="record.pttId != null" >
+        ptt_id = #{record.pttId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pttAttId != null" >
+        ptt_att_id = #{record.pttAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttToken != null" >
+        ptt_token = #{record.pttToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttGeneratedTime != null" >
+        ptt_generated_time = #{record.pttGeneratedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttExpiredTime != null" >
+        ptt_expired_time = #{record.pttExpiredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttStatus != null" >
+        ptt_status = #{record.pttStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.pttParam1 != null" >
+        ptt_param1 = #{record.pttParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttParam2 != null" >
+        ptt_param2 = #{record.pttParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttParam3 != null" >
+        ptt_param3 = #{record.pttParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttParam4 != null" >
+        ptt_param4 = #{record.pttParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttParam5 != null" >
+        ptt_param5 = #{record.pttParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pttValue != null" >
+        ptt_value = #{record.pttValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update payment_token_tbl
+    set ptt_id = #{record.pttId,jdbcType=INTEGER},
+      ptt_att_id = #{record.pttAttId,jdbcType=VARCHAR},
+      ptt_token = #{record.pttToken,jdbcType=VARCHAR},
+      ptt_generated_time = #{record.pttGeneratedTime,jdbcType=VARCHAR},
+      ptt_expired_time = #{record.pttExpiredTime,jdbcType=VARCHAR},
+      ptt_status = #{record.pttStatus,jdbcType=INTEGER},
+      ptt_param1 = #{record.pttParam1,jdbcType=VARCHAR},
+      ptt_param2 = #{record.pttParam2,jdbcType=VARCHAR},
+      ptt_param3 = #{record.pttParam3,jdbcType=VARCHAR},
+      ptt_param4 = #{record.pttParam4,jdbcType=VARCHAR},
+      ptt_param5 = #{record.pttParam5,jdbcType=VARCHAR},
+      ptt_value = #{record.pttValue,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payment_token_tbl
+    set ptt_id = #{record.pttId,jdbcType=INTEGER},
+      ptt_att_id = #{record.pttAttId,jdbcType=VARCHAR},
+      ptt_token = #{record.pttToken,jdbcType=VARCHAR},
+      ptt_generated_time = #{record.pttGeneratedTime,jdbcType=VARCHAR},
+      ptt_expired_time = #{record.pttExpiredTime,jdbcType=VARCHAR},
+      ptt_status = #{record.pttStatus,jdbcType=INTEGER},
+      ptt_param1 = #{record.pttParam1,jdbcType=VARCHAR},
+      ptt_param2 = #{record.pttParam2,jdbcType=VARCHAR},
+      ptt_param3 = #{record.pttParam3,jdbcType=VARCHAR},
+      ptt_param4 = #{record.pttParam4,jdbcType=VARCHAR},
+      ptt_param5 = #{record.pttParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    update payment_token_tbl
+    <set >
+      <if test="pttAttId != null" >
+        ptt_att_id = #{pttAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="pttToken != null" >
+        ptt_token = #{pttToken,jdbcType=VARCHAR},
+      </if>
+      <if test="pttGeneratedTime != null" >
+        ptt_generated_time = #{pttGeneratedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pttExpiredTime != null" >
+        ptt_expired_time = #{pttExpiredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pttStatus != null" >
+        ptt_status = #{pttStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pttParam1 != null" >
+        ptt_param1 = #{pttParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam2 != null" >
+        ptt_param2 = #{pttParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam3 != null" >
+        ptt_param3 = #{pttParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam4 != null" >
+        ptt_param4 = #{pttParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="pttParam5 != null" >
+        ptt_param5 = #{pttParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="pttValue != null" >
+        ptt_value = #{pttValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ptt_id = #{pttId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    update payment_token_tbl
+    set ptt_att_id = #{pttAttId,jdbcType=VARCHAR},
+      ptt_token = #{pttToken,jdbcType=VARCHAR},
+      ptt_generated_time = #{pttGeneratedTime,jdbcType=VARCHAR},
+      ptt_expired_time = #{pttExpiredTime,jdbcType=VARCHAR},
+      ptt_status = #{pttStatus,jdbcType=INTEGER},
+      ptt_param1 = #{pttParam1,jdbcType=VARCHAR},
+      ptt_param2 = #{pttParam2,jdbcType=VARCHAR},
+      ptt_param3 = #{pttParam3,jdbcType=VARCHAR},
+      ptt_param4 = #{pttParam4,jdbcType=VARCHAR},
+      ptt_param5 = #{pttParam5,jdbcType=VARCHAR},
+      ptt_value = #{pttValue,jdbcType=LONGVARCHAR}
+    where ptt_id = #{pttId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentTokenBean" >
+    update payment_token_tbl
+    set ptt_att_id = #{pttAttId,jdbcType=VARCHAR},
+      ptt_token = #{pttToken,jdbcType=VARCHAR},
+      ptt_generated_time = #{pttGeneratedTime,jdbcType=VARCHAR},
+      ptt_expired_time = #{pttExpiredTime,jdbcType=VARCHAR},
+      ptt_status = #{pttStatus,jdbcType=INTEGER},
+      ptt_param1 = #{pttParam1,jdbcType=VARCHAR},
+      ptt_param2 = #{pttParam2,jdbcType=VARCHAR},
+      ptt_param3 = #{pttParam3,jdbcType=VARCHAR},
+      ptt_param4 = #{pttParam4,jdbcType=VARCHAR},
+      ptt_param5 = #{pttParam5,jdbcType=VARCHAR}
+    where ptt_id = #{pttId,jdbcType=INTEGER}
+  </update>
+</mapper>

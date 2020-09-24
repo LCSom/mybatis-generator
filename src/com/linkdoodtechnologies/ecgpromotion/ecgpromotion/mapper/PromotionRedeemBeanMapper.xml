@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.mapper.PromotionRedeemBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBean" >
+    <id column="prrt_id" property="prrtId" jdbcType="INTEGER" />
+    <result column="prrt_att_id" property="prrtAttId" jdbcType="VARCHAR" />
+    <result column="prrt_unique_id" property="prrtUniqueId" jdbcType="VARCHAR" />
+    <result column="prrt_user_id" property="prrtUserId" jdbcType="VARCHAR" />
+    <result column="prrt_prt_id" property="prrtPrtId" jdbcType="VARCHAR" />
+    <result column="prrt_status" property="prrtStatus" jdbcType="VARCHAR" />
+    <result column="prrt_param1" property="prrtParam1" jdbcType="VARCHAR" />
+    <result column="prrt_param2" property="prrtParam2" jdbcType="VARCHAR" />
+    <result column="prrt_param3" property="prrtParam3" jdbcType="VARCHAR" />
+    <result column="prrt_param4" property="prrtParam4" jdbcType="VARCHAR" />
+    <result column="prrt_param5" property="prrtParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    prrt_id, prrt_att_id, prrt_unique_id, prrt_user_id, prrt_prt_id, prrt_status, prrt_param1, 
+    prrt_param2, prrt_param3, prrt_param4, prrt_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from promotion_redeem_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotion_redeem_tbl
+    where prrt_id = #{prrtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from promotion_redeem_tbl
+    where prrt_id = #{prrtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBeanExample" >
+    delete from promotion_redeem_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prrtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into promotion_redeem_tbl (prrt_att_id, prrt_unique_id, prrt_user_id, 
+      prrt_prt_id, prrt_status, prrt_param1, 
+      prrt_param2, prrt_param3, prrt_param4, 
+      prrt_param5)
+    values (#{prrtAttId,jdbcType=VARCHAR}, #{prrtUniqueId,jdbcType=VARCHAR}, #{prrtUserId,jdbcType=VARCHAR}, 
+      #{prrtPrtId,jdbcType=VARCHAR}, #{prrtStatus,jdbcType=VARCHAR}, #{prrtParam1,jdbcType=VARCHAR}, 
+      #{prrtParam2,jdbcType=VARCHAR}, #{prrtParam3,jdbcType=VARCHAR}, #{prrtParam4,jdbcType=VARCHAR}, 
+      #{prrtParam5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prrtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into promotion_redeem_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prrtAttId != null" >
+        prrt_att_id,
+      </if>
+      <if test="prrtUniqueId != null" >
+        prrt_unique_id,
+      </if>
+      <if test="prrtUserId != null" >
+        prrt_user_id,
+      </if>
+      <if test="prrtPrtId != null" >
+        prrt_prt_id,
+      </if>
+      <if test="prrtStatus != null" >
+        prrt_status,
+      </if>
+      <if test="prrtParam1 != null" >
+        prrt_param1,
+      </if>
+      <if test="prrtParam2 != null" >
+        prrt_param2,
+      </if>
+      <if test="prrtParam3 != null" >
+        prrt_param3,
+      </if>
+      <if test="prrtParam4 != null" >
+        prrt_param4,
+      </if>
+      <if test="prrtParam5 != null" >
+        prrt_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prrtAttId != null" >
+        #{prrtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtUniqueId != null" >
+        #{prrtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtUserId != null" >
+        #{prrtUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtPrtId != null" >
+        #{prrtPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtStatus != null" >
+        #{prrtStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam1 != null" >
+        #{prrtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam2 != null" >
+        #{prrtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam3 != null" >
+        #{prrtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam4 != null" >
+        #{prrtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam5 != null" >
+        #{prrtParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBeanExample" resultType="java.lang.Integer" >
+    select count(*) from promotion_redeem_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update promotion_redeem_tbl
+    <set >
+      <if test="record.prrtId != null" >
+        prrt_id = #{record.prrtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prrtAttId != null" >
+        prrt_att_id = #{record.prrtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtUniqueId != null" >
+        prrt_unique_id = #{record.prrtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtUserId != null" >
+        prrt_user_id = #{record.prrtUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtPrtId != null" >
+        prrt_prt_id = #{record.prrtPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtStatus != null" >
+        prrt_status = #{record.prrtStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtParam1 != null" >
+        prrt_param1 = #{record.prrtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtParam2 != null" >
+        prrt_param2 = #{record.prrtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtParam3 != null" >
+        prrt_param3 = #{record.prrtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtParam4 != null" >
+        prrt_param4 = #{record.prrtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prrtParam5 != null" >
+        prrt_param5 = #{record.prrtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update promotion_redeem_tbl
+    set prrt_id = #{record.prrtId,jdbcType=INTEGER},
+      prrt_att_id = #{record.prrtAttId,jdbcType=VARCHAR},
+      prrt_unique_id = #{record.prrtUniqueId,jdbcType=VARCHAR},
+      prrt_user_id = #{record.prrtUserId,jdbcType=VARCHAR},
+      prrt_prt_id = #{record.prrtPrtId,jdbcType=VARCHAR},
+      prrt_status = #{record.prrtStatus,jdbcType=VARCHAR},
+      prrt_param1 = #{record.prrtParam1,jdbcType=VARCHAR},
+      prrt_param2 = #{record.prrtParam2,jdbcType=VARCHAR},
+      prrt_param3 = #{record.prrtParam3,jdbcType=VARCHAR},
+      prrt_param4 = #{record.prrtParam4,jdbcType=VARCHAR},
+      prrt_param5 = #{record.prrtParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBean" >
+    update promotion_redeem_tbl
+    <set >
+      <if test="prrtAttId != null" >
+        prrt_att_id = #{prrtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtUniqueId != null" >
+        prrt_unique_id = #{prrtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtUserId != null" >
+        prrt_user_id = #{prrtUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtPrtId != null" >
+        prrt_prt_id = #{prrtPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtStatus != null" >
+        prrt_status = #{prrtStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam1 != null" >
+        prrt_param1 = #{prrtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam2 != null" >
+        prrt_param2 = #{prrtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam3 != null" >
+        prrt_param3 = #{prrtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam4 != null" >
+        prrt_param4 = #{prrtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="prrtParam5 != null" >
+        prrt_param5 = #{prrtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where prrt_id = #{prrtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionRedeemBean" >
+    update promotion_redeem_tbl
+    set prrt_att_id = #{prrtAttId,jdbcType=VARCHAR},
+      prrt_unique_id = #{prrtUniqueId,jdbcType=VARCHAR},
+      prrt_user_id = #{prrtUserId,jdbcType=VARCHAR},
+      prrt_prt_id = #{prrtPrtId,jdbcType=VARCHAR},
+      prrt_status = #{prrtStatus,jdbcType=VARCHAR},
+      prrt_param1 = #{prrtParam1,jdbcType=VARCHAR},
+      prrt_param2 = #{prrtParam2,jdbcType=VARCHAR},
+      prrt_param3 = #{prrtParam3,jdbcType=VARCHAR},
+      prrt_param4 = #{prrtParam4,jdbcType=VARCHAR},
+      prrt_param5 = #{prrtParam5,jdbcType=VARCHAR}
+    where prrt_id = #{prrtId,jdbcType=INTEGER}
+  </update>
+</mapper>

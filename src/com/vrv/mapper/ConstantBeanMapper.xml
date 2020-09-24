@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.ConstantBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.ConstantBean" >
+    <id column="ct_id" property="ctId" jdbcType="INTEGER" />
+    <result column="ct_type" property="ctType" jdbcType="VARCHAR" />
+    <result column="ct_value" property="ctValue" jdbcType="VARCHAR" />
+    <result column="ct_param1" property="ctParam1" jdbcType="VARCHAR" />
+    <result column="ct_param2" property="ctParam2" jdbcType="VARCHAR" />
+    <result column="ct_param3" property="ctParam3" jdbcType="VARCHAR" />
+    <result column="ct_param4" property="ctParam4" jdbcType="VARCHAR" />
+    <result column="ct_param5" property="ctParam5" jdbcType="VARCHAR" />
+    <result column="ct_param6" property="ctParam6" jdbcType="VARCHAR" />
+    <result column="ct_param7" property="ctParam7" jdbcType="VARCHAR" />
+    <result column="ct_param8" property="ctParam8" jdbcType="VARCHAR" />
+    <result column="ct_param9" property="ctParam9" jdbcType="VARCHAR" />
+    <result column="ct_param10" property="ctParam10" jdbcType="VARCHAR" />
+    <result column="ct_status" property="ctStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ct_id, ct_type, ct_value, ct_param1, ct_param2, ct_param3, ct_param4, ct_param5, 
+    ct_param6, ct_param7, ct_param8, ct_param9, ct_param10, ct_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.ConstantBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_constant_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_constant_tbl
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.ConstantBeanExample" >
+    delete from newcems_constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.ConstantBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_constant_tbl (ct_type, ct_value, ct_param1, 
+      ct_param2, ct_param3, ct_param4, 
+      ct_param5, ct_param6, ct_param7, 
+      ct_param8, ct_param9, ct_param10, 
+      ct_status)
+    values (#{ctType,jdbcType=VARCHAR}, #{ctValue,jdbcType=VARCHAR}, #{ctParam1,jdbcType=VARCHAR}, 
+      #{ctParam2,jdbcType=VARCHAR}, #{ctParam3,jdbcType=VARCHAR}, #{ctParam4,jdbcType=VARCHAR}, 
+      #{ctParam5,jdbcType=VARCHAR}, #{ctParam6,jdbcType=VARCHAR}, #{ctParam7,jdbcType=VARCHAR}, 
+      #{ctParam8,jdbcType=VARCHAR}, #{ctParam9,jdbcType=VARCHAR}, #{ctParam10,jdbcType=VARCHAR}, 
+      #{ctStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.ConstantBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_constant_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ctType != null" >
+        ct_type,
+      </if>
+      <if test="ctValue != null" >
+        ct_value,
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1,
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2,
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3,
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4,
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5,
+      </if>
+      <if test="ctParam6 != null" >
+        ct_param6,
+      </if>
+      <if test="ctParam7 != null" >
+        ct_param7,
+      </if>
+      <if test="ctParam8 != null" >
+        ct_param8,
+      </if>
+      <if test="ctParam9 != null" >
+        ct_param9,
+      </if>
+      <if test="ctParam10 != null" >
+        ct_param10,
+      </if>
+      <if test="ctStatus != null" >
+        ct_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ctType != null" >
+        #{ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctValue != null" >
+        #{ctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam1 != null" >
+        #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        #{ctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam6 != null" >
+        #{ctParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam7 != null" >
+        #{ctParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam8 != null" >
+        #{ctParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam9 != null" >
+        #{ctParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam10 != null" >
+        #{ctParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="ctStatus != null" >
+        #{ctStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.ConstantBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_constant_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_constant_tbl
+    <set >
+      <if test="record.ctId != null" >
+        ct_id = #{record.ctId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctType != null" >
+        ct_type = #{record.ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctValue != null" >
+        ct_value = #{record.ctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam1 != null" >
+        ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam2 != null" >
+        ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam3 != null" >
+        ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam4 != null" >
+        ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam5 != null" >
+        ct_param5 = #{record.ctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam6 != null" >
+        ct_param6 = #{record.ctParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam7 != null" >
+        ct_param7 = #{record.ctParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam8 != null" >
+        ct_param8 = #{record.ctParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam9 != null" >
+        ct_param9 = #{record.ctParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctParam10 != null" >
+        ct_param10 = #{record.ctParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctStatus != null" >
+        ct_status = #{record.ctStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_constant_tbl
+    set ct_id = #{record.ctId,jdbcType=INTEGER},
+      ct_type = #{record.ctType,jdbcType=VARCHAR},
+      ct_value = #{record.ctValue,jdbcType=VARCHAR},
+      ct_param1 = #{record.ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{record.ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{record.ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{record.ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{record.ctParam5,jdbcType=VARCHAR},
+      ct_param6 = #{record.ctParam6,jdbcType=VARCHAR},
+      ct_param7 = #{record.ctParam7,jdbcType=VARCHAR},
+      ct_param8 = #{record.ctParam8,jdbcType=VARCHAR},
+      ct_param9 = #{record.ctParam9,jdbcType=VARCHAR},
+      ct_param10 = #{record.ctParam10,jdbcType=VARCHAR},
+      ct_status = #{record.ctStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.ConstantBean" >
+    update newcems_constant_tbl
+    <set >
+      <if test="ctType != null" >
+        ct_type = #{ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctValue != null" >
+        ct_value = #{ctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam1 != null" >
+        ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam2 != null" >
+        ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam3 != null" >
+        ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam4 != null" >
+        ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam5 != null" >
+        ct_param5 = #{ctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam6 != null" >
+        ct_param6 = #{ctParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam7 != null" >
+        ct_param7 = #{ctParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam8 != null" >
+        ct_param8 = #{ctParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam9 != null" >
+        ct_param9 = #{ctParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="ctParam10 != null" >
+        ct_param10 = #{ctParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="ctStatus != null" >
+        ct_status = #{ctStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.ConstantBean" >
+    update newcems_constant_tbl
+    set ct_type = #{ctType,jdbcType=VARCHAR},
+      ct_value = #{ctValue,jdbcType=VARCHAR},
+      ct_param1 = #{ctParam1,jdbcType=VARCHAR},
+      ct_param2 = #{ctParam2,jdbcType=VARCHAR},
+      ct_param3 = #{ctParam3,jdbcType=VARCHAR},
+      ct_param4 = #{ctParam4,jdbcType=VARCHAR},
+      ct_param5 = #{ctParam5,jdbcType=VARCHAR},
+      ct_param6 = #{ctParam6,jdbcType=VARCHAR},
+      ct_param7 = #{ctParam7,jdbcType=VARCHAR},
+      ct_param8 = #{ctParam8,jdbcType=VARCHAR},
+      ct_param9 = #{ctParam9,jdbcType=VARCHAR},
+      ct_param10 = #{ctParam10,jdbcType=VARCHAR},
+      ct_status = #{ctStatus,jdbcType=TINYINT}
+    where ct_id = #{ctId,jdbcType=INTEGER}
+  </update>
+</mapper>

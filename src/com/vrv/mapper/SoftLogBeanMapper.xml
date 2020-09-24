@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.SoftLogBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.SoftLogBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="orgId" property="orgid" jdbcType="VARCHAR" />
+    <result column="orgName" property="orgname" jdbcType="VARCHAR" />
+    <result column="regUserOnlyId" property="reguseronlyid" jdbcType="VARCHAR" />
+    <result column="regUserAccount" property="reguseraccount" jdbcType="VARCHAR" />
+    <result column="osLoginAccount" property="osloginaccount" jdbcType="VARCHAR" />
+    <result column="sId" property="sid" jdbcType="VARCHAR" />
+    <result column="softName" property="softname" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="regguid" property="regguid" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="policyId" property="policyid" jdbcType="VARCHAR" />
+    <result column="clientTime" property="clienttime" jdbcType="TIMESTAMP" />
+    <result column="reportTime" property="reporttime" jdbcType="TIMESTAMP" />
+    <result column="regUserName" property="regusername" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userOrgId" property="userorgid" jdbcType="VARCHAR" />
+    <result column="userOrgCodeUI" property="userorgcodeui" jdbcType="VARCHAR" />
+    <result column="devOrgCodeUI" property="devorgcodeui" jdbcType="VARCHAR" />
+    <result column="devOrgPath" property="devorgpath" jdbcType="VARCHAR" />
+    <result column="ipType" property="iptype" jdbcType="INTEGER" />
+    <result column="holdName" property="holdname" jdbcType="VARCHAR" />
+    <result column="bread" property="bread" jdbcType="INTEGER" />
+    <result column="cyrip" property="cyrip" jdbcType="VARCHAR" />
+    <result column="curmac" property="curmac" jdbcType="VARCHAR" />
+    <result column="standardFlag" property="standardflag" jdbcType="INTEGER" />
+    <result column="softId" property="softid" jdbcType="VARCHAR" />
+    <result column="optAudit" property="optaudit" jdbcType="INTEGER" />
+    <result column="groupid" property="groupid" jdbcType="VARCHAR" />
+    <result column="policyName" property="policyname" jdbcType="VARCHAR" />
+    <result column="groupname" property="groupname" jdbcType="VARCHAR" />
+    <result column="netState" property="netstate" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.SoftLogBean" extends="BaseResultMap" >
+    <result column="ipNumber" property="ipnumber" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devOnlyId, ip, mac, NAME, orgId, orgName, regUserOnlyId, regUserAccount, osLoginAccount, 
+    sId, softName, VERSION, company, regguid, path, TIME, TYPE, policyId, clientTime, 
+    reportTime, regUserName, userName, userOrgId, userOrgCodeUI, devOrgCodeUI, devOrgPath, 
+    ipType, holdName, bread, cyrip, curmac, standardFlag, softId, optAudit, groupid, 
+    policyName, groupname, netState
+  </sql>
+  <sql id="Blob_Column_List" >
+    ipNumber
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.SoftLogBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_log_device_softlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.SoftLogBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_log_device_softlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_log_device_softlog
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_log_device_softlog
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.SoftLogBeanExample" >
+    delete from cems_log_device_softlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.SoftLogBean" >
+    insert into cems_log_device_softlog (id, devOnlyId, ip, 
+      mac, NAME, orgId, orgName, 
+      regUserOnlyId, regUserAccount, osLoginAccount, 
+      sId, softName, VERSION, 
+      company, regguid, path, 
+      TIME, TYPE, policyId, 
+      clientTime, reportTime, regUserName, 
+      userName, userOrgId, userOrgCodeUI, 
+      devOrgCodeUI, devOrgPath, ipType, 
+      holdName, bread, cyrip, 
+      curmac, standardFlag, softId, 
+      optAudit, groupid, policyName, 
+      groupname, netState, ipNumber
+      )
+    values (#{id,jdbcType=VARCHAR}, #{devonlyid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{mac,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{reguseronlyid,jdbcType=VARCHAR}, #{reguseraccount,jdbcType=VARCHAR}, #{osloginaccount,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=VARCHAR}, #{softname,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{regguid,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{policyid,jdbcType=VARCHAR}, 
+      #{clienttime,jdbcType=TIMESTAMP}, #{reporttime,jdbcType=TIMESTAMP}, #{regusername,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{userorgid,jdbcType=VARCHAR}, #{userorgcodeui,jdbcType=VARCHAR}, 
+      #{devorgcodeui,jdbcType=VARCHAR}, #{devorgpath,jdbcType=VARCHAR}, #{iptype,jdbcType=INTEGER}, 
+      #{holdname,jdbcType=VARCHAR}, #{bread,jdbcType=INTEGER}, #{cyrip,jdbcType=VARCHAR}, 
+      #{curmac,jdbcType=VARCHAR}, #{standardflag,jdbcType=INTEGER}, #{softid,jdbcType=VARCHAR}, 
+      #{optaudit,jdbcType=INTEGER}, #{groupid,jdbcType=VARCHAR}, #{policyname,jdbcType=VARCHAR}, 
+      #{groupname,jdbcType=VARCHAR}, #{netstate,jdbcType=INTEGER}, #{ipnumber,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.SoftLogBean" >
+    insert into cems_log_device_softlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="orgname != null" >
+        orgName,
+      </if>
+      <if test="reguseronlyid != null" >
+        regUserOnlyId,
+      </if>
+      <if test="reguseraccount != null" >
+        regUserAccount,
+      </if>
+      <if test="osloginaccount != null" >
+        osLoginAccount,
+      </if>
+      <if test="sid != null" >
+        sId,
+      </if>
+      <if test="softname != null" >
+        softName,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="regguid != null" >
+        regguid,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="policyid != null" >
+        policyId,
+      </if>
+      <if test="clienttime != null" >
+        clientTime,
+      </if>
+      <if test="reporttime != null" >
+        reportTime,
+      </if>
+      <if test="regusername != null" >
+        regUserName,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userorgid != null" >
+        userOrgId,
+      </if>
+      <if test="userorgcodeui != null" >
+        userOrgCodeUI,
+      </if>
+      <if test="devorgcodeui != null" >
+        devOrgCodeUI,
+      </if>
+      <if test="devorgpath != null" >
+        devOrgPath,
+      </if>
+      <if test="iptype != null" >
+        ipType,
+      </if>
+      <if test="holdname != null" >
+        holdName,
+      </if>
+      <if test="bread != null" >
+        bread,
+      </if>
+      <if test="cyrip != null" >
+        cyrip,
+      </if>
+      <if test="curmac != null" >
+        curmac,
+      </if>
+      <if test="standardflag != null" >
+        standardFlag,
+      </if>
+      <if test="softid != null" >
+        softId,
+      </if>
+      <if test="optaudit != null" >
+        optAudit,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+      <if test="policyname != null" >
+        policyName,
+      </if>
+      <if test="groupname != null" >
+        groupname,
+      </if>
+      <if test="netstate != null" >
+        netState,
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseronlyid != null" >
+        #{reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseraccount != null" >
+        #{reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="osloginaccount != null" >
+        #{osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="softname != null" >
+        #{softname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="regguid != null" >
+        #{regguid,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="policyid != null" >
+        #{policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttime != null" >
+        #{clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regusername != null" >
+        #{regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgid != null" >
+        #{userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgcodeui != null" >
+        #{userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgcodeui != null" >
+        #{devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgpath != null" >
+        #{devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="holdname != null" >
+        #{holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bread != null" >
+        #{bread,jdbcType=INTEGER},
+      </if>
+      <if test="cyrip != null" >
+        #{cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="curmac != null" >
+        #{curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="standardflag != null" >
+        #{standardflag,jdbcType=INTEGER},
+      </if>
+      <if test="softid != null" >
+        #{softid,jdbcType=VARCHAR},
+      </if>
+      <if test="optaudit != null" >
+        #{optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="policyname != null" >
+        #{policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="netstate != null" >
+        #{netstate,jdbcType=INTEGER},
+      </if>
+      <if test="ipnumber != null" >
+        #{ipnumber,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.SoftLogBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_log_device_softlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_log_device_softlog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgid != null" >
+        orgId = #{record.orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgname != null" >
+        orgName = #{record.orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reguseronlyid != null" >
+        regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reguseraccount != null" >
+        regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osloginaccount != null" >
+        osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sId = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softname != null" >
+        softName = #{record.softname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regguid != null" >
+        regguid = #{record.regguid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        TIME = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.policyid != null" >
+        policyId = #{record.policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clienttime != null" >
+        clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reporttime != null" >
+        reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regusername != null" >
+        regUserName = #{record.regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userorgid != null" >
+        userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userorgcodeui != null" >
+        userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devorgcodeui != null" >
+        devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devorgpath != null" >
+        devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iptype != null" >
+        ipType = #{record.iptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.holdname != null" >
+        holdName = #{record.holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bread != null" >
+        bread = #{record.bread,jdbcType=INTEGER},
+      </if>
+      <if test="record.cyrip != null" >
+        cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curmac != null" >
+        curmac = #{record.curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardflag != null" >
+        standardFlag = #{record.standardflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.softid != null" >
+        softId = #{record.softid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optaudit != null" >
+        optAudit = #{record.optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyname != null" >
+        policyName = #{record.policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        groupname = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netstate != null" >
+        netState = #{record.netstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipnumber != null" >
+        ipNumber = #{record.ipnumber,jdbcType=BINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_log_device_softlog
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      orgId = #{record.orgid,jdbcType=VARCHAR},
+      orgName = #{record.orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      sId = #{record.sid,jdbcType=VARCHAR},
+      softName = #{record.softname,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      regguid = #{record.regguid,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      TIME = #{record.time,jdbcType=TIMESTAMP},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      policyId = #{record.policyid,jdbcType=VARCHAR},
+      clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      regUserName = #{record.regusername,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      ipType = #{record.iptype,jdbcType=INTEGER},
+      holdName = #{record.holdname,jdbcType=VARCHAR},
+      bread = #{record.bread,jdbcType=INTEGER},
+      cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      curmac = #{record.curmac,jdbcType=VARCHAR},
+      standardFlag = #{record.standardflag,jdbcType=INTEGER},
+      softId = #{record.softid,jdbcType=VARCHAR},
+      optAudit = #{record.optaudit,jdbcType=INTEGER},
+      groupid = #{record.groupid,jdbcType=VARCHAR},
+      policyName = #{record.policyname,jdbcType=VARCHAR},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
+      netState = #{record.netstate,jdbcType=INTEGER},
+      ipNumber = #{record.ipnumber,jdbcType=BINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_log_device_softlog
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      orgId = #{record.orgid,jdbcType=VARCHAR},
+      orgName = #{record.orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{record.reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{record.reguseraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{record.osloginaccount,jdbcType=VARCHAR},
+      sId = #{record.sid,jdbcType=VARCHAR},
+      softName = #{record.softname,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      regguid = #{record.regguid,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      TIME = #{record.time,jdbcType=TIMESTAMP},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      policyId = #{record.policyid,jdbcType=VARCHAR},
+      clientTime = #{record.clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      regUserName = #{record.regusername,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      userOrgId = #{record.userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{record.userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{record.devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{record.devorgpath,jdbcType=VARCHAR},
+      ipType = #{record.iptype,jdbcType=INTEGER},
+      holdName = #{record.holdname,jdbcType=VARCHAR},
+      bread = #{record.bread,jdbcType=INTEGER},
+      cyrip = #{record.cyrip,jdbcType=VARCHAR},
+      curmac = #{record.curmac,jdbcType=VARCHAR},
+      standardFlag = #{record.standardflag,jdbcType=INTEGER},
+      softId = #{record.softid,jdbcType=VARCHAR},
+      optAudit = #{record.optaudit,jdbcType=INTEGER},
+      groupid = #{record.groupid,jdbcType=VARCHAR},
+      policyName = #{record.policyname,jdbcType=VARCHAR},
+      groupname = #{record.groupname,jdbcType=VARCHAR},
+      netState = #{record.netstate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.SoftLogBean" >
+    update cems_log_device_softlog
+    <set >
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        orgName = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseronlyid != null" >
+        regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="reguseraccount != null" >
+        regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="osloginaccount != null" >
+        osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sId = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="softname != null" >
+        softName = #{softname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="regguid != null" >
+        regguid = #{regguid,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="policyid != null" >
+        policyId = #{policyid,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttime != null" >
+        clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regusername != null" >
+        regUserName = #{regusername,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgid != null" >
+        userOrgId = #{userorgid,jdbcType=VARCHAR},
+      </if>
+      <if test="userorgcodeui != null" >
+        userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgcodeui != null" >
+        devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="devorgpath != null" >
+        devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        ipType = #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="holdname != null" >
+        holdName = #{holdname,jdbcType=VARCHAR},
+      </if>
+      <if test="bread != null" >
+        bread = #{bread,jdbcType=INTEGER},
+      </if>
+      <if test="cyrip != null" >
+        cyrip = #{cyrip,jdbcType=VARCHAR},
+      </if>
+      <if test="curmac != null" >
+        curmac = #{curmac,jdbcType=VARCHAR},
+      </if>
+      <if test="standardflag != null" >
+        standardFlag = #{standardflag,jdbcType=INTEGER},
+      </if>
+      <if test="softid != null" >
+        softId = #{softid,jdbcType=VARCHAR},
+      </if>
+      <if test="optaudit != null" >
+        optAudit = #{optaudit,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="policyname != null" >
+        policyName = #{policyname,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        groupname = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="netstate != null" >
+        netState = #{netstate,jdbcType=INTEGER},
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber = #{ipnumber,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.SoftLogBean" >
+    update cems_log_device_softlog
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      orgId = #{orgid,jdbcType=VARCHAR},
+      orgName = #{orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      sId = #{sid,jdbcType=VARCHAR},
+      softName = #{softname,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      regguid = #{regguid,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=INTEGER},
+      policyId = #{policyid,jdbcType=VARCHAR},
+      clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      regUserName = #{regusername,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userOrgId = #{userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      ipType = #{iptype,jdbcType=INTEGER},
+      holdName = #{holdname,jdbcType=VARCHAR},
+      bread = #{bread,jdbcType=INTEGER},
+      cyrip = #{cyrip,jdbcType=VARCHAR},
+      curmac = #{curmac,jdbcType=VARCHAR},
+      standardFlag = #{standardflag,jdbcType=INTEGER},
+      softId = #{softid,jdbcType=VARCHAR},
+      optAudit = #{optaudit,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=VARCHAR},
+      policyName = #{policyname,jdbcType=VARCHAR},
+      groupname = #{groupname,jdbcType=VARCHAR},
+      netState = #{netstate,jdbcType=INTEGER},
+      ipNumber = #{ipnumber,jdbcType=BINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.SoftLogBean" >
+    update cems_log_device_softlog
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      orgId = #{orgid,jdbcType=VARCHAR},
+      orgName = #{orgname,jdbcType=VARCHAR},
+      regUserOnlyId = #{reguseronlyid,jdbcType=VARCHAR},
+      regUserAccount = #{reguseraccount,jdbcType=VARCHAR},
+      osLoginAccount = #{osloginaccount,jdbcType=VARCHAR},
+      sId = #{sid,jdbcType=VARCHAR},
+      softName = #{softname,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      regguid = #{regguid,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=INTEGER},
+      policyId = #{policyid,jdbcType=VARCHAR},
+      clientTime = #{clienttime,jdbcType=TIMESTAMP},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      regUserName = #{regusername,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userOrgId = #{userorgid,jdbcType=VARCHAR},
+      userOrgCodeUI = #{userorgcodeui,jdbcType=VARCHAR},
+      devOrgCodeUI = #{devorgcodeui,jdbcType=VARCHAR},
+      devOrgPath = #{devorgpath,jdbcType=VARCHAR},
+      ipType = #{iptype,jdbcType=INTEGER},
+      holdName = #{holdname,jdbcType=VARCHAR},
+      bread = #{bread,jdbcType=INTEGER},
+      cyrip = #{cyrip,jdbcType=VARCHAR},
+      curmac = #{curmac,jdbcType=VARCHAR},
+      standardFlag = #{standardflag,jdbcType=INTEGER},
+      softId = #{softid,jdbcType=VARCHAR},
+      optAudit = #{optaudit,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=VARCHAR},
+      policyName = #{policyname,jdbcType=VARCHAR},
+      groupname = #{groupname,jdbcType=VARCHAR},
+      netState = #{netstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

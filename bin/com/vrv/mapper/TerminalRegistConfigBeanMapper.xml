@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.TerminalRegistConfigBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.TerminalRegistConfigBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="itemField" property="itemfield" jdbcType="VARCHAR" />
+    <result column="dbField" property="dbfield" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="itemName" property="itemname" jdbcType="VARCHAR" />
+    <result column="isverify" property="isverify" jdbcType="INTEGER" />
+    <result column="onlySelect" property="onlyselect" jdbcType="INTEGER" />
+    <result column="needFill" property="needfill" jdbcType="INTEGER" />
+    <result column="ctrlType" property="ctrltype" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="fieldCode" property="fieldcode" jdbcType="VARCHAR" />
+    <result column="isShow" property="isshow" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.TerminalRegistConfigBean" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, itemField, dbField, title, itemName, isverify, onlySelect, needFill, ctrlType, 
+    enabled, createTime, updateTime, sort, fieldCode, isShow
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.TerminalRegistConfigBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_terminalregist_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.TerminalRegistConfigBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_terminalregist_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_terminalregist_config
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_terminalregist_config
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.TerminalRegistConfigBeanExample" >
+    delete from cems_terminalregist_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.TerminalRegistConfigBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_terminalregist_config (itemField, dbField, title, 
+      itemName, isverify, onlySelect, 
+      needFill, ctrlType, enabled, 
+      createTime, updateTime, sort, 
+      fieldCode, isShow, description
+      )
+    values (#{itemfield,jdbcType=VARCHAR}, #{dbfield,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{itemname,jdbcType=VARCHAR}, #{isverify,jdbcType=INTEGER}, #{onlyselect,jdbcType=INTEGER}, 
+      #{needfill,jdbcType=INTEGER}, #{ctrltype,jdbcType=VARCHAR}, #{enabled,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, 
+      #{fieldcode,jdbcType=VARCHAR}, #{isshow,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.TerminalRegistConfigBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_terminalregist_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemfield != null" >
+        itemField,
+      </if>
+      <if test="dbfield != null" >
+        dbField,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="itemname != null" >
+        itemName,
+      </if>
+      <if test="isverify != null" >
+        isverify,
+      </if>
+      <if test="onlyselect != null" >
+        onlySelect,
+      </if>
+      <if test="needfill != null" >
+        needFill,
+      </if>
+      <if test="ctrltype != null" >
+        ctrlType,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="fieldcode != null" >
+        fieldCode,
+      </if>
+      <if test="isshow != null" >
+        isShow,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemfield != null" >
+        #{itemfield,jdbcType=VARCHAR},
+      </if>
+      <if test="dbfield != null" >
+        #{dbfield,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="isverify != null" >
+        #{isverify,jdbcType=INTEGER},
+      </if>
+      <if test="onlyselect != null" >
+        #{onlyselect,jdbcType=INTEGER},
+      </if>
+      <if test="needfill != null" >
+        #{needfill,jdbcType=INTEGER},
+      </if>
+      <if test="ctrltype != null" >
+        #{ctrltype,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="fieldcode != null" >
+        #{fieldcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.TerminalRegistConfigBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_terminalregist_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_terminalregist_config
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemfield != null" >
+        itemField = #{record.itemfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbfield != null" >
+        dbField = #{record.dbfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemname != null" >
+        itemName = #{record.itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isverify != null" >
+        isverify = #{record.isverify,jdbcType=INTEGER},
+      </if>
+      <if test="record.onlyselect != null" >
+        onlySelect = #{record.onlyselect,jdbcType=INTEGER},
+      </if>
+      <if test="record.needfill != null" >
+        needFill = #{record.needfill,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctrltype != null" >
+        ctrlType = #{record.ctrltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldcode != null" >
+        fieldCode = #{record.fieldcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshow != null" >
+        isShow = #{record.isshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_terminalregist_config
+    set id = #{record.id,jdbcType=VARCHAR},
+      itemField = #{record.itemfield,jdbcType=VARCHAR},
+      dbField = #{record.dbfield,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      itemName = #{record.itemname,jdbcType=VARCHAR},
+      isverify = #{record.isverify,jdbcType=INTEGER},
+      onlySelect = #{record.onlyselect,jdbcType=INTEGER},
+      needFill = #{record.needfill,jdbcType=INTEGER},
+      ctrlType = #{record.ctrltype,jdbcType=VARCHAR},
+      enabled = #{record.enabled,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      fieldCode = #{record.fieldcode,jdbcType=VARCHAR},
+      isShow = #{record.isshow,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_terminalregist_config
+    set id = #{record.id,jdbcType=VARCHAR},
+      itemField = #{record.itemfield,jdbcType=VARCHAR},
+      dbField = #{record.dbfield,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      itemName = #{record.itemname,jdbcType=VARCHAR},
+      isverify = #{record.isverify,jdbcType=INTEGER},
+      onlySelect = #{record.onlyselect,jdbcType=INTEGER},
+      needFill = #{record.needfill,jdbcType=INTEGER},
+      ctrlType = #{record.ctrltype,jdbcType=VARCHAR},
+      enabled = #{record.enabled,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      sort = #{record.sort,jdbcType=INTEGER},
+      fieldCode = #{record.fieldcode,jdbcType=VARCHAR},
+      isShow = #{record.isshow,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.TerminalRegistConfigBean" >
+    update cems_terminalregist_config
+    <set >
+      <if test="itemfield != null" >
+        itemField = #{itemfield,jdbcType=VARCHAR},
+      </if>
+      <if test="dbfield != null" >
+        dbField = #{dbfield,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        itemName = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="isverify != null" >
+        isverify = #{isverify,jdbcType=INTEGER},
+      </if>
+      <if test="onlyselect != null" >
+        onlySelect = #{onlyselect,jdbcType=INTEGER},
+      </if>
+      <if test="needfill != null" >
+        needFill = #{needfill,jdbcType=INTEGER},
+      </if>
+      <if test="ctrltype != null" >
+        ctrlType = #{ctrltype,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="fieldcode != null" >
+        fieldCode = #{fieldcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        isShow = #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.TerminalRegistConfigBean" >
+    update cems_terminalregist_config
+    set itemField = #{itemfield,jdbcType=VARCHAR},
+      dbField = #{dbfield,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      itemName = #{itemname,jdbcType=VARCHAR},
+      isverify = #{isverify,jdbcType=INTEGER},
+      onlySelect = #{onlyselect,jdbcType=INTEGER},
+      needFill = #{needfill,jdbcType=INTEGER},
+      ctrlType = #{ctrltype,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      fieldCode = #{fieldcode,jdbcType=VARCHAR},
+      isShow = #{isshow,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.TerminalRegistConfigBean" >
+    update cems_terminalregist_config
+    set itemField = #{itemfield,jdbcType=VARCHAR},
+      dbField = #{dbfield,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      itemName = #{itemname,jdbcType=VARCHAR},
+      isverify = #{isverify,jdbcType=INTEGER},
+      onlySelect = #{onlyselect,jdbcType=INTEGER},
+      needFill = #{needfill,jdbcType=INTEGER},
+      ctrlType = #{ctrltype,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      sort = #{sort,jdbcType=INTEGER},
+      fieldCode = #{fieldcode,jdbcType=VARCHAR},
+      isShow = #{isshow,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -14,26 +14,28 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://linkdood.ddns.net:3306/ecg_product_db" userId="root" password="L1nkd00d">
+                        connectionURL="jdbc:mysql://localhost:3306/cems_db2" userId="root" password="">
         </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.linkdoodtechnologies.ecgproduct.ecgproduct.bean" targetProject="./src">
+        <javaModelGenerator targetPackage="com.vrv.bean" targetProject="./src">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.linkdoodtechnologies.ecgproduct.ecgproduct.mapper" targetProject="./src">
+        <sqlMapGenerator targetPackage="com.vrv.mapper" targetProject="./src">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.linkdoodtechnologies.ecgproduct.ecgproduct.mapper" targetProject="./src">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.vrv.mapper"
+                             targetProject="./src">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="variation_tbl" domainObjectName="CategoryBean">
+
+        <table tableName="cems_kvssoft" domainObjectName="KvsSoftBean">
 
             <property name="enableSelectByExample" value="true"/>
             <property name="enableDeleteByExample" value="true"/>
@@ -41,13 +43,13 @@
             <property name="enableUpdateByExample" value="true"/>
             <property name="enableUpdateByPrimaryKey" value="true"/>
 
-<!--            auto increament id put here, so wont add in as empty-->
-            <generatedKey column="vt_id" sqlStatement="MySql"
+            <!-- auto increament id put here, so wont add in as empty -->
+            <generatedKey column="id" sqlStatement="MySql"
                           identity="true"/>
 
-<!--            ignore write at here-->
-            <ignoreColumn column="vt_created_datetime" />
-            <ignoreColumn column="vt_updated_datetime" />
+            <!-- ignore write at here -->
+<!--            <ignoreColumn column="hut_created_datetime"/>-->
+<!--            <ignoreColumn column="hut_updated_datetime"/>-->
         </table>
     </context>
 </generatorConfiguration>

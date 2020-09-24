@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.CloudRenewInstanceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBean" >
+    <id column="ecr_id" property="ecrId" jdbcType="INTEGER" />
+    <result column="ecr_otn" property="ecrOtn" jdbcType="VARCHAR" />
+    <result column="ecr_renew_start_date" property="ecrRenewStartDate" jdbcType="VARCHAR" />
+    <result column="ecr_renew_end_date" property="ecrRenewEndDate" jdbcType="VARCHAR" />
+    <result column="ecr_period_num" property="ecrPeriodNum" jdbcType="INTEGER" />
+    <result column="ecr_period_type" property="ecrPeriodType" jdbcType="VARCHAR" />
+    <result column="ecr_cloud_type" property="ecrCloudType" jdbcType="VARCHAR" />
+    <result column="ecr_remark" property="ecrRemark" jdbcType="VARCHAR" />
+    <result column="ecr_status" property="ecrStatus" jdbcType="INTEGER" />
+    <result column="ecr_param1" property="ecrParam1" jdbcType="VARCHAR" />
+    <result column="ecr_param2" property="ecrParam2" jdbcType="VARCHAR" />
+    <result column="ecr_param3" property="ecrParam3" jdbcType="VARCHAR" />
+    <result column="ecr_param4" property="ecrParam4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ecr_id, ecr_otn, ecr_renew_start_date, ecr_renew_end_date, ecr_period_num, ecr_period_type, 
+    ecr_cloud_type, ecr_remark, ecr_status, ecr_param1, ecr_param2, ecr_param3, ecr_param4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cloud_renewal_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cloud_renewal_tbl
+    where ecr_id = #{ecrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cloud_renewal_tbl
+    where ecr_id = #{ecrId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBeanExample" >
+    delete from cloud_renewal_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ecrId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_renewal_tbl (ecr_otn, ecr_renew_start_date, ecr_renew_end_date, 
+      ecr_period_num, ecr_period_type, ecr_cloud_type, 
+      ecr_remark, ecr_status, ecr_param1, 
+      ecr_param2, ecr_param3, ecr_param4
+      )
+    values (#{ecrOtn,jdbcType=VARCHAR}, #{ecrRenewStartDate,jdbcType=VARCHAR}, #{ecrRenewEndDate,jdbcType=VARCHAR}, 
+      #{ecrPeriodNum,jdbcType=INTEGER}, #{ecrPeriodType,jdbcType=VARCHAR}, #{ecrCloudType,jdbcType=VARCHAR}, 
+      #{ecrRemark,jdbcType=VARCHAR}, #{ecrStatus,jdbcType=INTEGER}, #{ecrParam1,jdbcType=VARCHAR}, 
+      #{ecrParam2,jdbcType=VARCHAR}, #{ecrParam3,jdbcType=VARCHAR}, #{ecrParam4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ecrId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_renewal_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ecrOtn != null" >
+        ecr_otn,
+      </if>
+      <if test="ecrRenewStartDate != null" >
+        ecr_renew_start_date,
+      </if>
+      <if test="ecrRenewEndDate != null" >
+        ecr_renew_end_date,
+      </if>
+      <if test="ecrPeriodNum != null" >
+        ecr_period_num,
+      </if>
+      <if test="ecrPeriodType != null" >
+        ecr_period_type,
+      </if>
+      <if test="ecrCloudType != null" >
+        ecr_cloud_type,
+      </if>
+      <if test="ecrRemark != null" >
+        ecr_remark,
+      </if>
+      <if test="ecrStatus != null" >
+        ecr_status,
+      </if>
+      <if test="ecrParam1 != null" >
+        ecr_param1,
+      </if>
+      <if test="ecrParam2 != null" >
+        ecr_param2,
+      </if>
+      <if test="ecrParam3 != null" >
+        ecr_param3,
+      </if>
+      <if test="ecrParam4 != null" >
+        ecr_param4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ecrOtn != null" >
+        #{ecrOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRenewStartDate != null" >
+        #{ecrRenewStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRenewEndDate != null" >
+        #{ecrRenewEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrPeriodNum != null" >
+        #{ecrPeriodNum,jdbcType=INTEGER},
+      </if>
+      <if test="ecrPeriodType != null" >
+        #{ecrPeriodType,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrCloudType != null" >
+        #{ecrCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRemark != null" >
+        #{ecrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrStatus != null" >
+        #{ecrStatus,jdbcType=INTEGER},
+      </if>
+      <if test="ecrParam1 != null" >
+        #{ecrParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam2 != null" >
+        #{ecrParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam3 != null" >
+        #{ecrParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam4 != null" >
+        #{ecrParam4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cloud_renewal_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cloud_renewal_tbl
+    <set >
+      <if test="record.ecrId != null" >
+        ecr_id = #{record.ecrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecrOtn != null" >
+        ecr_otn = #{record.ecrOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrRenewStartDate != null" >
+        ecr_renew_start_date = #{record.ecrRenewStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrRenewEndDate != null" >
+        ecr_renew_end_date = #{record.ecrRenewEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrPeriodNum != null" >
+        ecr_period_num = #{record.ecrPeriodNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecrPeriodType != null" >
+        ecr_period_type = #{record.ecrPeriodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrCloudType != null" >
+        ecr_cloud_type = #{record.ecrCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrRemark != null" >
+        ecr_remark = #{record.ecrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrStatus != null" >
+        ecr_status = #{record.ecrStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecrParam1 != null" >
+        ecr_param1 = #{record.ecrParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrParam2 != null" >
+        ecr_param2 = #{record.ecrParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrParam3 != null" >
+        ecr_param3 = #{record.ecrParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecrParam4 != null" >
+        ecr_param4 = #{record.ecrParam4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cloud_renewal_tbl
+    set ecr_id = #{record.ecrId,jdbcType=INTEGER},
+      ecr_otn = #{record.ecrOtn,jdbcType=VARCHAR},
+      ecr_renew_start_date = #{record.ecrRenewStartDate,jdbcType=VARCHAR},
+      ecr_renew_end_date = #{record.ecrRenewEndDate,jdbcType=VARCHAR},
+      ecr_period_num = #{record.ecrPeriodNum,jdbcType=INTEGER},
+      ecr_period_type = #{record.ecrPeriodType,jdbcType=VARCHAR},
+      ecr_cloud_type = #{record.ecrCloudType,jdbcType=VARCHAR},
+      ecr_remark = #{record.ecrRemark,jdbcType=VARCHAR},
+      ecr_status = #{record.ecrStatus,jdbcType=INTEGER},
+      ecr_param1 = #{record.ecrParam1,jdbcType=VARCHAR},
+      ecr_param2 = #{record.ecrParam2,jdbcType=VARCHAR},
+      ecr_param3 = #{record.ecrParam3,jdbcType=VARCHAR},
+      ecr_param4 = #{record.ecrParam4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBean" >
+    update cloud_renewal_tbl
+    <set >
+      <if test="ecrOtn != null" >
+        ecr_otn = #{ecrOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRenewStartDate != null" >
+        ecr_renew_start_date = #{ecrRenewStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRenewEndDate != null" >
+        ecr_renew_end_date = #{ecrRenewEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrPeriodNum != null" >
+        ecr_period_num = #{ecrPeriodNum,jdbcType=INTEGER},
+      </if>
+      <if test="ecrPeriodType != null" >
+        ecr_period_type = #{ecrPeriodType,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrCloudType != null" >
+        ecr_cloud_type = #{ecrCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrRemark != null" >
+        ecr_remark = #{ecrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrStatus != null" >
+        ecr_status = #{ecrStatus,jdbcType=INTEGER},
+      </if>
+      <if test="ecrParam1 != null" >
+        ecr_param1 = #{ecrParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam2 != null" >
+        ecr_param2 = #{ecrParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam3 != null" >
+        ecr_param3 = #{ecrParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ecrParam4 != null" >
+        ecr_param4 = #{ecrParam4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ecr_id = #{ecrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudRenewInstanceBean" >
+    update cloud_renewal_tbl
+    set ecr_otn = #{ecrOtn,jdbcType=VARCHAR},
+      ecr_renew_start_date = #{ecrRenewStartDate,jdbcType=VARCHAR},
+      ecr_renew_end_date = #{ecrRenewEndDate,jdbcType=VARCHAR},
+      ecr_period_num = #{ecrPeriodNum,jdbcType=INTEGER},
+      ecr_period_type = #{ecrPeriodType,jdbcType=VARCHAR},
+      ecr_cloud_type = #{ecrCloudType,jdbcType=VARCHAR},
+      ecr_remark = #{ecrRemark,jdbcType=VARCHAR},
+      ecr_status = #{ecrStatus,jdbcType=INTEGER},
+      ecr_param1 = #{ecrParam1,jdbcType=VARCHAR},
+      ecr_param2 = #{ecrParam2,jdbcType=VARCHAR},
+      ecr_param3 = #{ecrParam3,jdbcType=VARCHAR},
+      ecr_param4 = #{ecrParam4,jdbcType=VARCHAR}
+    where ecr_id = #{ecrId,jdbcType=INTEGER}
+  </update>
+</mapper>

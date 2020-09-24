@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.DeviceNetworkBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.DeviceNetworkBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="gate" property="gate" jdbcType="VARCHAR" />
+    <result column="gateways" property="gateways" jdbcType="VARCHAR" />
+    <result column="dns" property="dns" jdbcType="VARCHAR" />
+    <result column="macType" property="mactype" jdbcType="VARCHAR" />
+    <result column="netCardName" property="netcardname" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devOnlyId, mac, ip, gate, gateways, dns, macType, netCardName, createTime, updateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.DeviceNetworkBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_device_network
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_device_network
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_device_network
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.DeviceNetworkBeanExample" >
+    delete from cems_device_network
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.DeviceNetworkBean" >
+    insert into cems_device_network (id, devOnlyId, mac, 
+      ip, gate, gateways, 
+      dns, macType, netCardName, 
+      createTime, updateTime)
+    values (#{id,jdbcType=VARCHAR}, #{devonlyid,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{gate,jdbcType=VARCHAR}, #{gateways,jdbcType=VARCHAR}, 
+      #{dns,jdbcType=VARCHAR}, #{mactype,jdbcType=VARCHAR}, #{netcardname,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.DeviceNetworkBean" >
+    insert into cems_device_network
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="gate != null" >
+        gate,
+      </if>
+      <if test="gateways != null" >
+        gateways,
+      </if>
+      <if test="dns != null" >
+        dns,
+      </if>
+      <if test="mactype != null" >
+        macType,
+      </if>
+      <if test="netcardname != null" >
+        netCardName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="gate != null" >
+        #{gate,jdbcType=VARCHAR},
+      </if>
+      <if test="gateways != null" >
+        #{gateways,jdbcType=VARCHAR},
+      </if>
+      <if test="dns != null" >
+        #{dns,jdbcType=VARCHAR},
+      </if>
+      <if test="mactype != null" >
+        #{mactype,jdbcType=VARCHAR},
+      </if>
+      <if test="netcardname != null" >
+        #{netcardname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.DeviceNetworkBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_device_network
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_device_network
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gate != null" >
+        gate = #{record.gate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateways != null" >
+        gateways = #{record.gateways,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dns != null" >
+        dns = #{record.dns,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mactype != null" >
+        macType = #{record.mactype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netcardname != null" >
+        netCardName = #{record.netcardname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_device_network
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      gate = #{record.gate,jdbcType=VARCHAR},
+      gateways = #{record.gateways,jdbcType=VARCHAR},
+      dns = #{record.dns,jdbcType=VARCHAR},
+      macType = #{record.mactype,jdbcType=VARCHAR},
+      netCardName = #{record.netcardname,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.DeviceNetworkBean" >
+    update cems_device_network
+    <set >
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="gate != null" >
+        gate = #{gate,jdbcType=VARCHAR},
+      </if>
+      <if test="gateways != null" >
+        gateways = #{gateways,jdbcType=VARCHAR},
+      </if>
+      <if test="dns != null" >
+        dns = #{dns,jdbcType=VARCHAR},
+      </if>
+      <if test="mactype != null" >
+        macType = #{mactype,jdbcType=VARCHAR},
+      </if>
+      <if test="netcardname != null" >
+        netCardName = #{netcardname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.DeviceNetworkBean" >
+    update cems_device_network
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      gate = #{gate,jdbcType=VARCHAR},
+      gateways = #{gateways,jdbcType=VARCHAR},
+      dns = #{dns,jdbcType=VARCHAR},
+      macType = #{mactype,jdbcType=VARCHAR},
+      netCardName = #{netcardname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgnotification.ecgnotification.mapper.NotificationBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBean" >
+    <id column="nt_id" property="ntId" jdbcType="INTEGER" />
+    <result column="nt_ut_id" property="ntUtId" jdbcType="INTEGER" />
+    <result column="nt_type" property="ntType" jdbcType="VARCHAR" />
+    <result column="nt_phone_email" property="ntPhoneEmail" jdbcType="VARCHAR" />
+    <result column="nt_message" property="ntMessage" jdbcType="VARCHAR" />
+    <result column="nt_param1" property="ntParam1" jdbcType="VARCHAR" />
+    <result column="nt_param2" property="ntParam2" jdbcType="VARCHAR" />
+    <result column="nt_param3" property="ntParam3" jdbcType="VARCHAR" />
+    <result column="nt_param4" property="ntParam4" jdbcType="VARCHAR" />
+    <result column="nt_param5" property="ntParam5" jdbcType="VARCHAR" />
+    <result column="nt_param6" property="ntParam6" jdbcType="VARCHAR" />
+    <result column="nt_status" property="ntStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    nt_id, nt_ut_id, nt_type, nt_phone_email, nt_message, nt_param1, nt_param2, nt_param3, 
+    nt_param4, nt_param5, nt_param6, nt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from notification_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from notification_tbl
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from notification_tbl
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBeanExample" >
+    delete from notification_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ntId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notification_tbl (nt_ut_id, nt_type, nt_phone_email, 
+      nt_message, nt_param1, nt_param2, 
+      nt_param3, nt_param4, nt_param5, 
+      nt_param6, nt_status)
+    values (#{ntUtId,jdbcType=INTEGER}, #{ntType,jdbcType=VARCHAR}, #{ntPhoneEmail,jdbcType=VARCHAR}, 
+      #{ntMessage,jdbcType=VARCHAR}, #{ntParam1,jdbcType=VARCHAR}, #{ntParam2,jdbcType=VARCHAR}, 
+      #{ntParam3,jdbcType=VARCHAR}, #{ntParam4,jdbcType=VARCHAR}, #{ntParam5,jdbcType=VARCHAR}, 
+      #{ntParam6,jdbcType=VARCHAR}, #{ntStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ntId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notification_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ntUtId != null" >
+        nt_ut_id,
+      </if>
+      <if test="ntType != null" >
+        nt_type,
+      </if>
+      <if test="ntPhoneEmail != null" >
+        nt_phone_email,
+      </if>
+      <if test="ntMessage != null" >
+        nt_message,
+      </if>
+      <if test="ntParam1 != null" >
+        nt_param1,
+      </if>
+      <if test="ntParam2 != null" >
+        nt_param2,
+      </if>
+      <if test="ntParam3 != null" >
+        nt_param3,
+      </if>
+      <if test="ntParam4 != null" >
+        nt_param4,
+      </if>
+      <if test="ntParam5 != null" >
+        nt_param5,
+      </if>
+      <if test="ntParam6 != null" >
+        nt_param6,
+      </if>
+      <if test="ntStatus != null" >
+        nt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ntUtId != null" >
+        #{ntUtId,jdbcType=INTEGER},
+      </if>
+      <if test="ntType != null" >
+        #{ntType,jdbcType=VARCHAR},
+      </if>
+      <if test="ntPhoneEmail != null" >
+        #{ntPhoneEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ntMessage != null" >
+        #{ntMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam1 != null" >
+        #{ntParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam2 != null" >
+        #{ntParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam3 != null" >
+        #{ntParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam4 != null" >
+        #{ntParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam5 != null" >
+        #{ntParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam6 != null" >
+        #{ntParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ntStatus != null" >
+        #{ntStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBeanExample" resultType="java.lang.Integer" >
+    select count(*) from notification_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update notification_tbl
+    <set >
+      <if test="record.ntId != null" >
+        nt_id = #{record.ntId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntUtId != null" >
+        nt_ut_id = #{record.ntUtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntType != null" >
+        nt_type = #{record.ntType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntPhoneEmail != null" >
+        nt_phone_email = #{record.ntPhoneEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntMessage != null" >
+        nt_message = #{record.ntMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam1 != null" >
+        nt_param1 = #{record.ntParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam2 != null" >
+        nt_param2 = #{record.ntParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam3 != null" >
+        nt_param3 = #{record.ntParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam4 != null" >
+        nt_param4 = #{record.ntParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam5 != null" >
+        nt_param5 = #{record.ntParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntParam6 != null" >
+        nt_param6 = #{record.ntParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ntStatus != null" >
+        nt_status = #{record.ntStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update notification_tbl
+    set nt_id = #{record.ntId,jdbcType=INTEGER},
+      nt_ut_id = #{record.ntUtId,jdbcType=INTEGER},
+      nt_type = #{record.ntType,jdbcType=VARCHAR},
+      nt_phone_email = #{record.ntPhoneEmail,jdbcType=VARCHAR},
+      nt_message = #{record.ntMessage,jdbcType=VARCHAR},
+      nt_param1 = #{record.ntParam1,jdbcType=VARCHAR},
+      nt_param2 = #{record.ntParam2,jdbcType=VARCHAR},
+      nt_param3 = #{record.ntParam3,jdbcType=VARCHAR},
+      nt_param4 = #{record.ntParam4,jdbcType=VARCHAR},
+      nt_param5 = #{record.ntParam5,jdbcType=VARCHAR},
+      nt_param6 = #{record.ntParam6,jdbcType=VARCHAR},
+      nt_status = #{record.ntStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBean" >
+    update notification_tbl
+    <set >
+      <if test="ntUtId != null" >
+        nt_ut_id = #{ntUtId,jdbcType=INTEGER},
+      </if>
+      <if test="ntType != null" >
+        nt_type = #{ntType,jdbcType=VARCHAR},
+      </if>
+      <if test="ntPhoneEmail != null" >
+        nt_phone_email = #{ntPhoneEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="ntMessage != null" >
+        nt_message = #{ntMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam1 != null" >
+        nt_param1 = #{ntParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam2 != null" >
+        nt_param2 = #{ntParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam3 != null" >
+        nt_param3 = #{ntParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam4 != null" >
+        nt_param4 = #{ntParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam5 != null" >
+        nt_param5 = #{ntParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="ntParam6 != null" >
+        nt_param6 = #{ntParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="ntStatus != null" >
+        nt_status = #{ntStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.NotificationBean" >
+    update notification_tbl
+    set nt_ut_id = #{ntUtId,jdbcType=INTEGER},
+      nt_type = #{ntType,jdbcType=VARCHAR},
+      nt_phone_email = #{ntPhoneEmail,jdbcType=VARCHAR},
+      nt_message = #{ntMessage,jdbcType=VARCHAR},
+      nt_param1 = #{ntParam1,jdbcType=VARCHAR},
+      nt_param2 = #{ntParam2,jdbcType=VARCHAR},
+      nt_param3 = #{ntParam3,jdbcType=VARCHAR},
+      nt_param4 = #{ntParam4,jdbcType=VARCHAR},
+      nt_param5 = #{ntParam5,jdbcType=VARCHAR},
+      nt_param6 = #{ntParam6,jdbcType=VARCHAR},
+      nt_status = #{ntStatus,jdbcType=INTEGER}
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </update>
+</mapper>

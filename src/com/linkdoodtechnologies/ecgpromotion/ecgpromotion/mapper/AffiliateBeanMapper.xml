@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.mapper.AffiliateBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBean" >
+    <id column="aft_id" property="aftId" jdbcType="INTEGER" />
+    <result column="aft_att_id" property="aftAttId" jdbcType="VARCHAR" />
+    <result column="aft_unique_id" property="aftUniqueId" jdbcType="VARCHAR" />
+    <result column="aft_prt_id" property="aftPrtId" jdbcType="VARCHAR" />
+    <result column="aft_partner_name" property="aftPartnerName" jdbcType="VARCHAR" />
+    <result column="aft_partner_website_url" property="aftPartnerWebsiteUrl" jdbcType="VARCHAR" />
+    <result column="aft_description" property="aftDescription" jdbcType="VARCHAR" />
+    <result column="aft_param1" property="aftParam1" jdbcType="VARCHAR" />
+    <result column="aft_param2" property="aftParam2" jdbcType="VARCHAR" />
+    <result column="aft_param3" property="aftParam3" jdbcType="VARCHAR" />
+    <result column="aft_param4" property="aftParam4" jdbcType="VARCHAR" />
+    <result column="aft_param5" property="aftParam5" jdbcType="VARCHAR" />
+    <result column="aft_status" property="aftStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    aft_id, aft_att_id, aft_unique_id, aft_prt_id, aft_partner_name, aft_partner_website_url, 
+    aft_description, aft_param1, aft_param2, aft_param3, aft_param4, aft_param5, aft_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from affiliate_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from affiliate_tbl
+    where aft_id = #{aftId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from affiliate_tbl
+    where aft_id = #{aftId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBeanExample" >
+    delete from affiliate_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="aftId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into affiliate_tbl (aft_att_id, aft_unique_id, aft_prt_id, 
+      aft_partner_name, aft_partner_website_url, aft_description, 
+      aft_param1, aft_param2, aft_param3, 
+      aft_param4, aft_param5, aft_status
+      )
+    values (#{aftAttId,jdbcType=VARCHAR}, #{aftUniqueId,jdbcType=VARCHAR}, #{aftPrtId,jdbcType=VARCHAR}, 
+      #{aftPartnerName,jdbcType=VARCHAR}, #{aftPartnerWebsiteUrl,jdbcType=VARCHAR}, #{aftDescription,jdbcType=VARCHAR}, 
+      #{aftParam1,jdbcType=VARCHAR}, #{aftParam2,jdbcType=VARCHAR}, #{aftParam3,jdbcType=VARCHAR}, 
+      #{aftParam4,jdbcType=VARCHAR}, #{aftParam5,jdbcType=VARCHAR}, #{aftStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="aftId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into affiliate_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aftAttId != null" >
+        aft_att_id,
+      </if>
+      <if test="aftUniqueId != null" >
+        aft_unique_id,
+      </if>
+      <if test="aftPrtId != null" >
+        aft_prt_id,
+      </if>
+      <if test="aftPartnerName != null" >
+        aft_partner_name,
+      </if>
+      <if test="aftPartnerWebsiteUrl != null" >
+        aft_partner_website_url,
+      </if>
+      <if test="aftDescription != null" >
+        aft_description,
+      </if>
+      <if test="aftParam1 != null" >
+        aft_param1,
+      </if>
+      <if test="aftParam2 != null" >
+        aft_param2,
+      </if>
+      <if test="aftParam3 != null" >
+        aft_param3,
+      </if>
+      <if test="aftParam4 != null" >
+        aft_param4,
+      </if>
+      <if test="aftParam5 != null" >
+        aft_param5,
+      </if>
+      <if test="aftStatus != null" >
+        aft_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aftAttId != null" >
+        #{aftAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftUniqueId != null" >
+        #{aftUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPrtId != null" >
+        #{aftPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPartnerName != null" >
+        #{aftPartnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPartnerWebsiteUrl != null" >
+        #{aftPartnerWebsiteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="aftDescription != null" >
+        #{aftDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam1 != null" >
+        #{aftParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam2 != null" >
+        #{aftParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam3 != null" >
+        #{aftParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam4 != null" >
+        #{aftParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam5 != null" >
+        #{aftParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="aftStatus != null" >
+        #{aftStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBeanExample" resultType="java.lang.Integer" >
+    select count(*) from affiliate_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update affiliate_tbl
+    <set >
+      <if test="record.aftId != null" >
+        aft_id = #{record.aftId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aftAttId != null" >
+        aft_att_id = #{record.aftAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftUniqueId != null" >
+        aft_unique_id = #{record.aftUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftPrtId != null" >
+        aft_prt_id = #{record.aftPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftPartnerName != null" >
+        aft_partner_name = #{record.aftPartnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftPartnerWebsiteUrl != null" >
+        aft_partner_website_url = #{record.aftPartnerWebsiteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftDescription != null" >
+        aft_description = #{record.aftDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftParam1 != null" >
+        aft_param1 = #{record.aftParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftParam2 != null" >
+        aft_param2 = #{record.aftParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftParam3 != null" >
+        aft_param3 = #{record.aftParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftParam4 != null" >
+        aft_param4 = #{record.aftParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftParam5 != null" >
+        aft_param5 = #{record.aftParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftStatus != null" >
+        aft_status = #{record.aftStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update affiliate_tbl
+    set aft_id = #{record.aftId,jdbcType=INTEGER},
+      aft_att_id = #{record.aftAttId,jdbcType=VARCHAR},
+      aft_unique_id = #{record.aftUniqueId,jdbcType=VARCHAR},
+      aft_prt_id = #{record.aftPrtId,jdbcType=VARCHAR},
+      aft_partner_name = #{record.aftPartnerName,jdbcType=VARCHAR},
+      aft_partner_website_url = #{record.aftPartnerWebsiteUrl,jdbcType=VARCHAR},
+      aft_description = #{record.aftDescription,jdbcType=VARCHAR},
+      aft_param1 = #{record.aftParam1,jdbcType=VARCHAR},
+      aft_param2 = #{record.aftParam2,jdbcType=VARCHAR},
+      aft_param3 = #{record.aftParam3,jdbcType=VARCHAR},
+      aft_param4 = #{record.aftParam4,jdbcType=VARCHAR},
+      aft_param5 = #{record.aftParam5,jdbcType=VARCHAR},
+      aft_status = #{record.aftStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBean" >
+    update affiliate_tbl
+    <set >
+      <if test="aftAttId != null" >
+        aft_att_id = #{aftAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftUniqueId != null" >
+        aft_unique_id = #{aftUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPrtId != null" >
+        aft_prt_id = #{aftPrtId,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPartnerName != null" >
+        aft_partner_name = #{aftPartnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="aftPartnerWebsiteUrl != null" >
+        aft_partner_website_url = #{aftPartnerWebsiteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="aftDescription != null" >
+        aft_description = #{aftDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam1 != null" >
+        aft_param1 = #{aftParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam2 != null" >
+        aft_param2 = #{aftParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam3 != null" >
+        aft_param3 = #{aftParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam4 != null" >
+        aft_param4 = #{aftParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="aftParam5 != null" >
+        aft_param5 = #{aftParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="aftStatus != null" >
+        aft_status = #{aftStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aft_id = #{aftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.AffiliateBean" >
+    update affiliate_tbl
+    set aft_att_id = #{aftAttId,jdbcType=VARCHAR},
+      aft_unique_id = #{aftUniqueId,jdbcType=VARCHAR},
+      aft_prt_id = #{aftPrtId,jdbcType=VARCHAR},
+      aft_partner_name = #{aftPartnerName,jdbcType=VARCHAR},
+      aft_partner_website_url = #{aftPartnerWebsiteUrl,jdbcType=VARCHAR},
+      aft_description = #{aftDescription,jdbcType=VARCHAR},
+      aft_param1 = #{aftParam1,jdbcType=VARCHAR},
+      aft_param2 = #{aftParam2,jdbcType=VARCHAR},
+      aft_param3 = #{aftParam3,jdbcType=VARCHAR},
+      aft_param4 = #{aftParam4,jdbcType=VARCHAR},
+      aft_param5 = #{aftParam5,jdbcType=VARCHAR},
+      aft_status = #{aftStatus,jdbcType=VARCHAR}
+    where aft_id = #{aftId,jdbcType=INTEGER}
+  </update>
+</mapper>

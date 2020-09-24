@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.PaymentAppBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBean" >
+    <id column="pat_id" property="patId" jdbcType="INTEGER" />
+    <result column="pat_att_id" property="patAttId" jdbcType="VARCHAR" />
+    <result column="pat_user_id" property="patUserId" jdbcType="VARCHAR" />
+    <result column="pat_invoice_id" property="patInvoiceId" jdbcType="VARCHAR" />
+    <result column="pat_pmt_id" property="patPmtId" jdbcType="VARCHAR" />
+    <result column="pat_order_id" property="patOrderId" jdbcType="VARCHAR" />
+    <result column="pat_payment_method" property="patPaymentMethod" jdbcType="VARCHAR" />
+    <result column="pat_currency_type" property="patCurrencyType" jdbcType="VARCHAR" />
+    <result column="pat_amount" property="patAmount" jdbcType="VARCHAR" />
+    <result column="pat_description" property="patDescription" jdbcType="VARCHAR" />
+    <result column="pat_status" property="patStatus" jdbcType="VARCHAR" />
+    <result column="pat_param1" property="patParam1" jdbcType="VARCHAR" />
+    <result column="pat_param2" property="patParam2" jdbcType="VARCHAR" />
+    <result column="pat_param3" property="patParam3" jdbcType="VARCHAR" />
+    <result column="pat_param4" property="patParam4" jdbcType="VARCHAR" />
+    <result column="pat_param5" property="patParam5" jdbcType="VARCHAR" />
+    <result column="pat_param6" property="patParam6" jdbcType="VARCHAR" />
+    <result column="pat_param7" property="patParam7" jdbcType="VARCHAR" />
+    <result column="pat_param8" property="patParam8" jdbcType="VARCHAR" />
+    <result column="pat_param9" property="patParam9" jdbcType="VARCHAR" />
+    <result column="pat_param10" property="patParam10" jdbcType="VARCHAR" />
+    <result column="pat_param11" property="patParam11" jdbcType="VARCHAR" />
+    <result column="pat_param12" property="patParam12" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pat_id, pat_att_id, pat_user_id, pat_invoice_id, pat_pmt_id, pat_order_id, pat_payment_method, 
+    pat_currency_type, pat_amount, pat_description, pat_status, pat_param1, pat_param2, 
+    pat_param3, pat_param4, pat_param5, pat_param6, pat_param7, pat_param8, pat_param9, 
+    pat_param10, pat_param11, pat_param12
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payment_app_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from payment_app_tbl
+    where pat_id = #{patId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payment_app_tbl
+    where pat_id = #{patId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBeanExample" >
+    delete from payment_app_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="patId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_app_tbl (pat_att_id, pat_user_id, pat_invoice_id, 
+      pat_pmt_id, pat_order_id, pat_payment_method, 
+      pat_currency_type, pat_amount, pat_description, 
+      pat_status, pat_param1, pat_param2, 
+      pat_param3, pat_param4, pat_param5, 
+      pat_param6, pat_param7, pat_param8, 
+      pat_param9, pat_param10, pat_param11, 
+      pat_param12)
+    values (#{patAttId,jdbcType=VARCHAR}, #{patUserId,jdbcType=VARCHAR}, #{patInvoiceId,jdbcType=VARCHAR}, 
+      #{patPmtId,jdbcType=VARCHAR}, #{patOrderId,jdbcType=VARCHAR}, #{patPaymentMethod,jdbcType=VARCHAR}, 
+      #{patCurrencyType,jdbcType=VARCHAR}, #{patAmount,jdbcType=VARCHAR}, #{patDescription,jdbcType=VARCHAR}, 
+      #{patStatus,jdbcType=VARCHAR}, #{patParam1,jdbcType=VARCHAR}, #{patParam2,jdbcType=VARCHAR}, 
+      #{patParam3,jdbcType=VARCHAR}, #{patParam4,jdbcType=VARCHAR}, #{patParam5,jdbcType=VARCHAR}, 
+      #{patParam6,jdbcType=VARCHAR}, #{patParam7,jdbcType=VARCHAR}, #{patParam8,jdbcType=VARCHAR}, 
+      #{patParam9,jdbcType=VARCHAR}, #{patParam10,jdbcType=VARCHAR}, #{patParam11,jdbcType=VARCHAR}, 
+      #{patParam12,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="patId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_app_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patAttId != null" >
+        pat_att_id,
+      </if>
+      <if test="patUserId != null" >
+        pat_user_id,
+      </if>
+      <if test="patInvoiceId != null" >
+        pat_invoice_id,
+      </if>
+      <if test="patPmtId != null" >
+        pat_pmt_id,
+      </if>
+      <if test="patOrderId != null" >
+        pat_order_id,
+      </if>
+      <if test="patPaymentMethod != null" >
+        pat_payment_method,
+      </if>
+      <if test="patCurrencyType != null" >
+        pat_currency_type,
+      </if>
+      <if test="patAmount != null" >
+        pat_amount,
+      </if>
+      <if test="patDescription != null" >
+        pat_description,
+      </if>
+      <if test="patStatus != null" >
+        pat_status,
+      </if>
+      <if test="patParam1 != null" >
+        pat_param1,
+      </if>
+      <if test="patParam2 != null" >
+        pat_param2,
+      </if>
+      <if test="patParam3 != null" >
+        pat_param3,
+      </if>
+      <if test="patParam4 != null" >
+        pat_param4,
+      </if>
+      <if test="patParam5 != null" >
+        pat_param5,
+      </if>
+      <if test="patParam6 != null" >
+        pat_param6,
+      </if>
+      <if test="patParam7 != null" >
+        pat_param7,
+      </if>
+      <if test="patParam8 != null" >
+        pat_param8,
+      </if>
+      <if test="patParam9 != null" >
+        pat_param9,
+      </if>
+      <if test="patParam10 != null" >
+        pat_param10,
+      </if>
+      <if test="patParam11 != null" >
+        pat_param11,
+      </if>
+      <if test="patParam12 != null" >
+        pat_param12,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patAttId != null" >
+        #{patAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="patUserId != null" >
+        #{patUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="patInvoiceId != null" >
+        #{patInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="patPmtId != null" >
+        #{patPmtId,jdbcType=VARCHAR},
+      </if>
+      <if test="patOrderId != null" >
+        #{patOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="patPaymentMethod != null" >
+        #{patPaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="patCurrencyType != null" >
+        #{patCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="patAmount != null" >
+        #{patAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="patDescription != null" >
+        #{patDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="patStatus != null" >
+        #{patStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam1 != null" >
+        #{patParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam2 != null" >
+        #{patParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam3 != null" >
+        #{patParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam4 != null" >
+        #{patParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam5 != null" >
+        #{patParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam6 != null" >
+        #{patParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam7 != null" >
+        #{patParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam8 != null" >
+        #{patParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam9 != null" >
+        #{patParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam10 != null" >
+        #{patParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam11 != null" >
+        #{patParam11,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam12 != null" >
+        #{patParam12,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBeanExample" resultType="java.lang.Integer" >
+    select count(*) from payment_app_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payment_app_tbl
+    <set >
+      <if test="record.patId != null" >
+        pat_id = #{record.patId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patAttId != null" >
+        pat_att_id = #{record.patAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patUserId != null" >
+        pat_user_id = #{record.patUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patInvoiceId != null" >
+        pat_invoice_id = #{record.patInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patPmtId != null" >
+        pat_pmt_id = #{record.patPmtId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patOrderId != null" >
+        pat_order_id = #{record.patOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patPaymentMethod != null" >
+        pat_payment_method = #{record.patPaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patCurrencyType != null" >
+        pat_currency_type = #{record.patCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patAmount != null" >
+        pat_amount = #{record.patAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patDescription != null" >
+        pat_description = #{record.patDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patStatus != null" >
+        pat_status = #{record.patStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam1 != null" >
+        pat_param1 = #{record.patParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam2 != null" >
+        pat_param2 = #{record.patParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam3 != null" >
+        pat_param3 = #{record.patParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam4 != null" >
+        pat_param4 = #{record.patParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam5 != null" >
+        pat_param5 = #{record.patParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam6 != null" >
+        pat_param6 = #{record.patParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam7 != null" >
+        pat_param7 = #{record.patParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam8 != null" >
+        pat_param8 = #{record.patParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam9 != null" >
+        pat_param9 = #{record.patParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam10 != null" >
+        pat_param10 = #{record.patParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam11 != null" >
+        pat_param11 = #{record.patParam11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patParam12 != null" >
+        pat_param12 = #{record.patParam12,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payment_app_tbl
+    set pat_id = #{record.patId,jdbcType=INTEGER},
+      pat_att_id = #{record.patAttId,jdbcType=VARCHAR},
+      pat_user_id = #{record.patUserId,jdbcType=VARCHAR},
+      pat_invoice_id = #{record.patInvoiceId,jdbcType=VARCHAR},
+      pat_pmt_id = #{record.patPmtId,jdbcType=VARCHAR},
+      pat_order_id = #{record.patOrderId,jdbcType=VARCHAR},
+      pat_payment_method = #{record.patPaymentMethod,jdbcType=VARCHAR},
+      pat_currency_type = #{record.patCurrencyType,jdbcType=VARCHAR},
+      pat_amount = #{record.patAmount,jdbcType=VARCHAR},
+      pat_description = #{record.patDescription,jdbcType=VARCHAR},
+      pat_status = #{record.patStatus,jdbcType=VARCHAR},
+      pat_param1 = #{record.patParam1,jdbcType=VARCHAR},
+      pat_param2 = #{record.patParam2,jdbcType=VARCHAR},
+      pat_param3 = #{record.patParam3,jdbcType=VARCHAR},
+      pat_param4 = #{record.patParam4,jdbcType=VARCHAR},
+      pat_param5 = #{record.patParam5,jdbcType=VARCHAR},
+      pat_param6 = #{record.patParam6,jdbcType=VARCHAR},
+      pat_param7 = #{record.patParam7,jdbcType=VARCHAR},
+      pat_param8 = #{record.patParam8,jdbcType=VARCHAR},
+      pat_param9 = #{record.patParam9,jdbcType=VARCHAR},
+      pat_param10 = #{record.patParam10,jdbcType=VARCHAR},
+      pat_param11 = #{record.patParam11,jdbcType=VARCHAR},
+      pat_param12 = #{record.patParam12,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBean" >
+    update payment_app_tbl
+    <set >
+      <if test="patAttId != null" >
+        pat_att_id = #{patAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="patUserId != null" >
+        pat_user_id = #{patUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="patInvoiceId != null" >
+        pat_invoice_id = #{patInvoiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="patPmtId != null" >
+        pat_pmt_id = #{patPmtId,jdbcType=VARCHAR},
+      </if>
+      <if test="patOrderId != null" >
+        pat_order_id = #{patOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="patPaymentMethod != null" >
+        pat_payment_method = #{patPaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="patCurrencyType != null" >
+        pat_currency_type = #{patCurrencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="patAmount != null" >
+        pat_amount = #{patAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="patDescription != null" >
+        pat_description = #{patDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="patStatus != null" >
+        pat_status = #{patStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam1 != null" >
+        pat_param1 = #{patParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam2 != null" >
+        pat_param2 = #{patParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam3 != null" >
+        pat_param3 = #{patParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam4 != null" >
+        pat_param4 = #{patParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam5 != null" >
+        pat_param5 = #{patParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam6 != null" >
+        pat_param6 = #{patParam6,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam7 != null" >
+        pat_param7 = #{patParam7,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam8 != null" >
+        pat_param8 = #{patParam8,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam9 != null" >
+        pat_param9 = #{patParam9,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam10 != null" >
+        pat_param10 = #{patParam10,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam11 != null" >
+        pat_param11 = #{patParam11,jdbcType=VARCHAR},
+      </if>
+      <if test="patParam12 != null" >
+        pat_param12 = #{patParam12,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pat_id = #{patId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentAppBean" >
+    update payment_app_tbl
+    set pat_att_id = #{patAttId,jdbcType=VARCHAR},
+      pat_user_id = #{patUserId,jdbcType=VARCHAR},
+      pat_invoice_id = #{patInvoiceId,jdbcType=VARCHAR},
+      pat_pmt_id = #{patPmtId,jdbcType=VARCHAR},
+      pat_order_id = #{patOrderId,jdbcType=VARCHAR},
+      pat_payment_method = #{patPaymentMethod,jdbcType=VARCHAR},
+      pat_currency_type = #{patCurrencyType,jdbcType=VARCHAR},
+      pat_amount = #{patAmount,jdbcType=VARCHAR},
+      pat_description = #{patDescription,jdbcType=VARCHAR},
+      pat_status = #{patStatus,jdbcType=VARCHAR},
+      pat_param1 = #{patParam1,jdbcType=VARCHAR},
+      pat_param2 = #{patParam2,jdbcType=VARCHAR},
+      pat_param3 = #{patParam3,jdbcType=VARCHAR},
+      pat_param4 = #{patParam4,jdbcType=VARCHAR},
+      pat_param5 = #{patParam5,jdbcType=VARCHAR},
+      pat_param6 = #{patParam6,jdbcType=VARCHAR},
+      pat_param7 = #{patParam7,jdbcType=VARCHAR},
+      pat_param8 = #{patParam8,jdbcType=VARCHAR},
+      pat_param9 = #{patParam9,jdbcType=VARCHAR},
+      pat_param10 = #{patParam10,jdbcType=VARCHAR},
+      pat_param11 = #{patParam11,jdbcType=VARCHAR},
+      pat_param12 = #{patParam12,jdbcType=VARCHAR}
+    where pat_id = #{patId,jdbcType=INTEGER}
+  </update>
+</mapper>

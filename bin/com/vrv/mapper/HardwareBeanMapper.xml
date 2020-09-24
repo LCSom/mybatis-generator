@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.HardwareBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.HardwareBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="hardwareTypeId" property="hardwaretypeid" jdbcType="VARCHAR" />
+    <result column="hardwareName" property="hardwarename" jdbcType="VARCHAR" />
+    <result column="hardwareCompany" property="hardwarecompany" jdbcType="VARCHAR" />
+    <result column="hardwareVId" property="hardwarevid" jdbcType="VARCHAR" />
+    <result column="hardwarePId" property="hardwarepid" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="reportTime" property="reporttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.HardwareBean" extends="BaseResultMap" >
+    <result column="properties" property="properties" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, devOnlyId, hardwareTypeId, hardwareName, hardwareCompany, hardwareVId, hardwarePId, 
+    description, reportTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    properties
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.HardwareBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_device_hardware
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.HardwareBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_device_hardware
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_device_hardware
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_device_hardware
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.HardwareBeanExample" >
+    delete from cems_device_hardware
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.HardwareBean" >
+    insert into cems_device_hardware (id, devOnlyId, hardwareTypeId, 
+      hardwareName, hardwareCompany, hardwareVId, 
+      hardwarePId, description, reportTime, 
+      properties)
+    values (#{id,jdbcType=VARCHAR}, #{devonlyid,jdbcType=VARCHAR}, #{hardwaretypeid,jdbcType=VARCHAR}, 
+      #{hardwarename,jdbcType=VARCHAR}, #{hardwarecompany,jdbcType=VARCHAR}, #{hardwarevid,jdbcType=VARCHAR}, 
+      #{hardwarepid,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{reporttime,jdbcType=TIMESTAMP}, 
+      #{properties,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.HardwareBean" >
+    insert into cems_device_hardware
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="hardwaretypeid != null" >
+        hardwareTypeId,
+      </if>
+      <if test="hardwarename != null" >
+        hardwareName,
+      </if>
+      <if test="hardwarecompany != null" >
+        hardwareCompany,
+      </if>
+      <if test="hardwarevid != null" >
+        hardwareVId,
+      </if>
+      <if test="hardwarepid != null" >
+        hardwarePId,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="reporttime != null" >
+        reportTime,
+      </if>
+      <if test="properties != null" >
+        properties,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwaretypeid != null" >
+        #{hardwaretypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarename != null" >
+        #{hardwarename,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarecompany != null" >
+        #{hardwarecompany,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarevid != null" >
+        #{hardwarevid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarepid != null" >
+        #{hardwarepid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="properties != null" >
+        #{properties,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.HardwareBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_device_hardware
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_device_hardware
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardwaretypeid != null" >
+        hardwareTypeId = #{record.hardwaretypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardwarename != null" >
+        hardwareName = #{record.hardwarename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardwarecompany != null" >
+        hardwareCompany = #{record.hardwarecompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardwarevid != null" >
+        hardwareVId = #{record.hardwarevid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardwarepid != null" >
+        hardwarePId = #{record.hardwarepid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reporttime != null" >
+        reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.properties != null" >
+        properties = #{record.properties,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_device_hardware
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      hardwareTypeId = #{record.hardwaretypeid,jdbcType=VARCHAR},
+      hardwareName = #{record.hardwarename,jdbcType=VARCHAR},
+      hardwareCompany = #{record.hardwarecompany,jdbcType=VARCHAR},
+      hardwareVId = #{record.hardwarevid,jdbcType=VARCHAR},
+      hardwarePId = #{record.hardwarepid,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      properties = #{record.properties,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_device_hardware
+    set id = #{record.id,jdbcType=VARCHAR},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      hardwareTypeId = #{record.hardwaretypeid,jdbcType=VARCHAR},
+      hardwareName = #{record.hardwarename,jdbcType=VARCHAR},
+      hardwareCompany = #{record.hardwarecompany,jdbcType=VARCHAR},
+      hardwareVId = #{record.hardwarevid,jdbcType=VARCHAR},
+      hardwarePId = #{record.hardwarepid,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.HardwareBean" >
+    update cems_device_hardware
+    <set >
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwaretypeid != null" >
+        hardwareTypeId = #{hardwaretypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarename != null" >
+        hardwareName = #{hardwarename,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarecompany != null" >
+        hardwareCompany = #{hardwarecompany,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarevid != null" >
+        hardwareVId = #{hardwarevid,jdbcType=VARCHAR},
+      </if>
+      <if test="hardwarepid != null" >
+        hardwarePId = #{hardwarepid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="properties != null" >
+        properties = #{properties,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.HardwareBean" >
+    update cems_device_hardware
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      hardwareTypeId = #{hardwaretypeid,jdbcType=VARCHAR},
+      hardwareName = #{hardwarename,jdbcType=VARCHAR},
+      hardwareCompany = #{hardwarecompany,jdbcType=VARCHAR},
+      hardwareVId = #{hardwarevid,jdbcType=VARCHAR},
+      hardwarePId = #{hardwarepid,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      properties = #{properties,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.HardwareBean" >
+    update cems_device_hardware
+    set devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      hardwareTypeId = #{hardwaretypeid,jdbcType=VARCHAR},
+      hardwareName = #{hardwarename,jdbcType=VARCHAR},
+      hardwareCompany = #{hardwarecompany,jdbcType=VARCHAR},
+      hardwareVId = #{hardwarevid,jdbcType=VARCHAR},
+      hardwarePId = #{hardwarepid,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

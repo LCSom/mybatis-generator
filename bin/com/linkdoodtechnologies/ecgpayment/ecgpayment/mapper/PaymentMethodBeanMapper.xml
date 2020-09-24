@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.PaymentMethodBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBean" >
+    <id column="pmt_id" property="pmtId" jdbcType="INTEGER" />
+    <result column="pmt_att_id" property="pmtAttId" jdbcType="VARCHAR" />
+    <result column="pmt_unique_id" property="pmtUniqueId" jdbcType="VARCHAR" />
+    <result column="pmt_type" property="pmtType" jdbcType="VARCHAR" />
+    <result column="pmt_name" property="pmtName" jdbcType="VARCHAR" />
+    <result column="pmt_app_id" property="pmtAppId" jdbcType="VARCHAR" />
+    <result column="pmt_app_secret" property="pmtAppSecret" jdbcType="VARCHAR" />
+    <result column="pmt_url" property="pmtUrl" jdbcType="VARCHAR" />
+    <result column="pmt_remark" property="pmtRemark" jdbcType="VARCHAR" />
+    <result column="pmt_param1" property="pmtParam1" jdbcType="VARCHAR" />
+    <result column="pmt_param2" property="pmtParam2" jdbcType="VARCHAR" />
+    <result column="pmt_param3" property="pmtParam3" jdbcType="VARCHAR" />
+    <result column="pmt_param4" property="pmtParam4" jdbcType="VARCHAR" />
+    <result column="pmt_param5" property="pmtParam5" jdbcType="VARCHAR" />
+    <result column="pmt_status" property="pmtStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pmt_id, pmt_att_id, pmt_unique_id, pmt_type, pmt_name, pmt_app_id, pmt_app_secret, 
+    pmt_url, pmt_remark, pmt_param1, pmt_param2, pmt_param3, pmt_param4, pmt_param5, 
+    pmt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payment_method_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from payment_method_tbl
+    where pmt_id = #{pmtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payment_method_tbl
+    where pmt_id = #{pmtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBeanExample" >
+    delete from payment_method_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="pmtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_method_tbl (pmt_att_id, pmt_unique_id, pmt_type, 
+      pmt_name, pmt_app_id, pmt_app_secret, 
+      pmt_url, pmt_remark, pmt_param1, 
+      pmt_param2, pmt_param3, pmt_param4, 
+      pmt_param5, pmt_status)
+    values (#{pmtAttId,jdbcType=VARCHAR}, #{pmtUniqueId,jdbcType=VARCHAR}, #{pmtType,jdbcType=VARCHAR}, 
+      #{pmtName,jdbcType=VARCHAR}, #{pmtAppId,jdbcType=VARCHAR}, #{pmtAppSecret,jdbcType=VARCHAR}, 
+      #{pmtUrl,jdbcType=VARCHAR}, #{pmtRemark,jdbcType=VARCHAR}, #{pmtParam1,jdbcType=VARCHAR}, 
+      #{pmtParam2,jdbcType=VARCHAR}, #{pmtParam3,jdbcType=VARCHAR}, #{pmtParam4,jdbcType=VARCHAR}, 
+      #{pmtParam5,jdbcType=VARCHAR}, #{pmtStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="pmtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_method_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pmtAttId != null" >
+        pmt_att_id,
+      </if>
+      <if test="pmtUniqueId != null" >
+        pmt_unique_id,
+      </if>
+      <if test="pmtType != null" >
+        pmt_type,
+      </if>
+      <if test="pmtName != null" >
+        pmt_name,
+      </if>
+      <if test="pmtAppId != null" >
+        pmt_app_id,
+      </if>
+      <if test="pmtAppSecret != null" >
+        pmt_app_secret,
+      </if>
+      <if test="pmtUrl != null" >
+        pmt_url,
+      </if>
+      <if test="pmtRemark != null" >
+        pmt_remark,
+      </if>
+      <if test="pmtParam1 != null" >
+        pmt_param1,
+      </if>
+      <if test="pmtParam2 != null" >
+        pmt_param2,
+      </if>
+      <if test="pmtParam3 != null" >
+        pmt_param3,
+      </if>
+      <if test="pmtParam4 != null" >
+        pmt_param4,
+      </if>
+      <if test="pmtParam5 != null" >
+        pmt_param5,
+      </if>
+      <if test="pmtStatus != null" >
+        pmt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pmtAttId != null" >
+        #{pmtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtUniqueId != null" >
+        #{pmtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtType != null" >
+        #{pmtType,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtName != null" >
+        #{pmtName,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAppId != null" >
+        #{pmtAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAppSecret != null" >
+        #{pmtAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtUrl != null" >
+        #{pmtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtRemark != null" >
+        #{pmtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam1 != null" >
+        #{pmtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam2 != null" >
+        #{pmtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam3 != null" >
+        #{pmtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam4 != null" >
+        #{pmtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam5 != null" >
+        #{pmtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtStatus != null" >
+        #{pmtStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBeanExample" resultType="java.lang.Integer" >
+    select count(*) from payment_method_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payment_method_tbl
+    <set >
+      <if test="record.pmtId != null" >
+        pmt_id = #{record.pmtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pmtAttId != null" >
+        pmt_att_id = #{record.pmtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtUniqueId != null" >
+        pmt_unique_id = #{record.pmtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtType != null" >
+        pmt_type = #{record.pmtType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtName != null" >
+        pmt_name = #{record.pmtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtAppId != null" >
+        pmt_app_id = #{record.pmtAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtAppSecret != null" >
+        pmt_app_secret = #{record.pmtAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtUrl != null" >
+        pmt_url = #{record.pmtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtRemark != null" >
+        pmt_remark = #{record.pmtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtParam1 != null" >
+        pmt_param1 = #{record.pmtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtParam2 != null" >
+        pmt_param2 = #{record.pmtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtParam3 != null" >
+        pmt_param3 = #{record.pmtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtParam4 != null" >
+        pmt_param4 = #{record.pmtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtParam5 != null" >
+        pmt_param5 = #{record.pmtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pmtStatus != null" >
+        pmt_status = #{record.pmtStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payment_method_tbl
+    set pmt_id = #{record.pmtId,jdbcType=INTEGER},
+      pmt_att_id = #{record.pmtAttId,jdbcType=VARCHAR},
+      pmt_unique_id = #{record.pmtUniqueId,jdbcType=VARCHAR},
+      pmt_type = #{record.pmtType,jdbcType=VARCHAR},
+      pmt_name = #{record.pmtName,jdbcType=VARCHAR},
+      pmt_app_id = #{record.pmtAppId,jdbcType=VARCHAR},
+      pmt_app_secret = #{record.pmtAppSecret,jdbcType=VARCHAR},
+      pmt_url = #{record.pmtUrl,jdbcType=VARCHAR},
+      pmt_remark = #{record.pmtRemark,jdbcType=VARCHAR},
+      pmt_param1 = #{record.pmtParam1,jdbcType=VARCHAR},
+      pmt_param2 = #{record.pmtParam2,jdbcType=VARCHAR},
+      pmt_param3 = #{record.pmtParam3,jdbcType=VARCHAR},
+      pmt_param4 = #{record.pmtParam4,jdbcType=VARCHAR},
+      pmt_param5 = #{record.pmtParam5,jdbcType=VARCHAR},
+      pmt_status = #{record.pmtStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBean" >
+    update payment_method_tbl
+    <set >
+      <if test="pmtAttId != null" >
+        pmt_att_id = #{pmtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtUniqueId != null" >
+        pmt_unique_id = #{pmtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtType != null" >
+        pmt_type = #{pmtType,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtName != null" >
+        pmt_name = #{pmtName,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAppId != null" >
+        pmt_app_id = #{pmtAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAppSecret != null" >
+        pmt_app_secret = #{pmtAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtUrl != null" >
+        pmt_url = #{pmtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtRemark != null" >
+        pmt_remark = #{pmtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam1 != null" >
+        pmt_param1 = #{pmtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam2 != null" >
+        pmt_param2 = #{pmtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam3 != null" >
+        pmt_param3 = #{pmtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam4 != null" >
+        pmt_param4 = #{pmtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtParam5 != null" >
+        pmt_param5 = #{pmtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtStatus != null" >
+        pmt_status = #{pmtStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pmt_id = #{pmtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.PaymentMethodBean" >
+    update payment_method_tbl
+    set pmt_att_id = #{pmtAttId,jdbcType=VARCHAR},
+      pmt_unique_id = #{pmtUniqueId,jdbcType=VARCHAR},
+      pmt_type = #{pmtType,jdbcType=VARCHAR},
+      pmt_name = #{pmtName,jdbcType=VARCHAR},
+      pmt_app_id = #{pmtAppId,jdbcType=VARCHAR},
+      pmt_app_secret = #{pmtAppSecret,jdbcType=VARCHAR},
+      pmt_url = #{pmtUrl,jdbcType=VARCHAR},
+      pmt_remark = #{pmtRemark,jdbcType=VARCHAR},
+      pmt_param1 = #{pmtParam1,jdbcType=VARCHAR},
+      pmt_param2 = #{pmtParam2,jdbcType=VARCHAR},
+      pmt_param3 = #{pmtParam3,jdbcType=VARCHAR},
+      pmt_param4 = #{pmtParam4,jdbcType=VARCHAR},
+      pmt_param5 = #{pmtParam5,jdbcType=VARCHAR},
+      pmt_status = #{pmtStatus,jdbcType=VARCHAR}
+    where pmt_id = #{pmtId,jdbcType=INTEGER}
+  </update>
+</mapper>

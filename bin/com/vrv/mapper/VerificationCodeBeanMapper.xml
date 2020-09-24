@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.VerificationCodeBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.VerificationCodeBean" >
+    <id column="vct_id" property="vctId" jdbcType="INTEGER" />
+    <result column="vct_type" property="vctType" jdbcType="VARCHAR" />
+    <result column="vct_contact" property="vctContact" jdbcType="VARCHAR" />
+    <result column="vct_value" property="vctValue" jdbcType="VARCHAR" />
+    <result column="vct_param1" property="vctParam1" jdbcType="VARCHAR" />
+    <result column="vct_param2" property="vctParam2" jdbcType="VARCHAR" />
+    <result column="vct_param3" property="vctParam3" jdbcType="VARCHAR" />
+    <result column="vct_param4" property="vctParam4" jdbcType="VARCHAR" />
+    <result column="vct_param5" property="vctParam5" jdbcType="VARCHAR" />
+    <result column="vct_status" property="vctStatus" jdbcType="INTEGER" />
+    <result column="vct_expired_datetime" property="vctExpiredDatetime" jdbcType="TIMESTAMP" />
+    <result column="vct_created_datetime" property="vctCreatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="vct_updated_datetime" property="vctUpdatedDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vct_id, vct_type, vct_contact, vct_value, vct_param1, vct_param2, vct_param3, vct_param4, 
+    vct_param5, vct_status, vct_expired_datetime, vct_created_datetime, vct_updated_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.VerificationCodeBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from newcems_verification_code_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newcems_verification_code_tbl
+    where vct_id = #{vctId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newcems_verification_code_tbl
+    where vct_id = #{vctId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.VerificationCodeBeanExample" >
+    delete from newcems_verification_code_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.VerificationCodeBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="vctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_verification_code_tbl (vct_type, vct_contact, vct_value, 
+      vct_param1, vct_param2, vct_param3, 
+      vct_param4, vct_param5, vct_status, 
+      vct_expired_datetime, vct_created_datetime, 
+      vct_updated_datetime)
+    values (#{vctType,jdbcType=VARCHAR}, #{vctContact,jdbcType=VARCHAR}, #{vctValue,jdbcType=VARCHAR}, 
+      #{vctParam1,jdbcType=VARCHAR}, #{vctParam2,jdbcType=VARCHAR}, #{vctParam3,jdbcType=VARCHAR}, 
+      #{vctParam4,jdbcType=VARCHAR}, #{vctParam5,jdbcType=VARCHAR}, #{vctStatus,jdbcType=INTEGER}, 
+      #{vctExpiredDatetime,jdbcType=TIMESTAMP}, #{vctCreatedDatetime,jdbcType=TIMESTAMP}, 
+      #{vctUpdatedDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.VerificationCodeBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="vctId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into newcems_verification_code_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vctType != null" >
+        vct_type,
+      </if>
+      <if test="vctContact != null" >
+        vct_contact,
+      </if>
+      <if test="vctValue != null" >
+        vct_value,
+      </if>
+      <if test="vctParam1 != null" >
+        vct_param1,
+      </if>
+      <if test="vctParam2 != null" >
+        vct_param2,
+      </if>
+      <if test="vctParam3 != null" >
+        vct_param3,
+      </if>
+      <if test="vctParam4 != null" >
+        vct_param4,
+      </if>
+      <if test="vctParam5 != null" >
+        vct_param5,
+      </if>
+      <if test="vctStatus != null" >
+        vct_status,
+      </if>
+      <if test="vctExpiredDatetime != null" >
+        vct_expired_datetime,
+      </if>
+      <if test="vctCreatedDatetime != null" >
+        vct_created_datetime,
+      </if>
+      <if test="vctUpdatedDatetime != null" >
+        vct_updated_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vctType != null" >
+        #{vctType,jdbcType=VARCHAR},
+      </if>
+      <if test="vctContact != null" >
+        #{vctContact,jdbcType=VARCHAR},
+      </if>
+      <if test="vctValue != null" >
+        #{vctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam1 != null" >
+        #{vctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam2 != null" >
+        #{vctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam3 != null" >
+        #{vctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam4 != null" >
+        #{vctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam5 != null" >
+        #{vctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="vctStatus != null" >
+        #{vctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vctExpiredDatetime != null" >
+        #{vctExpiredDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vctCreatedDatetime != null" >
+        #{vctCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vctUpdatedDatetime != null" >
+        #{vctUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.VerificationCodeBeanExample" resultType="java.lang.Integer" >
+    select count(*) from newcems_verification_code_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update newcems_verification_code_tbl
+    <set >
+      <if test="record.vctId != null" >
+        vct_id = #{record.vctId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vctType != null" >
+        vct_type = #{record.vctType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctContact != null" >
+        vct_contact = #{record.vctContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctValue != null" >
+        vct_value = #{record.vctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctParam1 != null" >
+        vct_param1 = #{record.vctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctParam2 != null" >
+        vct_param2 = #{record.vctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctParam3 != null" >
+        vct_param3 = #{record.vctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctParam4 != null" >
+        vct_param4 = #{record.vctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctParam5 != null" >
+        vct_param5 = #{record.vctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vctStatus != null" >
+        vct_status = #{record.vctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.vctExpiredDatetime != null" >
+        vct_expired_datetime = #{record.vctExpiredDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vctCreatedDatetime != null" >
+        vct_created_datetime = #{record.vctCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vctUpdatedDatetime != null" >
+        vct_updated_datetime = #{record.vctUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update newcems_verification_code_tbl
+    set vct_id = #{record.vctId,jdbcType=INTEGER},
+      vct_type = #{record.vctType,jdbcType=VARCHAR},
+      vct_contact = #{record.vctContact,jdbcType=VARCHAR},
+      vct_value = #{record.vctValue,jdbcType=VARCHAR},
+      vct_param1 = #{record.vctParam1,jdbcType=VARCHAR},
+      vct_param2 = #{record.vctParam2,jdbcType=VARCHAR},
+      vct_param3 = #{record.vctParam3,jdbcType=VARCHAR},
+      vct_param4 = #{record.vctParam4,jdbcType=VARCHAR},
+      vct_param5 = #{record.vctParam5,jdbcType=VARCHAR},
+      vct_status = #{record.vctStatus,jdbcType=INTEGER},
+      vct_expired_datetime = #{record.vctExpiredDatetime,jdbcType=TIMESTAMP},
+      vct_created_datetime = #{record.vctCreatedDatetime,jdbcType=TIMESTAMP},
+      vct_updated_datetime = #{record.vctUpdatedDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.VerificationCodeBean" >
+    update newcems_verification_code_tbl
+    <set >
+      <if test="vctType != null" >
+        vct_type = #{vctType,jdbcType=VARCHAR},
+      </if>
+      <if test="vctContact != null" >
+        vct_contact = #{vctContact,jdbcType=VARCHAR},
+      </if>
+      <if test="vctValue != null" >
+        vct_value = #{vctValue,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam1 != null" >
+        vct_param1 = #{vctParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam2 != null" >
+        vct_param2 = #{vctParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam3 != null" >
+        vct_param3 = #{vctParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam4 != null" >
+        vct_param4 = #{vctParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="vctParam5 != null" >
+        vct_param5 = #{vctParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="vctStatus != null" >
+        vct_status = #{vctStatus,jdbcType=INTEGER},
+      </if>
+      <if test="vctExpiredDatetime != null" >
+        vct_expired_datetime = #{vctExpiredDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vctCreatedDatetime != null" >
+        vct_created_datetime = #{vctCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vctUpdatedDatetime != null" >
+        vct_updated_datetime = #{vctUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vct_id = #{vctId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.VerificationCodeBean" >
+    update newcems_verification_code_tbl
+    set vct_type = #{vctType,jdbcType=VARCHAR},
+      vct_contact = #{vctContact,jdbcType=VARCHAR},
+      vct_value = #{vctValue,jdbcType=VARCHAR},
+      vct_param1 = #{vctParam1,jdbcType=VARCHAR},
+      vct_param2 = #{vctParam2,jdbcType=VARCHAR},
+      vct_param3 = #{vctParam3,jdbcType=VARCHAR},
+      vct_param4 = #{vctParam4,jdbcType=VARCHAR},
+      vct_param5 = #{vctParam5,jdbcType=VARCHAR},
+      vct_status = #{vctStatus,jdbcType=INTEGER},
+      vct_expired_datetime = #{vctExpiredDatetime,jdbcType=TIMESTAMP},
+      vct_created_datetime = #{vctCreatedDatetime,jdbcType=TIMESTAMP},
+      vct_updated_datetime = #{vctUpdatedDatetime,jdbcType=TIMESTAMP}
+    where vct_id = #{vctId,jdbcType=INTEGER}
+  </update>
+</mapper>

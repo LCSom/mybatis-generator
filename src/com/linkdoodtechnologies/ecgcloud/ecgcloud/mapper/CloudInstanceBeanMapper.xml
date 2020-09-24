@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.CloudInstanceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBean" >
+    <id column="cit_id" property="citId" jdbcType="INTEGER" />
+    <result column="cit_otn" property="citOtn" jdbcType="VARCHAR" />
+    <result column="cit_user_id" property="citUserId" jdbcType="INTEGER" />
+    <result column="cit_public_ip" property="citPublicIp" jdbcType="VARCHAR" />
+    <result column="cit_srt_id" property="citSrtId" jdbcType="INTEGER" />
+    <result column="cit_instance_id" property="citInstanceId" jdbcType="VARCHAR" />
+    <result column="cit_allocation_id" property="citAllocationId" jdbcType="VARCHAR" />
+    <result column="cit_record_id" property="citRecordId" jdbcType="VARCHAR" />
+    <result column="cit_ssh_username" property="citSshUsername" jdbcType="VARCHAR" />
+    <result column="cit_ssh_password" property="citSshPassword" jdbcType="VARCHAR" />
+    <result column="cit_domain_name" property="citDomainName" jdbcType="VARCHAR" />
+    <result column="cit_status" property="citStatus" jdbcType="BIT" />
+    <result column="cit_is_pool" property="citIsPool" jdbcType="BIT" />
+    <result column="cit_start_datetime" property="citStartDatetime" jdbcType="VARCHAR" />
+    <result column="cit_end_datetime" property="citEndDatetime" jdbcType="VARCHAR" />
+    <result column="cit_project" property="citProject" jdbcType="VARCHAR" />
+    <result column="cit_server_up_datetime" property="citServerUpDatetime" jdbcType="VARCHAR" />
+    <result column="cit_stop_datetime" property="citStopDatetime" jdbcType="TIMESTAMP" />
+    <result column="cit_stop_eip_datetime" property="citStopEipDatetime" jdbcType="TIMESTAMP" />
+    <result column="cit_param1" property="citParam1" jdbcType="VARCHAR" />
+    <result column="cit_param2" property="citParam2" jdbcType="VARCHAR" />
+    <result column="cit_param3" property="citParam3" jdbcType="VARCHAR" />
+    <result column="cit_param4" property="citParam4" jdbcType="VARCHAR" />
+    <result column="cit_param5" property="citParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cit_id, cit_otn, cit_user_id, cit_public_ip, cit_srt_id, cit_instance_id, cit_allocation_id, 
+    cit_record_id, cit_ssh_username, cit_ssh_password, cit_domain_name, cit_status, cit_is_pool, 
+    cit_start_datetime, cit_end_datetime, cit_project, cit_server_up_datetime, cit_stop_datetime, 
+    cit_stop_eip_datetime, cit_param1, cit_param2, cit_param3, cit_param4, cit_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cloud_instance_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cloud_instance_tbl
+    where cit_id = #{citId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cloud_instance_tbl
+    where cit_id = #{citId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBeanExample" >
+    delete from cloud_instance_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="citId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_instance_tbl (cit_otn, cit_user_id, cit_public_ip, 
+      cit_srt_id, cit_instance_id, cit_allocation_id, 
+      cit_record_id, cit_ssh_username, cit_ssh_password, 
+      cit_domain_name, cit_status, cit_is_pool, 
+      cit_start_datetime, cit_end_datetime, cit_project, 
+      cit_server_up_datetime, cit_stop_datetime, 
+      cit_stop_eip_datetime, cit_param1, cit_param2, 
+      cit_param3, cit_param4, cit_param5
+      )
+    values (#{citOtn,jdbcType=VARCHAR}, #{citUserId,jdbcType=INTEGER}, #{citPublicIp,jdbcType=VARCHAR}, 
+      #{citSrtId,jdbcType=INTEGER}, #{citInstanceId,jdbcType=VARCHAR}, #{citAllocationId,jdbcType=VARCHAR}, 
+      #{citRecordId,jdbcType=VARCHAR}, #{citSshUsername,jdbcType=VARCHAR}, #{citSshPassword,jdbcType=VARCHAR}, 
+      #{citDomainName,jdbcType=VARCHAR}, #{citStatus,jdbcType=BIT}, #{citIsPool,jdbcType=BIT}, 
+      #{citStartDatetime,jdbcType=VARCHAR}, #{citEndDatetime,jdbcType=VARCHAR}, #{citProject,jdbcType=VARCHAR}, 
+      #{citServerUpDatetime,jdbcType=VARCHAR}, #{citStopDatetime,jdbcType=TIMESTAMP}, 
+      #{citStopEipDatetime,jdbcType=TIMESTAMP}, #{citParam1,jdbcType=VARCHAR}, #{citParam2,jdbcType=VARCHAR}, 
+      #{citParam3,jdbcType=VARCHAR}, #{citParam4,jdbcType=VARCHAR}, #{citParam5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="citId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_instance_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="citOtn != null" >
+        cit_otn,
+      </if>
+      <if test="citUserId != null" >
+        cit_user_id,
+      </if>
+      <if test="citPublicIp != null" >
+        cit_public_ip,
+      </if>
+      <if test="citSrtId != null" >
+        cit_srt_id,
+      </if>
+      <if test="citInstanceId != null" >
+        cit_instance_id,
+      </if>
+      <if test="citAllocationId != null" >
+        cit_allocation_id,
+      </if>
+      <if test="citRecordId != null" >
+        cit_record_id,
+      </if>
+      <if test="citSshUsername != null" >
+        cit_ssh_username,
+      </if>
+      <if test="citSshPassword != null" >
+        cit_ssh_password,
+      </if>
+      <if test="citDomainName != null" >
+        cit_domain_name,
+      </if>
+      <if test="citStatus != null" >
+        cit_status,
+      </if>
+      <if test="citIsPool != null" >
+        cit_is_pool,
+      </if>
+      <if test="citStartDatetime != null" >
+        cit_start_datetime,
+      </if>
+      <if test="citEndDatetime != null" >
+        cit_end_datetime,
+      </if>
+      <if test="citProject != null" >
+        cit_project,
+      </if>
+      <if test="citServerUpDatetime != null" >
+        cit_server_up_datetime,
+      </if>
+      <if test="citStopDatetime != null" >
+        cit_stop_datetime,
+      </if>
+      <if test="citStopEipDatetime != null" >
+        cit_stop_eip_datetime,
+      </if>
+      <if test="citParam1 != null" >
+        cit_param1,
+      </if>
+      <if test="citParam2 != null" >
+        cit_param2,
+      </if>
+      <if test="citParam3 != null" >
+        cit_param3,
+      </if>
+      <if test="citParam4 != null" >
+        cit_param4,
+      </if>
+      <if test="citParam5 != null" >
+        cit_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="citOtn != null" >
+        #{citOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="citUserId != null" >
+        #{citUserId,jdbcType=INTEGER},
+      </if>
+      <if test="citPublicIp != null" >
+        #{citPublicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="citSrtId != null" >
+        #{citSrtId,jdbcType=INTEGER},
+      </if>
+      <if test="citInstanceId != null" >
+        #{citInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="citAllocationId != null" >
+        #{citAllocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="citRecordId != null" >
+        #{citRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="citSshUsername != null" >
+        #{citSshUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="citSshPassword != null" >
+        #{citSshPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="citDomainName != null" >
+        #{citDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="citStatus != null" >
+        #{citStatus,jdbcType=BIT},
+      </if>
+      <if test="citIsPool != null" >
+        #{citIsPool,jdbcType=BIT},
+      </if>
+      <if test="citStartDatetime != null" >
+        #{citStartDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citEndDatetime != null" >
+        #{citEndDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citProject != null" >
+        #{citProject,jdbcType=VARCHAR},
+      </if>
+      <if test="citServerUpDatetime != null" >
+        #{citServerUpDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citStopDatetime != null" >
+        #{citStopDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="citStopEipDatetime != null" >
+        #{citStopEipDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="citParam1 != null" >
+        #{citParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam2 != null" >
+        #{citParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam3 != null" >
+        #{citParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam4 != null" >
+        #{citParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam5 != null" >
+        #{citParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cloud_instance_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cloud_instance_tbl
+    <set >
+      <if test="record.citId != null" >
+        cit_id = #{record.citId,jdbcType=INTEGER},
+      </if>
+      <if test="record.citOtn != null" >
+        cit_otn = #{record.citOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citUserId != null" >
+        cit_user_id = #{record.citUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.citPublicIp != null" >
+        cit_public_ip = #{record.citPublicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citSrtId != null" >
+        cit_srt_id = #{record.citSrtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.citInstanceId != null" >
+        cit_instance_id = #{record.citInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citAllocationId != null" >
+        cit_allocation_id = #{record.citAllocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citRecordId != null" >
+        cit_record_id = #{record.citRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citSshUsername != null" >
+        cit_ssh_username = #{record.citSshUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citSshPassword != null" >
+        cit_ssh_password = #{record.citSshPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citDomainName != null" >
+        cit_domain_name = #{record.citDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citStatus != null" >
+        cit_status = #{record.citStatus,jdbcType=BIT},
+      </if>
+      <if test="record.citIsPool != null" >
+        cit_is_pool = #{record.citIsPool,jdbcType=BIT},
+      </if>
+      <if test="record.citStartDatetime != null" >
+        cit_start_datetime = #{record.citStartDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citEndDatetime != null" >
+        cit_end_datetime = #{record.citEndDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citProject != null" >
+        cit_project = #{record.citProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citServerUpDatetime != null" >
+        cit_server_up_datetime = #{record.citServerUpDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citStopDatetime != null" >
+        cit_stop_datetime = #{record.citStopDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.citStopEipDatetime != null" >
+        cit_stop_eip_datetime = #{record.citStopEipDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.citParam1 != null" >
+        cit_param1 = #{record.citParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citParam2 != null" >
+        cit_param2 = #{record.citParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citParam3 != null" >
+        cit_param3 = #{record.citParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citParam4 != null" >
+        cit_param4 = #{record.citParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citParam5 != null" >
+        cit_param5 = #{record.citParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cloud_instance_tbl
+    set cit_id = #{record.citId,jdbcType=INTEGER},
+      cit_otn = #{record.citOtn,jdbcType=VARCHAR},
+      cit_user_id = #{record.citUserId,jdbcType=INTEGER},
+      cit_public_ip = #{record.citPublicIp,jdbcType=VARCHAR},
+      cit_srt_id = #{record.citSrtId,jdbcType=INTEGER},
+      cit_instance_id = #{record.citInstanceId,jdbcType=VARCHAR},
+      cit_allocation_id = #{record.citAllocationId,jdbcType=VARCHAR},
+      cit_record_id = #{record.citRecordId,jdbcType=VARCHAR},
+      cit_ssh_username = #{record.citSshUsername,jdbcType=VARCHAR},
+      cit_ssh_password = #{record.citSshPassword,jdbcType=VARCHAR},
+      cit_domain_name = #{record.citDomainName,jdbcType=VARCHAR},
+      cit_status = #{record.citStatus,jdbcType=BIT},
+      cit_is_pool = #{record.citIsPool,jdbcType=BIT},
+      cit_start_datetime = #{record.citStartDatetime,jdbcType=VARCHAR},
+      cit_end_datetime = #{record.citEndDatetime,jdbcType=VARCHAR},
+      cit_project = #{record.citProject,jdbcType=VARCHAR},
+      cit_server_up_datetime = #{record.citServerUpDatetime,jdbcType=VARCHAR},
+      cit_stop_datetime = #{record.citStopDatetime,jdbcType=TIMESTAMP},
+      cit_stop_eip_datetime = #{record.citStopEipDatetime,jdbcType=TIMESTAMP},
+      cit_param1 = #{record.citParam1,jdbcType=VARCHAR},
+      cit_param2 = #{record.citParam2,jdbcType=VARCHAR},
+      cit_param3 = #{record.citParam3,jdbcType=VARCHAR},
+      cit_param4 = #{record.citParam4,jdbcType=VARCHAR},
+      cit_param5 = #{record.citParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBean" >
+    update cloud_instance_tbl
+    <set >
+      <if test="citOtn != null" >
+        cit_otn = #{citOtn,jdbcType=VARCHAR},
+      </if>
+      <if test="citUserId != null" >
+        cit_user_id = #{citUserId,jdbcType=INTEGER},
+      </if>
+      <if test="citPublicIp != null" >
+        cit_public_ip = #{citPublicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="citSrtId != null" >
+        cit_srt_id = #{citSrtId,jdbcType=INTEGER},
+      </if>
+      <if test="citInstanceId != null" >
+        cit_instance_id = #{citInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="citAllocationId != null" >
+        cit_allocation_id = #{citAllocationId,jdbcType=VARCHAR},
+      </if>
+      <if test="citRecordId != null" >
+        cit_record_id = #{citRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="citSshUsername != null" >
+        cit_ssh_username = #{citSshUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="citSshPassword != null" >
+        cit_ssh_password = #{citSshPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="citDomainName != null" >
+        cit_domain_name = #{citDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="citStatus != null" >
+        cit_status = #{citStatus,jdbcType=BIT},
+      </if>
+      <if test="citIsPool != null" >
+        cit_is_pool = #{citIsPool,jdbcType=BIT},
+      </if>
+      <if test="citStartDatetime != null" >
+        cit_start_datetime = #{citStartDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citEndDatetime != null" >
+        cit_end_datetime = #{citEndDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citProject != null" >
+        cit_project = #{citProject,jdbcType=VARCHAR},
+      </if>
+      <if test="citServerUpDatetime != null" >
+        cit_server_up_datetime = #{citServerUpDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="citStopDatetime != null" >
+        cit_stop_datetime = #{citStopDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="citStopEipDatetime != null" >
+        cit_stop_eip_datetime = #{citStopEipDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="citParam1 != null" >
+        cit_param1 = #{citParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam2 != null" >
+        cit_param2 = #{citParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam3 != null" >
+        cit_param3 = #{citParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam4 != null" >
+        cit_param4 = #{citParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="citParam5 != null" >
+        cit_param5 = #{citParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cit_id = #{citId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudInstanceBean" >
+    update cloud_instance_tbl
+    set cit_otn = #{citOtn,jdbcType=VARCHAR},
+      cit_user_id = #{citUserId,jdbcType=INTEGER},
+      cit_public_ip = #{citPublicIp,jdbcType=VARCHAR},
+      cit_srt_id = #{citSrtId,jdbcType=INTEGER},
+      cit_instance_id = #{citInstanceId,jdbcType=VARCHAR},
+      cit_allocation_id = #{citAllocationId,jdbcType=VARCHAR},
+      cit_record_id = #{citRecordId,jdbcType=VARCHAR},
+      cit_ssh_username = #{citSshUsername,jdbcType=VARCHAR},
+      cit_ssh_password = #{citSshPassword,jdbcType=VARCHAR},
+      cit_domain_name = #{citDomainName,jdbcType=VARCHAR},
+      cit_status = #{citStatus,jdbcType=BIT},
+      cit_is_pool = #{citIsPool,jdbcType=BIT},
+      cit_start_datetime = #{citStartDatetime,jdbcType=VARCHAR},
+      cit_end_datetime = #{citEndDatetime,jdbcType=VARCHAR},
+      cit_project = #{citProject,jdbcType=VARCHAR},
+      cit_server_up_datetime = #{citServerUpDatetime,jdbcType=VARCHAR},
+      cit_stop_datetime = #{citStopDatetime,jdbcType=TIMESTAMP},
+      cit_stop_eip_datetime = #{citStopEipDatetime,jdbcType=TIMESTAMP},
+      cit_param1 = #{citParam1,jdbcType=VARCHAR},
+      cit_param2 = #{citParam2,jdbcType=VARCHAR},
+      cit_param3 = #{citParam3,jdbcType=VARCHAR},
+      cit_param4 = #{citParam4,jdbcType=VARCHAR},
+      cit_param5 = #{citParam5,jdbcType=VARCHAR}
+    where cit_id = #{citId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgnotification.ecgnotification.mapper.MessageBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBean" >
+    <id column="mt_id" property="mtId" jdbcType="INTEGER" />
+    <result column="mt_st_id" property="mtStId" jdbcType="INTEGER" />
+    <result column="mt_message" property="mtMessage" jdbcType="VARCHAR" />
+    <result column="mt_read" property="mtRead" jdbcType="INTEGER" />
+    <result column="mt_status" property="mtStatus" jdbcType="INTEGER" />
+    <result column="mt_param1" property="mtParam1" jdbcType="VARCHAR" />
+    <result column="mt_param2" property="mtParam2" jdbcType="VARCHAR" />
+    <result column="mt_param3" property="mtParam3" jdbcType="VARCHAR" />
+    <result column="mt_param4" property="mtParam4" jdbcType="VARCHAR" />
+    <result column="mt_param5" property="mtParam5" jdbcType="VARCHAR" />
+    <result column="mt_created_datetime" property="mtCreatedDatetime" jdbcType="TIMESTAMP" />
+    <result column="mt_updated_datetime" property="mtUpdatedDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mt_id, mt_st_id, mt_message, mt_read, mt_status, mt_param1, mt_param2, mt_param3, 
+    mt_param4, mt_param5, mt_created_datetime, mt_updated_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message_tbl
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message_tbl
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBeanExample" >
+    delete from message_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="mtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message_tbl (mt_st_id, mt_message, mt_read, 
+      mt_status, mt_param1, mt_param2, 
+      mt_param3, mt_param4, mt_param5, 
+      mt_created_datetime, mt_updated_datetime
+      )
+    values (#{mtStId,jdbcType=INTEGER}, #{mtMessage,jdbcType=VARCHAR}, #{mtRead,jdbcType=INTEGER}, 
+      #{mtStatus,jdbcType=INTEGER}, #{mtParam1,jdbcType=VARCHAR}, #{mtParam2,jdbcType=VARCHAR}, 
+      #{mtParam3,jdbcType=VARCHAR}, #{mtParam4,jdbcType=VARCHAR}, #{mtParam5,jdbcType=VARCHAR}, 
+      #{mtCreatedDatetime,jdbcType=TIMESTAMP}, #{mtUpdatedDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="mtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mtStId != null" >
+        mt_st_id,
+      </if>
+      <if test="mtMessage != null" >
+        mt_message,
+      </if>
+      <if test="mtRead != null" >
+        mt_read,
+      </if>
+      <if test="mtStatus != null" >
+        mt_status,
+      </if>
+      <if test="mtParam1 != null" >
+        mt_param1,
+      </if>
+      <if test="mtParam2 != null" >
+        mt_param2,
+      </if>
+      <if test="mtParam3 != null" >
+        mt_param3,
+      </if>
+      <if test="mtParam4 != null" >
+        mt_param4,
+      </if>
+      <if test="mtParam5 != null" >
+        mt_param5,
+      </if>
+      <if test="mtCreatedDatetime != null" >
+        mt_created_datetime,
+      </if>
+      <if test="mtUpdatedDatetime != null" >
+        mt_updated_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mtStId != null" >
+        #{mtStId,jdbcType=INTEGER},
+      </if>
+      <if test="mtMessage != null" >
+        #{mtMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mtRead != null" >
+        #{mtRead,jdbcType=INTEGER},
+      </if>
+      <if test="mtStatus != null" >
+        #{mtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mtParam1 != null" >
+        #{mtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam2 != null" >
+        #{mtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam3 != null" >
+        #{mtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam4 != null" >
+        #{mtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam5 != null" >
+        #{mtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="mtCreatedDatetime != null" >
+        #{mtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtUpdatedDatetime != null" >
+        #{mtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBeanExample" resultType="java.lang.Integer" >
+    select count(*) from message_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message_tbl
+    <set >
+      <if test="record.mtId != null" >
+        mt_id = #{record.mtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mtStId != null" >
+        mt_st_id = #{record.mtStId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mtMessage != null" >
+        mt_message = #{record.mtMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtRead != null" >
+        mt_read = #{record.mtRead,jdbcType=INTEGER},
+      </if>
+      <if test="record.mtStatus != null" >
+        mt_status = #{record.mtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.mtParam1 != null" >
+        mt_param1 = #{record.mtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtParam2 != null" >
+        mt_param2 = #{record.mtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtParam3 != null" >
+        mt_param3 = #{record.mtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtParam4 != null" >
+        mt_param4 = #{record.mtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtParam5 != null" >
+        mt_param5 = #{record.mtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtCreatedDatetime != null" >
+        mt_created_datetime = #{record.mtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtUpdatedDatetime != null" >
+        mt_updated_datetime = #{record.mtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message_tbl
+    set mt_id = #{record.mtId,jdbcType=INTEGER},
+      mt_st_id = #{record.mtStId,jdbcType=INTEGER},
+      mt_message = #{record.mtMessage,jdbcType=VARCHAR},
+      mt_read = #{record.mtRead,jdbcType=INTEGER},
+      mt_status = #{record.mtStatus,jdbcType=INTEGER},
+      mt_param1 = #{record.mtParam1,jdbcType=VARCHAR},
+      mt_param2 = #{record.mtParam2,jdbcType=VARCHAR},
+      mt_param3 = #{record.mtParam3,jdbcType=VARCHAR},
+      mt_param4 = #{record.mtParam4,jdbcType=VARCHAR},
+      mt_param5 = #{record.mtParam5,jdbcType=VARCHAR},
+      mt_created_datetime = #{record.mtCreatedDatetime,jdbcType=TIMESTAMP},
+      mt_updated_datetime = #{record.mtUpdatedDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBean" >
+    update message_tbl
+    <set >
+      <if test="mtStId != null" >
+        mt_st_id = #{mtStId,jdbcType=INTEGER},
+      </if>
+      <if test="mtMessage != null" >
+        mt_message = #{mtMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="mtRead != null" >
+        mt_read = #{mtRead,jdbcType=INTEGER},
+      </if>
+      <if test="mtStatus != null" >
+        mt_status = #{mtStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mtParam1 != null" >
+        mt_param1 = #{mtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam2 != null" >
+        mt_param2 = #{mtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam3 != null" >
+        mt_param3 = #{mtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam4 != null" >
+        mt_param4 = #{mtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="mtParam5 != null" >
+        mt_param5 = #{mtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="mtCreatedDatetime != null" >
+        mt_created_datetime = #{mtCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtUpdatedDatetime != null" >
+        mt_updated_datetime = #{mtUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.MessageBean" >
+    update message_tbl
+    set mt_st_id = #{mtStId,jdbcType=INTEGER},
+      mt_message = #{mtMessage,jdbcType=VARCHAR},
+      mt_read = #{mtRead,jdbcType=INTEGER},
+      mt_status = #{mtStatus,jdbcType=INTEGER},
+      mt_param1 = #{mtParam1,jdbcType=VARCHAR},
+      mt_param2 = #{mtParam2,jdbcType=VARCHAR},
+      mt_param3 = #{mtParam3,jdbcType=VARCHAR},
+      mt_param4 = #{mtParam4,jdbcType=VARCHAR},
+      mt_param5 = #{mtParam5,jdbcType=VARCHAR},
+      mt_created_datetime = #{mtCreatedDatetime,jdbcType=TIMESTAMP},
+      mt_updated_datetime = #{mtUpdatedDatetime,jdbcType=TIMESTAMP}
+    where mt_id = #{mtId,jdbcType=INTEGER}
+  </update>
+</mapper>

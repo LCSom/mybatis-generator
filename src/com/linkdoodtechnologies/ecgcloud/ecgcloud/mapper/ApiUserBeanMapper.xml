@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.ApiUserBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBean" >
+    <id column="aut_id" property="autId" jdbcType="INTEGER" />
+    <result column="aut_app_id" property="autAppId" jdbcType="VARCHAR" />
+    <result column="aut_app_secret" property="autAppSecret" jdbcType="VARCHAR" />
+    <result column="aut_remark" property="autRemark" jdbcType="VARCHAR" />
+    <result column="aut_domain" property="autDomain" jdbcType="VARCHAR" />
+    <result column="aut_notify_url" property="autNotifyUrl" jdbcType="VARCHAR" />
+    <result column="aut_status" property="autStatus" jdbcType="VARCHAR" />
+    <result column="aut_unique_id" property="autUniqueId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    aut_id, aut_app_id, aut_app_secret, aut_remark, aut_domain, aut_notify_url, aut_status, 
+    aut_unique_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from api_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from api_user_tbl
+    where aut_id = #{autId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from api_user_tbl
+    where aut_id = #{autId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBeanExample" >
+    delete from api_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="autId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into api_user_tbl (aut_app_id, aut_app_secret, aut_remark, 
+      aut_domain, aut_notify_url, aut_status, 
+      aut_unique_id)
+    values (#{autAppId,jdbcType=VARCHAR}, #{autAppSecret,jdbcType=VARCHAR}, #{autRemark,jdbcType=VARCHAR}, 
+      #{autDomain,jdbcType=VARCHAR}, #{autNotifyUrl,jdbcType=VARCHAR}, #{autStatus,jdbcType=VARCHAR}, 
+      #{autUniqueId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="autId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into api_user_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autAppId != null" >
+        aut_app_id,
+      </if>
+      <if test="autAppSecret != null" >
+        aut_app_secret,
+      </if>
+      <if test="autRemark != null" >
+        aut_remark,
+      </if>
+      <if test="autDomain != null" >
+        aut_domain,
+      </if>
+      <if test="autNotifyUrl != null" >
+        aut_notify_url,
+      </if>
+      <if test="autStatus != null" >
+        aut_status,
+      </if>
+      <if test="autUniqueId != null" >
+        aut_unique_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autAppId != null" >
+        #{autAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="autAppSecret != null" >
+        #{autAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="autRemark != null" >
+        #{autRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="autDomain != null" >
+        #{autDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="autNotifyUrl != null" >
+        #{autNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="autStatus != null" >
+        #{autStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="autUniqueId != null" >
+        #{autUniqueId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBeanExample" resultType="java.lang.Integer" >
+    select count(*) from api_user_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update api_user_tbl
+    <set >
+      <if test="record.autId != null" >
+        aut_id = #{record.autId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autAppId != null" >
+        aut_app_id = #{record.autAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autAppSecret != null" >
+        aut_app_secret = #{record.autAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autRemark != null" >
+        aut_remark = #{record.autRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autDomain != null" >
+        aut_domain = #{record.autDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autNotifyUrl != null" >
+        aut_notify_url = #{record.autNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autStatus != null" >
+        aut_status = #{record.autStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autUniqueId != null" >
+        aut_unique_id = #{record.autUniqueId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update api_user_tbl
+    set aut_id = #{record.autId,jdbcType=INTEGER},
+      aut_app_id = #{record.autAppId,jdbcType=VARCHAR},
+      aut_app_secret = #{record.autAppSecret,jdbcType=VARCHAR},
+      aut_remark = #{record.autRemark,jdbcType=VARCHAR},
+      aut_domain = #{record.autDomain,jdbcType=VARCHAR},
+      aut_notify_url = #{record.autNotifyUrl,jdbcType=VARCHAR},
+      aut_status = #{record.autStatus,jdbcType=VARCHAR},
+      aut_unique_id = #{record.autUniqueId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBean" >
+    update api_user_tbl
+    <set >
+      <if test="autAppId != null" >
+        aut_app_id = #{autAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="autAppSecret != null" >
+        aut_app_secret = #{autAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="autRemark != null" >
+        aut_remark = #{autRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="autDomain != null" >
+        aut_domain = #{autDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="autNotifyUrl != null" >
+        aut_notify_url = #{autNotifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="autStatus != null" >
+        aut_status = #{autStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="autUniqueId != null" >
+        aut_unique_id = #{autUniqueId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aut_id = #{autId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.ApiUserBean" >
+    update api_user_tbl
+    set aut_app_id = #{autAppId,jdbcType=VARCHAR},
+      aut_app_secret = #{autAppSecret,jdbcType=VARCHAR},
+      aut_remark = #{autRemark,jdbcType=VARCHAR},
+      aut_domain = #{autDomain,jdbcType=VARCHAR},
+      aut_notify_url = #{autNotifyUrl,jdbcType=VARCHAR},
+      aut_status = #{autStatus,jdbcType=VARCHAR},
+      aut_unique_id = #{autUniqueId,jdbcType=VARCHAR}
+    where aut_id = #{autId,jdbcType=INTEGER}
+  </update>
+</mapper>

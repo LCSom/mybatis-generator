@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgnotification.ecgnotification.mapper.ServerBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBean" >
+    <id column="st_id" property="stId" jdbcType="INTEGER" />
+    <result column="st_domain" property="stDomain" jdbcType="VARCHAR" />
+    <result column="st_ddio1_app_id" property="stDdio1AppId" jdbcType="VARCHAR" />
+    <result column="st_ddio1_app_secret" property="stDdio1AppSecret" jdbcType="VARCHAR" />
+    <result column="st_ddio2_app_id" property="stDdio2AppId" jdbcType="VARCHAR" />
+    <result column="st_ddio2_app_secret" property="stDdio2AppSecret" jdbcType="VARCHAR" />
+    <result column="st_param1" property="stParam1" jdbcType="VARCHAR" />
+    <result column="st_param2" property="stParam2" jdbcType="VARCHAR" />
+    <result column="st_param3" property="stParam3" jdbcType="VARCHAR" />
+    <result column="st_param4" property="stParam4" jdbcType="VARCHAR" />
+    <result column="st_param5" property="stParam5" jdbcType="VARCHAR" />
+    <result column="st_status" property="stStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    st_id, st_domain, st_ddio1_app_id, st_ddio1_app_secret, st_ddio2_app_id, st_ddio2_app_secret, 
+    st_param1, st_param2, st_param3, st_param4, st_param5, st_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from server_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from server_tbl
+    where st_id = #{stId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from server_tbl
+    where st_id = #{stId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBeanExample" >
+    delete from server_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="stId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into server_tbl (st_domain, st_ddio1_app_id, st_ddio1_app_secret, 
+      st_ddio2_app_id, st_ddio2_app_secret, st_param1, 
+      st_param2, st_param3, st_param4, 
+      st_param5, st_status)
+    values (#{stDomain,jdbcType=VARCHAR}, #{stDdio1AppId,jdbcType=VARCHAR}, #{stDdio1AppSecret,jdbcType=VARCHAR}, 
+      #{stDdio2AppId,jdbcType=VARCHAR}, #{stDdio2AppSecret,jdbcType=VARCHAR}, #{stParam1,jdbcType=VARCHAR}, 
+      #{stParam2,jdbcType=VARCHAR}, #{stParam3,jdbcType=VARCHAR}, #{stParam4,jdbcType=VARCHAR}, 
+      #{stParam5,jdbcType=VARCHAR}, #{stStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="stId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into server_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stDomain != null" >
+        st_domain,
+      </if>
+      <if test="stDdio1AppId != null" >
+        st_ddio1_app_id,
+      </if>
+      <if test="stDdio1AppSecret != null" >
+        st_ddio1_app_secret,
+      </if>
+      <if test="stDdio2AppId != null" >
+        st_ddio2_app_id,
+      </if>
+      <if test="stDdio2AppSecret != null" >
+        st_ddio2_app_secret,
+      </if>
+      <if test="stParam1 != null" >
+        st_param1,
+      </if>
+      <if test="stParam2 != null" >
+        st_param2,
+      </if>
+      <if test="stParam3 != null" >
+        st_param3,
+      </if>
+      <if test="stParam4 != null" >
+        st_param4,
+      </if>
+      <if test="stParam5 != null" >
+        st_param5,
+      </if>
+      <if test="stStatus != null" >
+        st_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stDomain != null" >
+        #{stDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio1AppId != null" >
+        #{stDdio1AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio1AppSecret != null" >
+        #{stDdio1AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio2AppId != null" >
+        #{stDdio2AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio2AppSecret != null" >
+        #{stDdio2AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam1 != null" >
+        #{stParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam2 != null" >
+        #{stParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam3 != null" >
+        #{stParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam4 != null" >
+        #{stParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam5 != null" >
+        #{stParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="stStatus != null" >
+        #{stStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBeanExample" resultType="java.lang.Integer" >
+    select count(*) from server_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update server_tbl
+    <set >
+      <if test="record.stId != null" >
+        st_id = #{record.stId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stDomain != null" >
+        st_domain = #{record.stDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stDdio1AppId != null" >
+        st_ddio1_app_id = #{record.stDdio1AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stDdio1AppSecret != null" >
+        st_ddio1_app_secret = #{record.stDdio1AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stDdio2AppId != null" >
+        st_ddio2_app_id = #{record.stDdio2AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stDdio2AppSecret != null" >
+        st_ddio2_app_secret = #{record.stDdio2AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stParam1 != null" >
+        st_param1 = #{record.stParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stParam2 != null" >
+        st_param2 = #{record.stParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stParam3 != null" >
+        st_param3 = #{record.stParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stParam4 != null" >
+        st_param4 = #{record.stParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stParam5 != null" >
+        st_param5 = #{record.stParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stStatus != null" >
+        st_status = #{record.stStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update server_tbl
+    set st_id = #{record.stId,jdbcType=INTEGER},
+      st_domain = #{record.stDomain,jdbcType=VARCHAR},
+      st_ddio1_app_id = #{record.stDdio1AppId,jdbcType=VARCHAR},
+      st_ddio1_app_secret = #{record.stDdio1AppSecret,jdbcType=VARCHAR},
+      st_ddio2_app_id = #{record.stDdio2AppId,jdbcType=VARCHAR},
+      st_ddio2_app_secret = #{record.stDdio2AppSecret,jdbcType=VARCHAR},
+      st_param1 = #{record.stParam1,jdbcType=VARCHAR},
+      st_param2 = #{record.stParam2,jdbcType=VARCHAR},
+      st_param3 = #{record.stParam3,jdbcType=VARCHAR},
+      st_param4 = #{record.stParam4,jdbcType=VARCHAR},
+      st_param5 = #{record.stParam5,jdbcType=VARCHAR},
+      st_status = #{record.stStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBean" >
+    update server_tbl
+    <set >
+      <if test="stDomain != null" >
+        st_domain = #{stDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio1AppId != null" >
+        st_ddio1_app_id = #{stDdio1AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio1AppSecret != null" >
+        st_ddio1_app_secret = #{stDdio1AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio2AppId != null" >
+        st_ddio2_app_id = #{stDdio2AppId,jdbcType=VARCHAR},
+      </if>
+      <if test="stDdio2AppSecret != null" >
+        st_ddio2_app_secret = #{stDdio2AppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam1 != null" >
+        st_param1 = #{stParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam2 != null" >
+        st_param2 = #{stParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam3 != null" >
+        st_param3 = #{stParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam4 != null" >
+        st_param4 = #{stParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="stParam5 != null" >
+        st_param5 = #{stParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="stStatus != null" >
+        st_status = #{stStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgnotification.ecgnotification.bean.ServerBean" >
+    update server_tbl
+    set st_domain = #{stDomain,jdbcType=VARCHAR},
+      st_ddio1_app_id = #{stDdio1AppId,jdbcType=VARCHAR},
+      st_ddio1_app_secret = #{stDdio1AppSecret,jdbcType=VARCHAR},
+      st_ddio2_app_id = #{stDdio2AppId,jdbcType=VARCHAR},
+      st_ddio2_app_secret = #{stDdio2AppSecret,jdbcType=VARCHAR},
+      st_param1 = #{stParam1,jdbcType=VARCHAR},
+      st_param2 = #{stParam2,jdbcType=VARCHAR},
+      st_param3 = #{stParam3,jdbcType=VARCHAR},
+      st_param4 = #{stParam4,jdbcType=VARCHAR},
+      st_param5 = #{stParam5,jdbcType=VARCHAR},
+      st_status = #{stStatus,jdbcType=INTEGER}
+    where st_id = #{stId,jdbcType=INTEGER}
+  </update>
+</mapper>

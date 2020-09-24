@@ -2,8 +2,191 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97e0249f-f083-4fa8-b301-90221d5f9245" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/ApiUserBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/ApiUserBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudDomainBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudDomainBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudInstanceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudInstanceBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudRenewInstanceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudRenewInstanceBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudWatchBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudWatchBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/InvoiceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/InvoiceBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/ApiUserBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/ApiUserBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudDomainBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudDomainBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudInstanceBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudInstanceBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudRenewInstanceBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudRenewInstanceBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudWatchBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/CloudWatchBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/InvoiceBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/mapper/InvoiceBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/MessageBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/MessageBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/NotificationBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/NotificationBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/ServerBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/bean/ServerBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/MessageBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/MessageBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/NotificationBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/NotificationBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/ServerBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgnotification/ecgnotification/mapper/ServerBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentAppBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentAppBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentMethodBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentMethodBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentUserBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentUserBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentAppBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentAppBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentMethodBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentMethodBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentUserBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/PaymentUserBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/AffiliateBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/AffiliateBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionRedeemBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionRedeemBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionUsageBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/bean/PromotionUsageBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/AffiliateBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/AffiliateBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionRedeemBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionRedeemBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionUsageBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpromotion/ecgpromotion/mapper/PromotionUsageBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/AgentTypeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/AgentTypeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/AlarmTypeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/AlarmTypeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ConstantBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ConstantBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceGroupBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceGroupBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceInfoBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceInfoBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceKvsBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceKvsBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceKvsMonitorLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceKvsMonitorLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceKvsMonitorLogBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceNetworkBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceNetworkBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceOnlineBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceOnlineBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DevicePatchLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DevicePatchLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DevicePatchLogBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceTypeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceTypeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceTypeGroupBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceTypeGroupBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceUnregisterBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceUnregisterBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceUsefulBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/DeviceUsefulBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/EmailServerBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/EmailServerBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/FileProtectedLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/FileProtectedLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareControlLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareControlLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareControlLogBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareLogBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareTypeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/HardwareTypeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/InstallSoftBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/InstallSoftBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/LogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/LogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/MailMonitorLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/MailMonitorLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/MailMonitorLogBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ManagerOrgBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ManagerOrgBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/MergeSoftBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/MergeSoftBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgIpRangeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgIpRangeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgOldIpBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OrgOldIpBeanKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OsBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/OsBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchBeanWithBLOBs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchIndexBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchIndexBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchResourceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PatchResourceBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PrintProtectedLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/PrintProtectedLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/RoleBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/RoleBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ServerAreaBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ServerAreaBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ServerAreaOrgBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/ServerAreaOrgBeanKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/SoftLogBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/SoftLogBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserInfoBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserInfoBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserRoleBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/UserRoleBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/VerificationCodeBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/bean/VerificationCodeBeanExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/AgentTypeBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/AgentTypeBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/AlarmTypeBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/AlarmTypeBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceGroupBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceGroupBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceKvsBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceKvsBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceNetworkBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceNetworkBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceOnlineBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceOnlineBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceUnregisterBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/DeviceUnregisterBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/HardwareBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/HardwareBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/InstallSoftBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/InstallSoftBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchIndexBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchIndexBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchResourceBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/PatchResourceBeanMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/VerificationCodeBeanMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/vrv/mapper/VerificationCodeBeanMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/META-INF/mybaitsgenerator.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mybaitsgenerator/TestMain.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wanlicloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wanlicloud.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,43 +208,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wanlicloud.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+            <state relative-caret-position="458">
+              <caret line="39" column="65" lean-forward="true" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/mybatis-generator-core-1.3.1/lib/mybatis-generator-core-1.3.1.jar!/org/mybatis/generator/config/xml/mybatis-generator-config_1_0.dtd">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-289">
-              <caret line="141" column="10" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/releasing.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/html/index.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mysql-example.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mybatisgenerators.iml">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -82,7 +232,16 @@
       <find>cre</find>
       <find>crea</find>
       <find>insert</find>
+      <find>mapper</find>
+      <find>linkdoodtechnologies.ecgcloud.ecgcloud</find>
+      <find>ecgcloud</find>
+      <find>com.vrv</find>
     </findStrings>
+    <replaceStrings>
+      <replace>vrv</replace>
+      <replace>ecgnotification</replace>
+      <replace>com.linkdoodtechnologies.ecgpayment.ecgpayment</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,43 +255,70 @@
         <option value="$PROJECT_DIR$/yqh.xml" />
         <option value="$PROJECT_DIR$/mysql-example.xml" />
         <option value="$PROJECT_DIR$/src/TestMain.java" />
+        <option value="$PROJECT_DIR$/src/com/vrv/bean/MicroBean.java" />
+        <option value="$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudRenewInstanceBeanExample.java" />
         <option value="$PROJECT_DIR$/wanlicloud.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1039" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="mybatisgenerators" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybatisgenerators" type="462c0819:PsiDirectoryNode" />
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="mybatisgenerators" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybatisgenerators" type="462c0819:PsiDirectoryNode" />
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="mybatisgenerators" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybatisgenerators" type="462c0819:PsiDirectoryNode" />
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ecgproduct" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="vrv" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="vrv" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mybatisgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybatisgenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="vrv" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -144,12 +330,12 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\云盘备份\工具\mybaitsgenerator" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\云盘备份\工具\mybaitsgenerator" />
       <recent name="F:\云盘备份\工具\mybaitsgenerator\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\云盘备份\工具\mybaitsgenerator" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -326,17 +512,147 @@
       <workItem from="1561442217070" duration="1270000" />
       <workItem from="1561517604410" duration="5914000" />
       <workItem from="1561600698655" duration="579000" />
+      <workItem from="1561703863739" duration="2687000" />
+      <workItem from="1561707063005" duration="678000" />
+      <workItem from="1561709358355" duration="84000" />
+      <workItem from="1562914927515" duration="1288000" />
+      <workItem from="1562918690017" duration="240000" />
+      <workItem from="1563109113298" duration="89000" />
+      <workItem from="1563157849066" duration="128000" />
+      <workItem from="1563256213266" duration="1388000" />
+      <workItem from="1563873846671" duration="2186000" />
+      <workItem from="1563932114682" duration="55000" />
+      <workItem from="1563954216951" duration="645000" />
+      <workItem from="1563954894378" duration="17000" />
+      <workItem from="1564547597515" duration="202000" />
+      <workItem from="1564623756855" duration="1140000" />
+      <workItem from="1565141624467" duration="644000" />
+      <workItem from="1565847881580" duration="730000" />
+      <workItem from="1565920815046" duration="619000" />
+      <workItem from="1566287093049" duration="1014000" />
+      <workItem from="1566358986893" duration="850000" />
+      <workItem from="1566798464447" duration="1826000" />
+      <workItem from="1566885906291" duration="688000" />
+      <workItem from="1566982898081" duration="1390000" />
+      <workItem from="1566985416814" duration="76000" />
+      <workItem from="1567579823746" duration="1068000" />
+      <workItem from="1567591908380" duration="95000" />
+      <workItem from="1569924805727" duration="755000" />
+      <workItem from="1569930176715" duration="593000" />
+      <workItem from="1569934570910" duration="206000" />
+      <workItem from="1575942186577" duration="1737000" />
+      <workItem from="1577423723675" duration="1242000" />
+      <workItem from="1577431650230" duration="1212000" />
+      <workItem from="1577677345591" duration="132000" />
+      <workItem from="1578038756761" duration="744000" />
+      <workItem from="1578039608171" duration="68000" />
+      <workItem from="1578385579673" duration="703000" />
+      <workItem from="1578463519802" duration="686000" />
+      <workItem from="1578465926501" duration="71000" />
+      <workItem from="1578633533705" duration="260000" />
+      <workItem from="1578647068901" duration="166000" />
+      <workItem from="1578647263822" duration="112000" />
+      <workItem from="1579160282359" duration="296000" />
+      <workItem from="1579160615216" duration="105000" />
+      <workItem from="1579514064018" duration="247000" />
+      <workItem from="1579676561396" duration="660000" />
+      <workItem from="1579677365062" duration="634000" />
+      <workItem from="1579682093775" duration="683000" />
+      <workItem from="1579686647214" duration="103000" />
+      <workItem from="1581044132529" duration="252000" />
+      <workItem from="1581407958112" duration="390000" />
+      <workItem from="1581493914542" duration="262000" />
+      <workItem from="1581924679547" duration="369000" />
+      <workItem from="1581928181831" duration="180000" />
+      <workItem from="1581928393827" duration="9000" />
+      <workItem from="1581989098442" duration="1023000" />
+      <workItem from="1581990458357" duration="83000" />
+      <workItem from="1582012418644" duration="158000" />
+      <workItem from="1582093562605" duration="120000" />
+      <workItem from="1582609319659" duration="134000" />
+      <workItem from="1582622386673" duration="81000" />
+      <workItem from="1582622501375" duration="610000" />
+      <workItem from="1582680166465" duration="77000" />
+      <workItem from="1583216844754" duration="93000" />
+      <workItem from="1583479225769" duration="256000" />
+      <workItem from="1583481645754" duration="233000" />
+      <workItem from="1583482215743" duration="90000" />
+      <workItem from="1583725826266" duration="690000" />
+      <workItem from="1583732594368" duration="39000" />
+      <workItem from="1583807095904" duration="133000" />
+      <workItem from="1584437775427" duration="2547000" />
+      <workItem from="1584588490520" duration="237000" />
+      <workItem from="1586252185187" duration="1158000" />
+      <workItem from="1586260467490" duration="172000" />
+      <workItem from="1586260672490" duration="154000" />
+      <workItem from="1586329064999" duration="752000" />
+      <workItem from="1586332606539" duration="683000" />
+      <workItem from="1586424183781" duration="1615000" />
+      <workItem from="1586485337235" duration="1782000" />
+      <workItem from="1586680887573" duration="2005000" />
+      <workItem from="1586848119417" duration="95000" />
+      <workItem from="1586850323220" duration="141000" />
+      <workItem from="1586940846022" duration="283000" />
+      <workItem from="1587031418939" duration="709000" />
+      <workItem from="1587032208528" duration="85000" />
+      <workItem from="1587122046545" duration="187000" />
+      <workItem from="1587276933916" duration="2306000" />
+      <workItem from="1587370351792" duration="110000" />
+      <workItem from="1587609057932" duration="870000" />
+      <workItem from="1587634435758" duration="68000" />
+      <workItem from="1587795148062" duration="1975000" />
+      <workItem from="1588231421046" duration="922000" />
+      <workItem from="1588244914940" duration="136000" />
+      <workItem from="1588245058223" duration="11000" />
+      <workItem from="1588245781632" duration="168000" />
+      <workItem from="1588670512693" duration="261000" />
+      <workItem from="1588750994883" duration="721000" />
+      <workItem from="1588757444211" duration="233000" />
+      <workItem from="1588920276955" duration="401000" />
+      <workItem from="1589246720380" duration="1000" />
+      <workItem from="1589260514377" duration="647000" />
+      <workItem from="1589277058523" duration="100000" />
+      <workItem from="1590031106832" duration="728000" />
+      <workItem from="1590130146934" duration="246000" />
+      <workItem from="1590659186606" duration="738000" />
+      <workItem from="1590739388927" duration="120000" />
+      <workItem from="1592971173565" duration="284000" />
+      <workItem from="1592978225207" duration="133000" />
+      <workItem from="1592980553361" duration="541000" />
+      <workItem from="1592981130334" duration="602000" />
+      <workItem from="1592989761370" duration="241000" />
+      <workItem from="1592994869313" duration="216000" />
+      <workItem from="1594112150361" duration="97000" />
+      <workItem from="1594376081777" duration="482000" />
+      <workItem from="1594379403762" duration="679000" />
+      <workItem from="1594603606364" duration="295000" />
+      <workItem from="1594707944485" duration="156000" />
+      <workItem from="1594709387686" duration="1755000" />
+      <workItem from="1594717904830" duration="14000" />
+      <workItem from="1594966060250" duration="111000" />
+      <workItem from="1595236075313" duration="238000" />
+      <workItem from="1595398303189" duration="463000" />
+      <workItem from="1597139775506" duration="178000" />
+      <workItem from="1598263824550" duration="304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19298000" />
+    <option name="totallyTimeSpent" value="85978000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1536" height="831" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24525745" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33221477" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -344,17 +660,17 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Nl-Palette" order="7" />
-      <window_info id="Learn" order="8" />
+      <window_info id="Learn" order="8" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298611" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25608012" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28045326" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -413,136 +729,260 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/第一步：注册中心的搭建" />
-    <entry file="file://$PROJECT_DIR$/ORACLE-example2.xml" />
-    <entry file="file://$PROJECT_DIR$/NewFile.xml" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/UserMapper.java" />
-    <entry file="jar://$PROJECT_DIR$/mybatis-generator-core-1.3.1/lib/mybatis-3.0.5.jar!/org/apache/ibatis/annotations/Param.class">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/MessageCommentBeanMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/LogBeanMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/InviteBeanExample.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/InviteBeanMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/InviteBeanMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/InviteBean.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/MsgBeanWithBLOBs.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/MsgBeanExample.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ContentBeanWithBLOBs.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ContentBeanExample.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ContentBean.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudInstanceBeanExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="36">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/TbUserMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/TbOperationLogsMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/model/TbOperationLogs.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/model/StudentExample.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/model/Student.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/model/VersionInfo.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/model/VersionInfoExample.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/VersionInfoMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/StudentMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/net/wanho/mapper/StudentMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/readme.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgcloud/ecgcloud/bean/CloudRenewInstanceBeanExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="306">
+          <caret line="269" column="9" selection-start-line="269" selection-start-column="9" selection-end-line="269" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/oracle-example.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/UserBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="36" column="44" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="44" />
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/todo.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/UserBeanMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/UserBeanMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/VerificationCodeBean.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/VerificationCodeBeanExample.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/VerificationCodeBeanMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/VerificationCodeBeanMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/RoleBean.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/RoleBeanMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/RoleBeanMapper.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/RoleBeanExample.java" />
-    <entry file="file://$PROJECT_DIR$/src/TestMain.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/EventBean.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/InstallSoftBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+        <state relative-caret-position="72">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/ReleaseNotes.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ErrorBean.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/InstallSoftBeanExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+        <state relative-caret-position="72">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ErrorBeanExample.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/OrganizationBean.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/OrganizationBeanExample.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/DeviceTypeBeanMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="-1674" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/DevicePatchBeanMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/DevicePatchBeanMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/EmailServerBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/ErrorBeanMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/InstallSoftBeanMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <state relative-caret-position="126">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/ErrorBeanMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/DeviceHardwareBean.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/DeviceGroupBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/releasing.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mybatis-generator-core-1.3.1/doc/html/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysql-example.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/DeviceTypeGroupBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        <state relative-caret-position="414">
+          <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mybatisgenerators.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mybatis-generator-core-1.3.1/lib/mybatis-generator-core-1.3.1.jar!/org/mybatis/generator/config/xml/mybatis-generator-config_1_0.dtd">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
-          <caret line="141" column="10" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+        <state relative-caret-position="72">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgproduct/ecgproduct/mapper/CategoryBeanMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchBeanExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="110" column="78" lean-forward="true" selection-start-line="110" selection-start-column="78" selection-end-line="110" selection-end-column="78" />
+        <state relative-caret-position="72">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgproduct/ecgproduct/mapper/CategoryBeanMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchBeanWithBLOBs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchIndexBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchIndexBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchResourceBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PatchResourceBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/mapper/DeviceInfoBeanMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/DevicePatchLogBeanWithBLOBs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/DevicePatchLogBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/LogBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/LogBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1008">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/LogBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1494">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/OrgOldIpBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4032">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/OrgOldIpBeanKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ManagerOrgBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ManagerOrgBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ChartBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/ChartBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/bean/PaymentTokenBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/linkdoodtechnologies/ecgpayment/ecgpayment/mapper/CustomerBeanMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13184" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PolicyFileBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-511">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vrv/bean/PolicyFileBeanExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="839">
+          <caret line="696" selection-start-line="696" selection-end-line="696" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wanlicloud.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+        <state relative-caret-position="458">
+          <caret line="39" column="65" lean-forward="true" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
         </state>
       </provider>
     </entry>

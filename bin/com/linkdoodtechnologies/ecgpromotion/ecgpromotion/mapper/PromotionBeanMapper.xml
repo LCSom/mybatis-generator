@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.mapper.PromotionBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBean" >
+    <id column="prt_id" property="prtId" jdbcType="INTEGER" />
+    <result column="prt_att_id" property="prtAttId" jdbcType="VARCHAR" />
+    <result column="prt_unique_id" property="prtUniqueId" jdbcType="VARCHAR" />
+    <result column="prt_name" property="prtName" jdbcType="VARCHAR" />
+    <result column="prt_description" property="prtDescription" jdbcType="VARCHAR" />
+    <result column="prt_type" property="prtType" jdbcType="VARCHAR" />
+    <result column="prt_amount" property="prtAmount" jdbcType="VARCHAR" />
+    <result column="prt_max_use_time" property="prtMaxUseTime" jdbcType="VARCHAR" />
+    <result column="prt_one_account_one" property="prtOneAccountOne" jdbcType="VARCHAR" />
+    <result column="prt_min_purchase" property="prtMinPurchase" jdbcType="VARCHAR" />
+    <result column="prt_max_cashback" property="prtMaxCashback" jdbcType="VARCHAR" />
+    <result column="prt_affiliate_program" property="prtAffiliateProgram" jdbcType="VARCHAR" />
+    <result column="prt_expired_datetime" property="prtExpiredDatetime" jdbcType="VARCHAR" />
+    <result column="prt_param1" property="prtParam1" jdbcType="VARCHAR" />
+    <result column="prt_param2" property="prtParam2" jdbcType="VARCHAR" />
+    <result column="prt_param3" property="prtParam3" jdbcType="VARCHAR" />
+    <result column="prt_param4" property="prtParam4" jdbcType="VARCHAR" />
+    <result column="prt_param5" property="prtParam5" jdbcType="VARCHAR" />
+    <result column="prt_status" property="prtStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    prt_id, prt_att_id, prt_unique_id, prt_name, prt_description, prt_type, prt_amount, 
+    prt_max_use_time, prt_one_account_one, prt_min_purchase, prt_max_cashback, prt_affiliate_program, 
+    prt_expired_datetime, prt_param1, prt_param2, prt_param3, prt_param4, prt_param5, 
+    prt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from promotion_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from promotion_tbl
+    where prt_id = #{prtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from promotion_tbl
+    where prt_id = #{prtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBeanExample" >
+    delete from promotion_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into promotion_tbl (prt_att_id, prt_unique_id, prt_name, 
+      prt_description, prt_type, prt_amount, 
+      prt_max_use_time, prt_one_account_one, prt_min_purchase, 
+      prt_max_cashback, prt_affiliate_program, prt_expired_datetime, 
+      prt_param1, prt_param2, prt_param3, 
+      prt_param4, prt_param5, prt_status
+      )
+    values (#{prtAttId,jdbcType=VARCHAR}, #{prtUniqueId,jdbcType=VARCHAR}, #{prtName,jdbcType=VARCHAR}, 
+      #{prtDescription,jdbcType=VARCHAR}, #{prtType,jdbcType=VARCHAR}, #{prtAmount,jdbcType=VARCHAR}, 
+      #{prtMaxUseTime,jdbcType=VARCHAR}, #{prtOneAccountOne,jdbcType=VARCHAR}, #{prtMinPurchase,jdbcType=VARCHAR}, 
+      #{prtMaxCashback,jdbcType=VARCHAR}, #{prtAffiliateProgram,jdbcType=VARCHAR}, #{prtExpiredDatetime,jdbcType=VARCHAR}, 
+      #{prtParam1,jdbcType=VARCHAR}, #{prtParam2,jdbcType=VARCHAR}, #{prtParam3,jdbcType=VARCHAR}, 
+      #{prtParam4,jdbcType=VARCHAR}, #{prtParam5,jdbcType=VARCHAR}, #{prtStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="prtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into promotion_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prtAttId != null" >
+        prt_att_id,
+      </if>
+      <if test="prtUniqueId != null" >
+        prt_unique_id,
+      </if>
+      <if test="prtName != null" >
+        prt_name,
+      </if>
+      <if test="prtDescription != null" >
+        prt_description,
+      </if>
+      <if test="prtType != null" >
+        prt_type,
+      </if>
+      <if test="prtAmount != null" >
+        prt_amount,
+      </if>
+      <if test="prtMaxUseTime != null" >
+        prt_max_use_time,
+      </if>
+      <if test="prtOneAccountOne != null" >
+        prt_one_account_one,
+      </if>
+      <if test="prtMinPurchase != null" >
+        prt_min_purchase,
+      </if>
+      <if test="prtMaxCashback != null" >
+        prt_max_cashback,
+      </if>
+      <if test="prtAffiliateProgram != null" >
+        prt_affiliate_program,
+      </if>
+      <if test="prtExpiredDatetime != null" >
+        prt_expired_datetime,
+      </if>
+      <if test="prtParam1 != null" >
+        prt_param1,
+      </if>
+      <if test="prtParam2 != null" >
+        prt_param2,
+      </if>
+      <if test="prtParam3 != null" >
+        prt_param3,
+      </if>
+      <if test="prtParam4 != null" >
+        prt_param4,
+      </if>
+      <if test="prtParam5 != null" >
+        prt_param5,
+      </if>
+      <if test="prtStatus != null" >
+        prt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prtAttId != null" >
+        #{prtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="prtUniqueId != null" >
+        #{prtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="prtName != null" >
+        #{prtName,jdbcType=VARCHAR},
+      </if>
+      <if test="prtDescription != null" >
+        #{prtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="prtType != null" >
+        #{prtType,jdbcType=VARCHAR},
+      </if>
+      <if test="prtAmount != null" >
+        #{prtAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMaxUseTime != null" >
+        #{prtMaxUseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="prtOneAccountOne != null" >
+        #{prtOneAccountOne,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMinPurchase != null" >
+        #{prtMinPurchase,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMaxCashback != null" >
+        #{prtMaxCashback,jdbcType=VARCHAR},
+      </if>
+      <if test="prtAffiliateProgram != null" >
+        #{prtAffiliateProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="prtExpiredDatetime != null" >
+        #{prtExpiredDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam1 != null" >
+        #{prtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam2 != null" >
+        #{prtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam3 != null" >
+        #{prtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam4 != null" >
+        #{prtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam5 != null" >
+        #{prtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="prtStatus != null" >
+        #{prtStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBeanExample" resultType="java.lang.Integer" >
+    select count(*) from promotion_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update promotion_tbl
+    <set >
+      <if test="record.prtId != null" >
+        prt_id = #{record.prtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prtAttId != null" >
+        prt_att_id = #{record.prtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtUniqueId != null" >
+        prt_unique_id = #{record.prtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtName != null" >
+        prt_name = #{record.prtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtDescription != null" >
+        prt_description = #{record.prtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtType != null" >
+        prt_type = #{record.prtType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtAmount != null" >
+        prt_amount = #{record.prtAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtMaxUseTime != null" >
+        prt_max_use_time = #{record.prtMaxUseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtOneAccountOne != null" >
+        prt_one_account_one = #{record.prtOneAccountOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtMinPurchase != null" >
+        prt_min_purchase = #{record.prtMinPurchase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtMaxCashback != null" >
+        prt_max_cashback = #{record.prtMaxCashback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtAffiliateProgram != null" >
+        prt_affiliate_program = #{record.prtAffiliateProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtExpiredDatetime != null" >
+        prt_expired_datetime = #{record.prtExpiredDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtParam1 != null" >
+        prt_param1 = #{record.prtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtParam2 != null" >
+        prt_param2 = #{record.prtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtParam3 != null" >
+        prt_param3 = #{record.prtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtParam4 != null" >
+        prt_param4 = #{record.prtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtParam5 != null" >
+        prt_param5 = #{record.prtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prtStatus != null" >
+        prt_status = #{record.prtStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update promotion_tbl
+    set prt_id = #{record.prtId,jdbcType=INTEGER},
+      prt_att_id = #{record.prtAttId,jdbcType=VARCHAR},
+      prt_unique_id = #{record.prtUniqueId,jdbcType=VARCHAR},
+      prt_name = #{record.prtName,jdbcType=VARCHAR},
+      prt_description = #{record.prtDescription,jdbcType=VARCHAR},
+      prt_type = #{record.prtType,jdbcType=VARCHAR},
+      prt_amount = #{record.prtAmount,jdbcType=VARCHAR},
+      prt_max_use_time = #{record.prtMaxUseTime,jdbcType=VARCHAR},
+      prt_one_account_one = #{record.prtOneAccountOne,jdbcType=VARCHAR},
+      prt_min_purchase = #{record.prtMinPurchase,jdbcType=VARCHAR},
+      prt_max_cashback = #{record.prtMaxCashback,jdbcType=VARCHAR},
+      prt_affiliate_program = #{record.prtAffiliateProgram,jdbcType=VARCHAR},
+      prt_expired_datetime = #{record.prtExpiredDatetime,jdbcType=VARCHAR},
+      prt_param1 = #{record.prtParam1,jdbcType=VARCHAR},
+      prt_param2 = #{record.prtParam2,jdbcType=VARCHAR},
+      prt_param3 = #{record.prtParam3,jdbcType=VARCHAR},
+      prt_param4 = #{record.prtParam4,jdbcType=VARCHAR},
+      prt_param5 = #{record.prtParam5,jdbcType=VARCHAR},
+      prt_status = #{record.prtStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBean" >
+    update promotion_tbl
+    <set >
+      <if test="prtAttId != null" >
+        prt_att_id = #{prtAttId,jdbcType=VARCHAR},
+      </if>
+      <if test="prtUniqueId != null" >
+        prt_unique_id = #{prtUniqueId,jdbcType=VARCHAR},
+      </if>
+      <if test="prtName != null" >
+        prt_name = #{prtName,jdbcType=VARCHAR},
+      </if>
+      <if test="prtDescription != null" >
+        prt_description = #{prtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="prtType != null" >
+        prt_type = #{prtType,jdbcType=VARCHAR},
+      </if>
+      <if test="prtAmount != null" >
+        prt_amount = #{prtAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMaxUseTime != null" >
+        prt_max_use_time = #{prtMaxUseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="prtOneAccountOne != null" >
+        prt_one_account_one = #{prtOneAccountOne,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMinPurchase != null" >
+        prt_min_purchase = #{prtMinPurchase,jdbcType=VARCHAR},
+      </if>
+      <if test="prtMaxCashback != null" >
+        prt_max_cashback = #{prtMaxCashback,jdbcType=VARCHAR},
+      </if>
+      <if test="prtAffiliateProgram != null" >
+        prt_affiliate_program = #{prtAffiliateProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="prtExpiredDatetime != null" >
+        prt_expired_datetime = #{prtExpiredDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam1 != null" >
+        prt_param1 = #{prtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam2 != null" >
+        prt_param2 = #{prtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam3 != null" >
+        prt_param3 = #{prtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam4 != null" >
+        prt_param4 = #{prtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="prtParam5 != null" >
+        prt_param5 = #{prtParam5,jdbcType=VARCHAR},
+      </if>
+      <if test="prtStatus != null" >
+        prt_status = #{prtStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where prt_id = #{prtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpromotion.ecgpromotion.bean.PromotionBean" >
+    update promotion_tbl
+    set prt_att_id = #{prtAttId,jdbcType=VARCHAR},
+      prt_unique_id = #{prtUniqueId,jdbcType=VARCHAR},
+      prt_name = #{prtName,jdbcType=VARCHAR},
+      prt_description = #{prtDescription,jdbcType=VARCHAR},
+      prt_type = #{prtType,jdbcType=VARCHAR},
+      prt_amount = #{prtAmount,jdbcType=VARCHAR},
+      prt_max_use_time = #{prtMaxUseTime,jdbcType=VARCHAR},
+      prt_one_account_one = #{prtOneAccountOne,jdbcType=VARCHAR},
+      prt_min_purchase = #{prtMinPurchase,jdbcType=VARCHAR},
+      prt_max_cashback = #{prtMaxCashback,jdbcType=VARCHAR},
+      prt_affiliate_program = #{prtAffiliateProgram,jdbcType=VARCHAR},
+      prt_expired_datetime = #{prtExpiredDatetime,jdbcType=VARCHAR},
+      prt_param1 = #{prtParam1,jdbcType=VARCHAR},
+      prt_param2 = #{prtParam2,jdbcType=VARCHAR},
+      prt_param3 = #{prtParam3,jdbcType=VARCHAR},
+      prt_param4 = #{prtParam4,jdbcType=VARCHAR},
+      prt_param5 = #{prtParam5,jdbcType=VARCHAR},
+      prt_status = #{prtStatus,jdbcType=VARCHAR}
+    where prt_id = #{prtId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgpayment.ecgpayment.mapper.TokenBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBean" >
+    <id column="att_token_id" property="attTokenId" jdbcType="INTEGER" />
+    <result column="att_aut_id" property="attAutId" jdbcType="VARCHAR" />
+    <result column="att_token_key" property="attTokenKey" jdbcType="VARCHAR" />
+    <result column="att_token_status" property="attTokenStatus" jdbcType="BIT" />
+    <result column="att_token_expire_date" property="attTokenExpireDate" jdbcType="VARCHAR" />
+    <result column="att_token_access_type" property="attTokenAccessType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    att_token_id, att_aut_id, att_token_key, att_token_status, att_token_expire_date, 
+    att_token_access_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from api_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from api_token_tbl
+    where att_token_id = #{attTokenId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from api_token_tbl
+    where att_token_id = #{attTokenId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBeanExample" >
+    delete from api_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="attTokenId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into api_token_tbl (att_aut_id, att_token_key, att_token_status, 
+      att_token_expire_date, att_token_access_type)
+    values (#{attAutId,jdbcType=VARCHAR}, #{attTokenKey,jdbcType=VARCHAR}, #{attTokenStatus,jdbcType=BIT}, 
+      #{attTokenExpireDate,jdbcType=VARCHAR}, #{attTokenAccessType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="attTokenId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into api_token_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attAutId != null" >
+        att_aut_id,
+      </if>
+      <if test="attTokenKey != null" >
+        att_token_key,
+      </if>
+      <if test="attTokenStatus != null" >
+        att_token_status,
+      </if>
+      <if test="attTokenExpireDate != null" >
+        att_token_expire_date,
+      </if>
+      <if test="attTokenAccessType != null" >
+        att_token_access_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attAutId != null" >
+        #{attAutId,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenKey != null" >
+        #{attTokenKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenStatus != null" >
+        #{attTokenStatus,jdbcType=BIT},
+      </if>
+      <if test="attTokenExpireDate != null" >
+        #{attTokenExpireDate,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenAccessType != null" >
+        #{attTokenAccessType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBeanExample" resultType="java.lang.Integer" >
+    select count(*) from api_token_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update api_token_tbl
+    <set >
+      <if test="record.attTokenId != null" >
+        att_token_id = #{record.attTokenId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attAutId != null" >
+        att_aut_id = #{record.attAutId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attTokenKey != null" >
+        att_token_key = #{record.attTokenKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attTokenStatus != null" >
+        att_token_status = #{record.attTokenStatus,jdbcType=BIT},
+      </if>
+      <if test="record.attTokenExpireDate != null" >
+        att_token_expire_date = #{record.attTokenExpireDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attTokenAccessType != null" >
+        att_token_access_type = #{record.attTokenAccessType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update api_token_tbl
+    set att_token_id = #{record.attTokenId,jdbcType=INTEGER},
+      att_aut_id = #{record.attAutId,jdbcType=VARCHAR},
+      att_token_key = #{record.attTokenKey,jdbcType=VARCHAR},
+      att_token_status = #{record.attTokenStatus,jdbcType=BIT},
+      att_token_expire_date = #{record.attTokenExpireDate,jdbcType=VARCHAR},
+      att_token_access_type = #{record.attTokenAccessType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBean" >
+    update api_token_tbl
+    <set >
+      <if test="attAutId != null" >
+        att_aut_id = #{attAutId,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenKey != null" >
+        att_token_key = #{attTokenKey,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenStatus != null" >
+        att_token_status = #{attTokenStatus,jdbcType=BIT},
+      </if>
+      <if test="attTokenExpireDate != null" >
+        att_token_expire_date = #{attTokenExpireDate,jdbcType=VARCHAR},
+      </if>
+      <if test="attTokenAccessType != null" >
+        att_token_access_type = #{attTokenAccessType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where att_token_id = #{attTokenId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgpayment.ecgpayment.bean.TokenBean" >
+    update api_token_tbl
+    set att_aut_id = #{attAutId,jdbcType=VARCHAR},
+      att_token_key = #{attTokenKey,jdbcType=VARCHAR},
+      att_token_status = #{attTokenStatus,jdbcType=BIT},
+      att_token_expire_date = #{attTokenExpireDate,jdbcType=VARCHAR},
+      att_token_access_type = #{attTokenAccessType,jdbcType=VARCHAR}
+    where att_token_id = #{attTokenId,jdbcType=INTEGER}
+  </update>
+</mapper>

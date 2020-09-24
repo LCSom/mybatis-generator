@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.DeviceInfoBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.DeviceInfoBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="osDescription" property="osdescription" jdbcType="VARCHAR" />
+    <result column="osLanguage" property="oslanguage" jdbcType="VARCHAR" />
+    <result column="osVersion" property="osversion" jdbcType="VARCHAR" />
+    <result column="osSerial" property="osserial" jdbcType="VARCHAR" />
+    <result column="osInstall" property="osinstall" jdbcType="TIMESTAMP" />
+    <result column="netWork" property="network" jdbcType="VARCHAR" />
+    <result column="safeLevel" property="safelevel" jdbcType="INTEGER" />
+    <result column="attackTime" property="attacktime" jdbcType="TIMESTAMP" />
+    <result column="protectEndTime" property="protectendtime" jdbcType="TIMESTAMP" />
+    <result column="netIsolation" property="netisolation" jdbcType="INTEGER" />
+    <result column="healthScore" property="healthscore" jdbcType="INTEGER" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="mlevel" property="mlevel" jdbcType="INTEGER" />
+    <result column="deptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="floorNumber" property="floornumber" jdbcType="VARCHAR" />
+    <result column="officeName" property="officename" jdbcType="VARCHAR" />
+    <result column="roomNumber" property="roomnumber" jdbcType="VARCHAR" />
+    <result column="subOffice" property="suboffice" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="domainName" property="domainname" jdbcType="VARCHAR" />
+    <result column="migrateRegIP" property="migrateregip" jdbcType="VARCHAR" />
+    <result column="migrateUnitName" property="migrateunitname" jdbcType="VARCHAR" />
+    <result column="migrateTime" property="migratetime" jdbcType="TIMESTAMP" />
+    <result column="roomSerial" property="roomserial" jdbcType="VARCHAR" />
+    <result column="pkiId" property="pkiid" jdbcType="VARCHAR" />
+    <result column="pkiName" property="pkiname" jdbcType="VARCHAR" />
+    <result column="pkiUnit" property="pkiunit" jdbcType="VARCHAR" />
+    <result column="aclCtrl" property="aclctrl" jdbcType="VARCHAR" />
+    <result column="policemenKind" property="policemenkind" jdbcType="VARCHAR" />
+    <result column="userCode" property="usercode" jdbcType="VARCHAR" />
+    <result column="deviceCode" property="devicecode" jdbcType="VARCHAR" />
+    <result column="vmClientIp" property="vmclientip" jdbcType="VARCHAR" />
+    <result column="vmClientIPType" property="vmclientiptype" jdbcType="INTEGER" />
+    <result column="vmClientMac" property="vmclientmac" jdbcType="VARCHAR" />
+    <result column="vmCompanyName" property="vmcompanyname" jdbcType="VARCHAR" />
+    <result column="vmClientDetailInfo" property="vmclientdetailinfo" jdbcType="VARCHAR" />
+    <result column="freesize" property="freesize" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vrv.bean.DeviceInfoBean" extends="BaseResultMap" >
+    <result column="osUserInfo" property="osuserinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, osDescription, osLanguage, osVersion, osSerial, osInstall, netWork, safeLevel, 
+    attackTime, protectEndTime, netIsolation, healthScore, devOnlyId, mlevel, deptName, 
+    floorNumber, officeName, roomNumber, subOffice, tel, email, domainName, migrateRegIP, 
+    migrateUnitName, migrateTime, roomSerial, pkiId, pkiName, pkiUnit, aclCtrl, policemenKind, 
+    userCode, deviceCode, vmClientIp, vmClientIPType, vmClientMac, vmCompanyName, vmClientDetailInfo, 
+    freesize
+  </sql>
+  <sql id="Blob_Column_List" >
+    osUserInfo
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vrv.bean.DeviceInfoBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_deviceinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.DeviceInfoBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_deviceinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cems_deviceinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_deviceinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.DeviceInfoBeanExample" >
+    delete from cems_deviceinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.DeviceInfoBean" >
+    insert into cems_deviceinfo (id, osDescription, osLanguage, 
+      osVersion, osSerial, osInstall, 
+      netWork, safeLevel, attackTime, 
+      protectEndTime, netIsolation, healthScore, 
+      devOnlyId, mlevel, deptName, 
+      floorNumber, officeName, roomNumber, 
+      subOffice, tel, email, 
+      domainName, migrateRegIP, migrateUnitName, 
+      migrateTime, roomSerial, pkiId, 
+      pkiName, pkiUnit, aclCtrl, 
+      policemenKind, userCode, deviceCode, 
+      vmClientIp, vmClientIPType, vmClientMac, 
+      vmCompanyName, vmClientDetailInfo, freesize, 
+      osUserInfo)
+    values (#{id,jdbcType=VARCHAR}, #{osdescription,jdbcType=VARCHAR}, #{oslanguage,jdbcType=VARCHAR}, 
+      #{osversion,jdbcType=VARCHAR}, #{osserial,jdbcType=VARCHAR}, #{osinstall,jdbcType=TIMESTAMP}, 
+      #{network,jdbcType=VARCHAR}, #{safelevel,jdbcType=INTEGER}, #{attacktime,jdbcType=TIMESTAMP}, 
+      #{protectendtime,jdbcType=TIMESTAMP}, #{netisolation,jdbcType=INTEGER}, #{healthscore,jdbcType=INTEGER}, 
+      #{devonlyid,jdbcType=VARCHAR}, #{mlevel,jdbcType=INTEGER}, #{deptname,jdbcType=VARCHAR}, 
+      #{floornumber,jdbcType=VARCHAR}, #{officename,jdbcType=VARCHAR}, #{roomnumber,jdbcType=VARCHAR}, 
+      #{suboffice,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{domainname,jdbcType=VARCHAR}, #{migrateregip,jdbcType=VARCHAR}, #{migrateunitname,jdbcType=VARCHAR}, 
+      #{migratetime,jdbcType=TIMESTAMP}, #{roomserial,jdbcType=VARCHAR}, #{pkiid,jdbcType=VARCHAR}, 
+      #{pkiname,jdbcType=VARCHAR}, #{pkiunit,jdbcType=VARCHAR}, #{aclctrl,jdbcType=VARCHAR}, 
+      #{policemenkind,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR}, #{devicecode,jdbcType=VARCHAR}, 
+      #{vmclientip,jdbcType=VARCHAR}, #{vmclientiptype,jdbcType=INTEGER}, #{vmclientmac,jdbcType=VARCHAR}, 
+      #{vmcompanyname,jdbcType=VARCHAR}, #{vmclientdetailinfo,jdbcType=VARCHAR}, #{freesize,jdbcType=VARCHAR}, 
+      #{osuserinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.DeviceInfoBean" >
+    insert into cems_deviceinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="osdescription != null" >
+        osDescription,
+      </if>
+      <if test="oslanguage != null" >
+        osLanguage,
+      </if>
+      <if test="osversion != null" >
+        osVersion,
+      </if>
+      <if test="osserial != null" >
+        osSerial,
+      </if>
+      <if test="osinstall != null" >
+        osInstall,
+      </if>
+      <if test="network != null" >
+        netWork,
+      </if>
+      <if test="safelevel != null" >
+        safeLevel,
+      </if>
+      <if test="attacktime != null" >
+        attackTime,
+      </if>
+      <if test="protectendtime != null" >
+        protectEndTime,
+      </if>
+      <if test="netisolation != null" >
+        netIsolation,
+      </if>
+      <if test="healthscore != null" >
+        healthScore,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="mlevel != null" >
+        mlevel,
+      </if>
+      <if test="deptname != null" >
+        deptName,
+      </if>
+      <if test="floornumber != null" >
+        floorNumber,
+      </if>
+      <if test="officename != null" >
+        officeName,
+      </if>
+      <if test="roomnumber != null" >
+        roomNumber,
+      </if>
+      <if test="suboffice != null" >
+        subOffice,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="domainname != null" >
+        domainName,
+      </if>
+      <if test="migrateregip != null" >
+        migrateRegIP,
+      </if>
+      <if test="migrateunitname != null" >
+        migrateUnitName,
+      </if>
+      <if test="migratetime != null" >
+        migrateTime,
+      </if>
+      <if test="roomserial != null" >
+        roomSerial,
+      </if>
+      <if test="pkiid != null" >
+        pkiId,
+      </if>
+      <if test="pkiname != null" >
+        pkiName,
+      </if>
+      <if test="pkiunit != null" >
+        pkiUnit,
+      </if>
+      <if test="aclctrl != null" >
+        aclCtrl,
+      </if>
+      <if test="policemenkind != null" >
+        policemenKind,
+      </if>
+      <if test="usercode != null" >
+        userCode,
+      </if>
+      <if test="devicecode != null" >
+        deviceCode,
+      </if>
+      <if test="vmclientip != null" >
+        vmClientIp,
+      </if>
+      <if test="vmclientiptype != null" >
+        vmClientIPType,
+      </if>
+      <if test="vmclientmac != null" >
+        vmClientMac,
+      </if>
+      <if test="vmcompanyname != null" >
+        vmCompanyName,
+      </if>
+      <if test="vmclientdetailinfo != null" >
+        vmClientDetailInfo,
+      </if>
+      <if test="freesize != null" >
+        freesize,
+      </if>
+      <if test="osuserinfo != null" >
+        osUserInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="osdescription != null" >
+        #{osdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="oslanguage != null" >
+        #{oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="osversion != null" >
+        #{osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="osserial != null" >
+        #{osserial,jdbcType=VARCHAR},
+      </if>
+      <if test="osinstall != null" >
+        #{osinstall,jdbcType=TIMESTAMP},
+      </if>
+      <if test="network != null" >
+        #{network,jdbcType=VARCHAR},
+      </if>
+      <if test="safelevel != null" >
+        #{safelevel,jdbcType=INTEGER},
+      </if>
+      <if test="attacktime != null" >
+        #{attacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="protectendtime != null" >
+        #{protectendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netisolation != null" >
+        #{netisolation,jdbcType=INTEGER},
+      </if>
+      <if test="healthscore != null" >
+        #{healthscore,jdbcType=INTEGER},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mlevel != null" >
+        #{mlevel,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="floornumber != null" >
+        #{floornumber,jdbcType=VARCHAR},
+      </if>
+      <if test="officename != null" >
+        #{officename,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnumber != null" >
+        #{roomnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="suboffice != null" >
+        #{suboffice,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="domainname != null" >
+        #{domainname,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateregip != null" >
+        #{migrateregip,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateunitname != null" >
+        #{migrateunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="migratetime != null" >
+        #{migratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomserial != null" >
+        #{roomserial,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiid != null" >
+        #{pkiid,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiname != null" >
+        #{pkiname,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiunit != null" >
+        #{pkiunit,jdbcType=VARCHAR},
+      </if>
+      <if test="aclctrl != null" >
+        #{aclctrl,jdbcType=VARCHAR},
+      </if>
+      <if test="policemenkind != null" >
+        #{policemenkind,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="devicecode != null" >
+        #{devicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientip != null" >
+        #{vmclientip,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientiptype != null" >
+        #{vmclientiptype,jdbcType=INTEGER},
+      </if>
+      <if test="vmclientmac != null" >
+        #{vmclientmac,jdbcType=VARCHAR},
+      </if>
+      <if test="vmcompanyname != null" >
+        #{vmcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientdetailinfo != null" >
+        #{vmclientdetailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="freesize != null" >
+        #{freesize,jdbcType=VARCHAR},
+      </if>
+      <if test="osuserinfo != null" >
+        #{osuserinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.DeviceInfoBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_deviceinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_deviceinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osdescription != null" >
+        osDescription = #{record.osdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oslanguage != null" >
+        osLanguage = #{record.oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osversion != null" >
+        osVersion = #{record.osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osserial != null" >
+        osSerial = #{record.osserial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osinstall != null" >
+        osInstall = #{record.osinstall,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.network != null" >
+        netWork = #{record.network,jdbcType=VARCHAR},
+      </if>
+      <if test="record.safelevel != null" >
+        safeLevel = #{record.safelevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.attacktime != null" >
+        attackTime = #{record.attacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.protectendtime != null" >
+        protectEndTime = #{record.protectendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.netisolation != null" >
+        netIsolation = #{record.netisolation,jdbcType=INTEGER},
+      </if>
+      <if test="record.healthscore != null" >
+        healthScore = #{record.healthscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mlevel != null" >
+        mlevel = #{record.mlevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptname != null" >
+        deptName = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floornumber != null" >
+        floorNumber = #{record.floornumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officename != null" >
+        officeName = #{record.officename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomnumber != null" >
+        roomNumber = #{record.roomnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suboffice != null" >
+        subOffice = #{record.suboffice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domainname != null" >
+        domainName = #{record.domainname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.migrateregip != null" >
+        migrateRegIP = #{record.migrateregip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.migrateunitname != null" >
+        migrateUnitName = #{record.migrateunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.migratetime != null" >
+        migrateTime = #{record.migratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roomserial != null" >
+        roomSerial = #{record.roomserial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkiid != null" >
+        pkiId = #{record.pkiid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkiname != null" >
+        pkiName = #{record.pkiname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkiunit != null" >
+        pkiUnit = #{record.pkiunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aclctrl != null" >
+        aclCtrl = #{record.aclctrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policemenkind != null" >
+        policemenKind = #{record.policemenkind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usercode != null" >
+        userCode = #{record.usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicecode != null" >
+        deviceCode = #{record.devicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vmclientip != null" >
+        vmClientIp = #{record.vmclientip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vmclientiptype != null" >
+        vmClientIPType = #{record.vmclientiptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.vmclientmac != null" >
+        vmClientMac = #{record.vmclientmac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vmcompanyname != null" >
+        vmCompanyName = #{record.vmcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vmclientdetailinfo != null" >
+        vmClientDetailInfo = #{record.vmclientdetailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freesize != null" >
+        freesize = #{record.freesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osuserinfo != null" >
+        osUserInfo = #{record.osuserinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cems_deviceinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      osDescription = #{record.osdescription,jdbcType=VARCHAR},
+      osLanguage = #{record.oslanguage,jdbcType=VARCHAR},
+      osVersion = #{record.osversion,jdbcType=VARCHAR},
+      osSerial = #{record.osserial,jdbcType=VARCHAR},
+      osInstall = #{record.osinstall,jdbcType=TIMESTAMP},
+      netWork = #{record.network,jdbcType=VARCHAR},
+      safeLevel = #{record.safelevel,jdbcType=INTEGER},
+      attackTime = #{record.attacktime,jdbcType=TIMESTAMP},
+      protectEndTime = #{record.protectendtime,jdbcType=TIMESTAMP},
+      netIsolation = #{record.netisolation,jdbcType=INTEGER},
+      healthScore = #{record.healthscore,jdbcType=INTEGER},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      mlevel = #{record.mlevel,jdbcType=INTEGER},
+      deptName = #{record.deptname,jdbcType=VARCHAR},
+      floorNumber = #{record.floornumber,jdbcType=VARCHAR},
+      officeName = #{record.officename,jdbcType=VARCHAR},
+      roomNumber = #{record.roomnumber,jdbcType=VARCHAR},
+      subOffice = #{record.suboffice,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      domainName = #{record.domainname,jdbcType=VARCHAR},
+      migrateRegIP = #{record.migrateregip,jdbcType=VARCHAR},
+      migrateUnitName = #{record.migrateunitname,jdbcType=VARCHAR},
+      migrateTime = #{record.migratetime,jdbcType=TIMESTAMP},
+      roomSerial = #{record.roomserial,jdbcType=VARCHAR},
+      pkiId = #{record.pkiid,jdbcType=VARCHAR},
+      pkiName = #{record.pkiname,jdbcType=VARCHAR},
+      pkiUnit = #{record.pkiunit,jdbcType=VARCHAR},
+      aclCtrl = #{record.aclctrl,jdbcType=VARCHAR},
+      policemenKind = #{record.policemenkind,jdbcType=VARCHAR},
+      userCode = #{record.usercode,jdbcType=VARCHAR},
+      deviceCode = #{record.devicecode,jdbcType=VARCHAR},
+      vmClientIp = #{record.vmclientip,jdbcType=VARCHAR},
+      vmClientIPType = #{record.vmclientiptype,jdbcType=INTEGER},
+      vmClientMac = #{record.vmclientmac,jdbcType=VARCHAR},
+      vmCompanyName = #{record.vmcompanyname,jdbcType=VARCHAR},
+      vmClientDetailInfo = #{record.vmclientdetailinfo,jdbcType=VARCHAR},
+      freesize = #{record.freesize,jdbcType=VARCHAR},
+      osUserInfo = #{record.osuserinfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_deviceinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      osDescription = #{record.osdescription,jdbcType=VARCHAR},
+      osLanguage = #{record.oslanguage,jdbcType=VARCHAR},
+      osVersion = #{record.osversion,jdbcType=VARCHAR},
+      osSerial = #{record.osserial,jdbcType=VARCHAR},
+      osInstall = #{record.osinstall,jdbcType=TIMESTAMP},
+      netWork = #{record.network,jdbcType=VARCHAR},
+      safeLevel = #{record.safelevel,jdbcType=INTEGER},
+      attackTime = #{record.attacktime,jdbcType=TIMESTAMP},
+      protectEndTime = #{record.protectendtime,jdbcType=TIMESTAMP},
+      netIsolation = #{record.netisolation,jdbcType=INTEGER},
+      healthScore = #{record.healthscore,jdbcType=INTEGER},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      mlevel = #{record.mlevel,jdbcType=INTEGER},
+      deptName = #{record.deptname,jdbcType=VARCHAR},
+      floorNumber = #{record.floornumber,jdbcType=VARCHAR},
+      officeName = #{record.officename,jdbcType=VARCHAR},
+      roomNumber = #{record.roomnumber,jdbcType=VARCHAR},
+      subOffice = #{record.suboffice,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      domainName = #{record.domainname,jdbcType=VARCHAR},
+      migrateRegIP = #{record.migrateregip,jdbcType=VARCHAR},
+      migrateUnitName = #{record.migrateunitname,jdbcType=VARCHAR},
+      migrateTime = #{record.migratetime,jdbcType=TIMESTAMP},
+      roomSerial = #{record.roomserial,jdbcType=VARCHAR},
+      pkiId = #{record.pkiid,jdbcType=VARCHAR},
+      pkiName = #{record.pkiname,jdbcType=VARCHAR},
+      pkiUnit = #{record.pkiunit,jdbcType=VARCHAR},
+      aclCtrl = #{record.aclctrl,jdbcType=VARCHAR},
+      policemenKind = #{record.policemenkind,jdbcType=VARCHAR},
+      userCode = #{record.usercode,jdbcType=VARCHAR},
+      deviceCode = #{record.devicecode,jdbcType=VARCHAR},
+      vmClientIp = #{record.vmclientip,jdbcType=VARCHAR},
+      vmClientIPType = #{record.vmclientiptype,jdbcType=INTEGER},
+      vmClientMac = #{record.vmclientmac,jdbcType=VARCHAR},
+      vmCompanyName = #{record.vmcompanyname,jdbcType=VARCHAR},
+      vmClientDetailInfo = #{record.vmclientdetailinfo,jdbcType=VARCHAR},
+      freesize = #{record.freesize,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.DeviceInfoBean" >
+    update cems_deviceinfo
+    <set >
+      <if test="osdescription != null" >
+        osDescription = #{osdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="oslanguage != null" >
+        osLanguage = #{oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="osversion != null" >
+        osVersion = #{osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="osserial != null" >
+        osSerial = #{osserial,jdbcType=VARCHAR},
+      </if>
+      <if test="osinstall != null" >
+        osInstall = #{osinstall,jdbcType=TIMESTAMP},
+      </if>
+      <if test="network != null" >
+        netWork = #{network,jdbcType=VARCHAR},
+      </if>
+      <if test="safelevel != null" >
+        safeLevel = #{safelevel,jdbcType=INTEGER},
+      </if>
+      <if test="attacktime != null" >
+        attackTime = #{attacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="protectendtime != null" >
+        protectEndTime = #{protectendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="netisolation != null" >
+        netIsolation = #{netisolation,jdbcType=INTEGER},
+      </if>
+      <if test="healthscore != null" >
+        healthScore = #{healthscore,jdbcType=INTEGER},
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mlevel != null" >
+        mlevel = #{mlevel,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        deptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="floornumber != null" >
+        floorNumber = #{floornumber,jdbcType=VARCHAR},
+      </if>
+      <if test="officename != null" >
+        officeName = #{officename,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnumber != null" >
+        roomNumber = #{roomnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="suboffice != null" >
+        subOffice = #{suboffice,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="domainname != null" >
+        domainName = #{domainname,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateregip != null" >
+        migrateRegIP = #{migrateregip,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateunitname != null" >
+        migrateUnitName = #{migrateunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="migratetime != null" >
+        migrateTime = #{migratetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomserial != null" >
+        roomSerial = #{roomserial,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiid != null" >
+        pkiId = #{pkiid,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiname != null" >
+        pkiName = #{pkiname,jdbcType=VARCHAR},
+      </if>
+      <if test="pkiunit != null" >
+        pkiUnit = #{pkiunit,jdbcType=VARCHAR},
+      </if>
+      <if test="aclctrl != null" >
+        aclCtrl = #{aclctrl,jdbcType=VARCHAR},
+      </if>
+      <if test="policemenkind != null" >
+        policemenKind = #{policemenkind,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        userCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="devicecode != null" >
+        deviceCode = #{devicecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientip != null" >
+        vmClientIp = #{vmclientip,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientiptype != null" >
+        vmClientIPType = #{vmclientiptype,jdbcType=INTEGER},
+      </if>
+      <if test="vmclientmac != null" >
+        vmClientMac = #{vmclientmac,jdbcType=VARCHAR},
+      </if>
+      <if test="vmcompanyname != null" >
+        vmCompanyName = #{vmcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="vmclientdetailinfo != null" >
+        vmClientDetailInfo = #{vmclientdetailinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="freesize != null" >
+        freesize = #{freesize,jdbcType=VARCHAR},
+      </if>
+      <if test="osuserinfo != null" >
+        osUserInfo = #{osuserinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.vrv.bean.DeviceInfoBean" >
+    update cems_deviceinfo
+    set osDescription = #{osdescription,jdbcType=VARCHAR},
+      osLanguage = #{oslanguage,jdbcType=VARCHAR},
+      osVersion = #{osversion,jdbcType=VARCHAR},
+      osSerial = #{osserial,jdbcType=VARCHAR},
+      osInstall = #{osinstall,jdbcType=TIMESTAMP},
+      netWork = #{network,jdbcType=VARCHAR},
+      safeLevel = #{safelevel,jdbcType=INTEGER},
+      attackTime = #{attacktime,jdbcType=TIMESTAMP},
+      protectEndTime = #{protectendtime,jdbcType=TIMESTAMP},
+      netIsolation = #{netisolation,jdbcType=INTEGER},
+      healthScore = #{healthscore,jdbcType=INTEGER},
+      devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      mlevel = #{mlevel,jdbcType=INTEGER},
+      deptName = #{deptname,jdbcType=VARCHAR},
+      floorNumber = #{floornumber,jdbcType=VARCHAR},
+      officeName = #{officename,jdbcType=VARCHAR},
+      roomNumber = #{roomnumber,jdbcType=VARCHAR},
+      subOffice = #{suboffice,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      domainName = #{domainname,jdbcType=VARCHAR},
+      migrateRegIP = #{migrateregip,jdbcType=VARCHAR},
+      migrateUnitName = #{migrateunitname,jdbcType=VARCHAR},
+      migrateTime = #{migratetime,jdbcType=TIMESTAMP},
+      roomSerial = #{roomserial,jdbcType=VARCHAR},
+      pkiId = #{pkiid,jdbcType=VARCHAR},
+      pkiName = #{pkiname,jdbcType=VARCHAR},
+      pkiUnit = #{pkiunit,jdbcType=VARCHAR},
+      aclCtrl = #{aclctrl,jdbcType=VARCHAR},
+      policemenKind = #{policemenkind,jdbcType=VARCHAR},
+      userCode = #{usercode,jdbcType=VARCHAR},
+      deviceCode = #{devicecode,jdbcType=VARCHAR},
+      vmClientIp = #{vmclientip,jdbcType=VARCHAR},
+      vmClientIPType = #{vmclientiptype,jdbcType=INTEGER},
+      vmClientMac = #{vmclientmac,jdbcType=VARCHAR},
+      vmCompanyName = #{vmcompanyname,jdbcType=VARCHAR},
+      vmClientDetailInfo = #{vmclientdetailinfo,jdbcType=VARCHAR},
+      freesize = #{freesize,jdbcType=VARCHAR},
+      osUserInfo = #{osuserinfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.DeviceInfoBean" >
+    update cems_deviceinfo
+    set osDescription = #{osdescription,jdbcType=VARCHAR},
+      osLanguage = #{oslanguage,jdbcType=VARCHAR},
+      osVersion = #{osversion,jdbcType=VARCHAR},
+      osSerial = #{osserial,jdbcType=VARCHAR},
+      osInstall = #{osinstall,jdbcType=TIMESTAMP},
+      netWork = #{network,jdbcType=VARCHAR},
+      safeLevel = #{safelevel,jdbcType=INTEGER},
+      attackTime = #{attacktime,jdbcType=TIMESTAMP},
+      protectEndTime = #{protectendtime,jdbcType=TIMESTAMP},
+      netIsolation = #{netisolation,jdbcType=INTEGER},
+      healthScore = #{healthscore,jdbcType=INTEGER},
+      devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      mlevel = #{mlevel,jdbcType=INTEGER},
+      deptName = #{deptname,jdbcType=VARCHAR},
+      floorNumber = #{floornumber,jdbcType=VARCHAR},
+      officeName = #{officename,jdbcType=VARCHAR},
+      roomNumber = #{roomnumber,jdbcType=VARCHAR},
+      subOffice = #{suboffice,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      domainName = #{domainname,jdbcType=VARCHAR},
+      migrateRegIP = #{migrateregip,jdbcType=VARCHAR},
+      migrateUnitName = #{migrateunitname,jdbcType=VARCHAR},
+      migrateTime = #{migratetime,jdbcType=TIMESTAMP},
+      roomSerial = #{roomserial,jdbcType=VARCHAR},
+      pkiId = #{pkiid,jdbcType=VARCHAR},
+      pkiName = #{pkiname,jdbcType=VARCHAR},
+      pkiUnit = #{pkiunit,jdbcType=VARCHAR},
+      aclCtrl = #{aclctrl,jdbcType=VARCHAR},
+      policemenKind = #{policemenkind,jdbcType=VARCHAR},
+      userCode = #{usercode,jdbcType=VARCHAR},
+      deviceCode = #{devicecode,jdbcType=VARCHAR},
+      vmClientIp = #{vmclientip,jdbcType=VARCHAR},
+      vmClientIPType = #{vmclientiptype,jdbcType=INTEGER},
+      vmClientMac = #{vmclientmac,jdbcType=VARCHAR},
+      vmCompanyName = #{vmcompanyname,jdbcType=VARCHAR},
+      vmClientDetailInfo = #{vmclientdetailinfo,jdbcType=VARCHAR},
+      freesize = #{freesize,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

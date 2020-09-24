@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.DeviceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.DeviceBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="ipType" property="iptype" jdbcType="INTEGER" />
+    <result column="ipNumber" property="ipnumber" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="groupName" property="groupname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="osId" property="osid" jdbcType="VARCHAR" />
+    <result column="deviceTypeId" property="devicetypeid" jdbcType="VARCHAR" />
+    <result column="userOnlyId" property="useronlyid" jdbcType="VARCHAR" />
+    <result column="organizationId" property="organizationid" jdbcType="VARCHAR" />
+    <result column="organizationCodeUI" property="organizationcodeui" jdbcType="VARCHAR" />
+    <result column="approvalId" property="approvalid" jdbcType="VARCHAR" />
+    <result column="approvalState" property="approvalstate" jdbcType="INTEGER" />
+    <result column="devOnlyId" property="devonlyid" jdbcType="VARCHAR" />
+    <result column="registerTime" property="registertime" jdbcType="TIMESTAMP" />
+    <result column="clientId" property="clientid" jdbcType="VARCHAR" />
+    <result column="clientName" property="clientname" jdbcType="VARCHAR" />
+    <result column="clientSign" property="clientsign" jdbcType="VARCHAR" />
+    <result column="softVersion" property="softversion" jdbcType="VARCHAR" />
+    <result column="clientVersion" property="clientversion" jdbcType="VARCHAR" />
+    <result column="unInstallTime" property="uninstalltime" jdbcType="TIMESTAMP" />
+    <result column="switchId" property="switchid" jdbcType="VARCHAR" />
+    <result column="switchPort" property="switchport" jdbcType="VARCHAR" />
+    <result column="cpuType" property="cputype" jdbcType="VARCHAR" />
+    <result column="cpuHz" property="cpuhz" jdbcType="DOUBLE" />
+    <result column="memorySize" property="memorysize" jdbcType="DOUBLE" />
+    <result column="diskModel" property="diskmodel" jdbcType="VARCHAR" />
+    <result column="diskSize" property="disksize" jdbcType="INTEGER" />
+    <result column="diskSerial" property="diskserial" jdbcType="VARCHAR" />
+    <result column="computerManufacturer" property="computermanufacturer" jdbcType="VARCHAR" />
+    <result column="computerModel" property="computermodel" jdbcType="VARCHAR" />
+    <result column="matherBoardId" property="matherboardid" jdbcType="VARCHAR" />
+    <result column="serviceNo" property="serviceno" jdbcType="VARCHAR" />
+    <result column="isMutiOs" property="ismutios" jdbcType="INTEGER" />
+    <result column="isVm" property="isvm" jdbcType="INTEGER" />
+    <result column="communicateIP" property="communicateip" jdbcType="VARCHAR" />
+    <result column="isOpened" property="isopened" jdbcType="INTEGER" />
+    <result column="regState" property="regstate" jdbcType="INTEGER" />
+    <result column="protectState" property="protectstate" jdbcType="INTEGER" />
+    <result column="roamState" property="roamstate" jdbcType="INTEGER" />
+    <result column="deleteState" property="deletestate" jdbcType="INTEGER" />
+    <result column="deviceUsefulId" property="deviceusefulid" jdbcType="VARCHAR" />
+    <result column="lastUpgradeTime" property="lastupgradetime" jdbcType="TIMESTAMP" />
+    <result column="oldDevOnlyId" property="olddevonlyid" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="holderName" property="holdername" jdbcType="VARCHAR" />
+    <result column="assetStatus" property="assetstatus" jdbcType="INTEGER" />
+    <result column="effectiveProtectedTime" property="effectiveprotectedtime" jdbcType="TIMESTAMP" />
+    <result column="isSetLock" property="issetlock" jdbcType="INTEGER" />
+    <result column="isSetReRegist" property="issetreregist" jdbcType="INTEGER" />
+    <result column="isSetBlock" property="issetblock" jdbcType="INTEGER" />
+    <result column="isSetUninstall" property="issetuninstall" jdbcType="INTEGER" />
+    <result column="isSetDisable" property="issetdisable" jdbcType="INTEGER" />
+    <result column="agentPackType" property="agentpacktype" jdbcType="INTEGER" />
+    <result column="loginDomainName" property="logindomainname" jdbcType="VARCHAR" />
+    <result column="accessNetworkState" property="accessnetworkstate" jdbcType="INTEGER" />
+    <result column="isFireWall" property="isfirewall" jdbcType="INTEGER" />
+    <result column="serverAreaId" property="serverareaid" jdbcType="VARCHAR" />
+    <result column="reportTime" property="reporttime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="findTime" property="findtime" jdbcType="TIMESTAMP" />
+    <result column="classify" property="classify" jdbcType="VARCHAR" />
+    <result column="inforSource" property="inforsource" jdbcType="INTEGER" />
+    <result column="isControl" property="iscontrol" jdbcType="INTEGER" />
+    <result column="lastActiveTime" property="lastactivetime" jdbcType="TIMESTAMP" />
+    <result column="historyOnlineTime" property="historyonlinetime" jdbcType="VARCHAR" />
+    <result column="loseControlTime" property="losecontroltime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ip, ipType, ipNumber, mac, name, groupName, description, osId, deviceTypeId, 
+    userOnlyId, organizationId, organizationCodeUI, approvalId, approvalState, devOnlyId, 
+    registerTime, clientId, clientName, clientSign, softVersion, clientVersion, unInstallTime, 
+    switchId, switchPort, cpuType, cpuHz, memorySize, diskModel, diskSize, diskSerial, 
+    computerManufacturer, computerModel, matherBoardId, serviceNo, isMutiOs, isVm, communicateIP, 
+    isOpened, regState, protectState, roamState, deleteState, deviceUsefulId, lastUpgradeTime, 
+    oldDevOnlyId, location, holderName, assetStatus, effectiveProtectedTime, isSetLock, 
+    isSetReRegist, isSetBlock, isSetUninstall, isSetDisable, agentPackType, loginDomainName, 
+    accessNetworkState, isFireWall, serverAreaId, reportTime, updateTime, findTime, classify, 
+    inforSource, isControl, lastActiveTime, historyOnlineTime, loseControlTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.DeviceBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.DeviceBeanExample" >
+    delete from cems_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.DeviceBean" >
+    insert into cems_device (id, ip, ipType, 
+      ipNumber, mac, name, 
+      groupName, description, osId, 
+      deviceTypeId, userOnlyId, organizationId, 
+      organizationCodeUI, approvalId, approvalState, 
+      devOnlyId, registerTime, clientId, 
+      clientName, clientSign, softVersion, 
+      clientVersion, unInstallTime, switchId, 
+      switchPort, cpuType, cpuHz, 
+      memorySize, diskModel, diskSize, 
+      diskSerial, computerManufacturer, computerModel, 
+      matherBoardId, serviceNo, isMutiOs, 
+      isVm, communicateIP, isOpened, 
+      regState, protectState, roamState, 
+      deleteState, deviceUsefulId, lastUpgradeTime, 
+      oldDevOnlyId, location, holderName, 
+      assetStatus, effectiveProtectedTime, 
+      isSetLock, isSetReRegist, isSetBlock, 
+      isSetUninstall, isSetDisable, agentPackType, 
+      loginDomainName, accessNetworkState, isFireWall, 
+      serverAreaId, reportTime, updateTime, 
+      findTime, classify, inforSource, 
+      isControl, lastActiveTime, historyOnlineTime, 
+      loseControlTime)
+    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{iptype,jdbcType=INTEGER}, 
+      #{ipnumber,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{groupname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{osid,jdbcType=VARCHAR}, 
+      #{devicetypeid,jdbcType=VARCHAR}, #{useronlyid,jdbcType=VARCHAR}, #{organizationid,jdbcType=VARCHAR}, 
+      #{organizationcodeui,jdbcType=VARCHAR}, #{approvalid,jdbcType=VARCHAR}, #{approvalstate,jdbcType=INTEGER}, 
+      #{devonlyid,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP}, #{clientid,jdbcType=VARCHAR}, 
+      #{clientname,jdbcType=VARCHAR}, #{clientsign,jdbcType=VARCHAR}, #{softversion,jdbcType=VARCHAR}, 
+      #{clientversion,jdbcType=VARCHAR}, #{uninstalltime,jdbcType=TIMESTAMP}, #{switchid,jdbcType=VARCHAR}, 
+      #{switchport,jdbcType=VARCHAR}, #{cputype,jdbcType=VARCHAR}, #{cpuhz,jdbcType=DOUBLE}, 
+      #{memorysize,jdbcType=DOUBLE}, #{diskmodel,jdbcType=VARCHAR}, #{disksize,jdbcType=INTEGER}, 
+      #{diskserial,jdbcType=VARCHAR}, #{computermanufacturer,jdbcType=VARCHAR}, #{computermodel,jdbcType=VARCHAR}, 
+      #{matherboardid,jdbcType=VARCHAR}, #{serviceno,jdbcType=VARCHAR}, #{ismutios,jdbcType=INTEGER}, 
+      #{isvm,jdbcType=INTEGER}, #{communicateip,jdbcType=VARCHAR}, #{isopened,jdbcType=INTEGER}, 
+      #{regstate,jdbcType=INTEGER}, #{protectstate,jdbcType=INTEGER}, #{roamstate,jdbcType=INTEGER}, 
+      #{deletestate,jdbcType=INTEGER}, #{deviceusefulid,jdbcType=VARCHAR}, #{lastupgradetime,jdbcType=TIMESTAMP}, 
+      #{olddevonlyid,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{holdername,jdbcType=VARCHAR}, 
+      #{assetstatus,jdbcType=INTEGER}, #{effectiveprotectedtime,jdbcType=TIMESTAMP}, 
+      #{issetlock,jdbcType=INTEGER}, #{issetreregist,jdbcType=INTEGER}, #{issetblock,jdbcType=INTEGER}, 
+      #{issetuninstall,jdbcType=INTEGER}, #{issetdisable,jdbcType=INTEGER}, #{agentpacktype,jdbcType=INTEGER}, 
+      #{logindomainname,jdbcType=VARCHAR}, #{accessnetworkstate,jdbcType=INTEGER}, #{isfirewall,jdbcType=INTEGER}, 
+      #{serverareaid,jdbcType=VARCHAR}, #{reporttime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{findtime,jdbcType=TIMESTAMP}, #{classify,jdbcType=VARCHAR}, #{inforsource,jdbcType=INTEGER}, 
+      #{iscontrol,jdbcType=INTEGER}, #{lastactivetime,jdbcType=TIMESTAMP}, #{historyonlinetime,jdbcType=VARCHAR}, 
+      #{losecontroltime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.DeviceBean" >
+    insert into cems_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="iptype != null" >
+        ipType,
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="groupname != null" >
+        groupName,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="osid != null" >
+        osId,
+      </if>
+      <if test="devicetypeid != null" >
+        deviceTypeId,
+      </if>
+      <if test="useronlyid != null" >
+        userOnlyId,
+      </if>
+      <if test="organizationid != null" >
+        organizationId,
+      </if>
+      <if test="organizationcodeui != null" >
+        organizationCodeUI,
+      </if>
+      <if test="approvalid != null" >
+        approvalId,
+      </if>
+      <if test="approvalstate != null" >
+        approvalState,
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId,
+      </if>
+      <if test="registertime != null" >
+        registerTime,
+      </if>
+      <if test="clientid != null" >
+        clientId,
+      </if>
+      <if test="clientname != null" >
+        clientName,
+      </if>
+      <if test="clientsign != null" >
+        clientSign,
+      </if>
+      <if test="softversion != null" >
+        softVersion,
+      </if>
+      <if test="clientversion != null" >
+        clientVersion,
+      </if>
+      <if test="uninstalltime != null" >
+        unInstallTime,
+      </if>
+      <if test="switchid != null" >
+        switchId,
+      </if>
+      <if test="switchport != null" >
+        switchPort,
+      </if>
+      <if test="cputype != null" >
+        cpuType,
+      </if>
+      <if test="cpuhz != null" >
+        cpuHz,
+      </if>
+      <if test="memorysize != null" >
+        memorySize,
+      </if>
+      <if test="diskmodel != null" >
+        diskModel,
+      </if>
+      <if test="disksize != null" >
+        diskSize,
+      </if>
+      <if test="diskserial != null" >
+        diskSerial,
+      </if>
+      <if test="computermanufacturer != null" >
+        computerManufacturer,
+      </if>
+      <if test="computermodel != null" >
+        computerModel,
+      </if>
+      <if test="matherboardid != null" >
+        matherBoardId,
+      </if>
+      <if test="serviceno != null" >
+        serviceNo,
+      </if>
+      <if test="ismutios != null" >
+        isMutiOs,
+      </if>
+      <if test="isvm != null" >
+        isVm,
+      </if>
+      <if test="communicateip != null" >
+        communicateIP,
+      </if>
+      <if test="isopened != null" >
+        isOpened,
+      </if>
+      <if test="regstate != null" >
+        regState,
+      </if>
+      <if test="protectstate != null" >
+        protectState,
+      </if>
+      <if test="roamstate != null" >
+        roamState,
+      </if>
+      <if test="deletestate != null" >
+        deleteState,
+      </if>
+      <if test="deviceusefulid != null" >
+        deviceUsefulId,
+      </if>
+      <if test="lastupgradetime != null" >
+        lastUpgradeTime,
+      </if>
+      <if test="olddevonlyid != null" >
+        oldDevOnlyId,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="holdername != null" >
+        holderName,
+      </if>
+      <if test="assetstatus != null" >
+        assetStatus,
+      </if>
+      <if test="effectiveprotectedtime != null" >
+        effectiveProtectedTime,
+      </if>
+      <if test="issetlock != null" >
+        isSetLock,
+      </if>
+      <if test="issetreregist != null" >
+        isSetReRegist,
+      </if>
+      <if test="issetblock != null" >
+        isSetBlock,
+      </if>
+      <if test="issetuninstall != null" >
+        isSetUninstall,
+      </if>
+      <if test="issetdisable != null" >
+        isSetDisable,
+      </if>
+      <if test="agentpacktype != null" >
+        agentPackType,
+      </if>
+      <if test="logindomainname != null" >
+        loginDomainName,
+      </if>
+      <if test="accessnetworkstate != null" >
+        accessNetworkState,
+      </if>
+      <if test="isfirewall != null" >
+        isFireWall,
+      </if>
+      <if test="serverareaid != null" >
+        serverAreaId,
+      </if>
+      <if test="reporttime != null" >
+        reportTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="findtime != null" >
+        findTime,
+      </if>
+      <if test="classify != null" >
+        classify,
+      </if>
+      <if test="inforsource != null" >
+        inforSource,
+      </if>
+      <if test="iscontrol != null" >
+        isControl,
+      </if>
+      <if test="lastactivetime != null" >
+        lastActiveTime,
+      </if>
+      <if test="historyonlinetime != null" >
+        historyOnlineTime,
+      </if>
+      <if test="losecontroltime != null" >
+        loseControlTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="ipnumber != null" >
+        #{ipnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="osid != null" >
+        #{osid,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetypeid != null" >
+        #{devicetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="useronlyid != null" >
+        #{useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationid != null" >
+        #{organizationid,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcodeui != null" >
+        #{organizationcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalid != null" >
+        #{approvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalstate != null" >
+        #{approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="devonlyid != null" >
+        #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsign != null" >
+        #{clientsign,jdbcType=VARCHAR},
+      </if>
+      <if test="softversion != null" >
+        #{softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientversion != null" >
+        #{clientversion,jdbcType=VARCHAR},
+      </if>
+      <if test="uninstalltime != null" >
+        #{uninstalltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="switchid != null" >
+        #{switchid,jdbcType=VARCHAR},
+      </if>
+      <if test="switchport != null" >
+        #{switchport,jdbcType=VARCHAR},
+      </if>
+      <if test="cputype != null" >
+        #{cputype,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuhz != null" >
+        #{cpuhz,jdbcType=DOUBLE},
+      </if>
+      <if test="memorysize != null" >
+        #{memorysize,jdbcType=DOUBLE},
+      </if>
+      <if test="diskmodel != null" >
+        #{diskmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="disksize != null" >
+        #{disksize,jdbcType=INTEGER},
+      </if>
+      <if test="diskserial != null" >
+        #{diskserial,jdbcType=VARCHAR},
+      </if>
+      <if test="computermanufacturer != null" >
+        #{computermanufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="computermodel != null" >
+        #{computermodel,jdbcType=VARCHAR},
+      </if>
+      <if test="matherboardid != null" >
+        #{matherboardid,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceno != null" >
+        #{serviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="ismutios != null" >
+        #{ismutios,jdbcType=INTEGER},
+      </if>
+      <if test="isvm != null" >
+        #{isvm,jdbcType=INTEGER},
+      </if>
+      <if test="communicateip != null" >
+        #{communicateip,jdbcType=VARCHAR},
+      </if>
+      <if test="isopened != null" >
+        #{isopened,jdbcType=INTEGER},
+      </if>
+      <if test="regstate != null" >
+        #{regstate,jdbcType=INTEGER},
+      </if>
+      <if test="protectstate != null" >
+        #{protectstate,jdbcType=INTEGER},
+      </if>
+      <if test="roamstate != null" >
+        #{roamstate,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null" >
+        #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="deviceusefulid != null" >
+        #{deviceusefulid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupgradetime != null" >
+        #{lastupgradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="olddevonlyid != null" >
+        #{olddevonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="holdername != null" >
+        #{holdername,jdbcType=VARCHAR},
+      </if>
+      <if test="assetstatus != null" >
+        #{assetstatus,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveprotectedtime != null" >
+        #{effectiveprotectedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issetlock != null" >
+        #{issetlock,jdbcType=INTEGER},
+      </if>
+      <if test="issetreregist != null" >
+        #{issetreregist,jdbcType=INTEGER},
+      </if>
+      <if test="issetblock != null" >
+        #{issetblock,jdbcType=INTEGER},
+      </if>
+      <if test="issetuninstall != null" >
+        #{issetuninstall,jdbcType=INTEGER},
+      </if>
+      <if test="issetdisable != null" >
+        #{issetdisable,jdbcType=INTEGER},
+      </if>
+      <if test="agentpacktype != null" >
+        #{agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="logindomainname != null" >
+        #{logindomainname,jdbcType=VARCHAR},
+      </if>
+      <if test="accessnetworkstate != null" >
+        #{accessnetworkstate,jdbcType=INTEGER},
+      </if>
+      <if test="isfirewall != null" >
+        #{isfirewall,jdbcType=INTEGER},
+      </if>
+      <if test="serverareaid != null" >
+        #{serverareaid,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="findtime != null" >
+        #{findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classify != null" >
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="inforsource != null" >
+        #{inforsource,jdbcType=INTEGER},
+      </if>
+      <if test="iscontrol != null" >
+        #{iscontrol,jdbcType=INTEGER},
+      </if>
+      <if test="lastactivetime != null" >
+        #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyonlinetime != null" >
+        #{historyonlinetime,jdbcType=VARCHAR},
+      </if>
+      <if test="losecontroltime != null" >
+        #{losecontroltime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.DeviceBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iptype != null" >
+        ipType = #{record.iptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipnumber != null" >
+        ipNumber = #{record.ipnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        groupName = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osid != null" >
+        osId = #{record.osid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicetypeid != null" >
+        deviceTypeId = #{record.devicetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useronlyid != null" >
+        userOnlyId = #{record.useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationid != null" >
+        organizationId = #{record.organizationid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcodeui != null" >
+        organizationCodeUI = #{record.organizationcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalid != null" >
+        approvalId = #{record.approvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalstate != null" >
+        approvalState = #{record.approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.devonlyid != null" >
+        devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registertime != null" >
+        registerTime = #{record.registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clientid != null" >
+        clientId = #{record.clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientname != null" >
+        clientName = #{record.clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientsign != null" >
+        clientSign = #{record.clientsign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softversion != null" >
+        softVersion = #{record.softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientversion != null" >
+        clientVersion = #{record.clientversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uninstalltime != null" >
+        unInstallTime = #{record.uninstalltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.switchid != null" >
+        switchId = #{record.switchid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.switchport != null" >
+        switchPort = #{record.switchport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cputype != null" >
+        cpuType = #{record.cputype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuhz != null" >
+        cpuHz = #{record.cpuhz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memorysize != null" >
+        memorySize = #{record.memorysize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskmodel != null" >
+        diskModel = #{record.diskmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disksize != null" >
+        diskSize = #{record.disksize,jdbcType=INTEGER},
+      </if>
+      <if test="record.diskserial != null" >
+        diskSerial = #{record.diskserial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.computermanufacturer != null" >
+        computerManufacturer = #{record.computermanufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.computermodel != null" >
+        computerModel = #{record.computermodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matherboardid != null" >
+        matherBoardId = #{record.matherboardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceno != null" >
+        serviceNo = #{record.serviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismutios != null" >
+        isMutiOs = #{record.ismutios,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvm != null" >
+        isVm = #{record.isvm,jdbcType=INTEGER},
+      </if>
+      <if test="record.communicateip != null" >
+        communicateIP = #{record.communicateip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isopened != null" >
+        isOpened = #{record.isopened,jdbcType=INTEGER},
+      </if>
+      <if test="record.regstate != null" >
+        regState = #{record.regstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.protectstate != null" >
+        protectState = #{record.protectstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.roamstate != null" >
+        roamState = #{record.roamstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletestate != null" >
+        deleteState = #{record.deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceusefulid != null" >
+        deviceUsefulId = #{record.deviceusefulid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastupgradetime != null" >
+        lastUpgradeTime = #{record.lastupgradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.olddevonlyid != null" >
+        oldDevOnlyId = #{record.olddevonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.holdername != null" >
+        holderName = #{record.holdername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetstatus != null" >
+        assetStatus = #{record.assetstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.effectiveprotectedtime != null" >
+        effectiveProtectedTime = #{record.effectiveprotectedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.issetlock != null" >
+        isSetLock = #{record.issetlock,jdbcType=INTEGER},
+      </if>
+      <if test="record.issetreregist != null" >
+        isSetReRegist = #{record.issetreregist,jdbcType=INTEGER},
+      </if>
+      <if test="record.issetblock != null" >
+        isSetBlock = #{record.issetblock,jdbcType=INTEGER},
+      </if>
+      <if test="record.issetuninstall != null" >
+        isSetUninstall = #{record.issetuninstall,jdbcType=INTEGER},
+      </if>
+      <if test="record.issetdisable != null" >
+        isSetDisable = #{record.issetdisable,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentpacktype != null" >
+        agentPackType = #{record.agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="record.logindomainname != null" >
+        loginDomainName = #{record.logindomainname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessnetworkstate != null" >
+        accessNetworkState = #{record.accessnetworkstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.isfirewall != null" >
+        isFireWall = #{record.isfirewall,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverareaid != null" >
+        serverAreaId = #{record.serverareaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reporttime != null" >
+        reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.findtime != null" >
+        findTime = #{record.findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.classify != null" >
+        classify = #{record.classify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inforsource != null" >
+        inforSource = #{record.inforsource,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscontrol != null" >
+        isControl = #{record.iscontrol,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastactivetime != null" >
+        lastActiveTime = #{record.lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.historyonlinetime != null" >
+        historyOnlineTime = #{record.historyonlinetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.losecontroltime != null" >
+        loseControlTime = #{record.losecontroltime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_device
+    set id = #{record.id,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      ipType = #{record.iptype,jdbcType=INTEGER},
+      ipNumber = #{record.ipnumber,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      groupName = #{record.groupname,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      osId = #{record.osid,jdbcType=VARCHAR},
+      deviceTypeId = #{record.devicetypeid,jdbcType=VARCHAR},
+      userOnlyId = #{record.useronlyid,jdbcType=VARCHAR},
+      organizationId = #{record.organizationid,jdbcType=VARCHAR},
+      organizationCodeUI = #{record.organizationcodeui,jdbcType=VARCHAR},
+      approvalId = #{record.approvalid,jdbcType=VARCHAR},
+      approvalState = #{record.approvalstate,jdbcType=INTEGER},
+      devOnlyId = #{record.devonlyid,jdbcType=VARCHAR},
+      registerTime = #{record.registertime,jdbcType=TIMESTAMP},
+      clientId = #{record.clientid,jdbcType=VARCHAR},
+      clientName = #{record.clientname,jdbcType=VARCHAR},
+      clientSign = #{record.clientsign,jdbcType=VARCHAR},
+      softVersion = #{record.softversion,jdbcType=VARCHAR},
+      clientVersion = #{record.clientversion,jdbcType=VARCHAR},
+      unInstallTime = #{record.uninstalltime,jdbcType=TIMESTAMP},
+      switchId = #{record.switchid,jdbcType=VARCHAR},
+      switchPort = #{record.switchport,jdbcType=VARCHAR},
+      cpuType = #{record.cputype,jdbcType=VARCHAR},
+      cpuHz = #{record.cpuhz,jdbcType=DOUBLE},
+      memorySize = #{record.memorysize,jdbcType=DOUBLE},
+      diskModel = #{record.diskmodel,jdbcType=VARCHAR},
+      diskSize = #{record.disksize,jdbcType=INTEGER},
+      diskSerial = #{record.diskserial,jdbcType=VARCHAR},
+      computerManufacturer = #{record.computermanufacturer,jdbcType=VARCHAR},
+      computerModel = #{record.computermodel,jdbcType=VARCHAR},
+      matherBoardId = #{record.matherboardid,jdbcType=VARCHAR},
+      serviceNo = #{record.serviceno,jdbcType=VARCHAR},
+      isMutiOs = #{record.ismutios,jdbcType=INTEGER},
+      isVm = #{record.isvm,jdbcType=INTEGER},
+      communicateIP = #{record.communicateip,jdbcType=VARCHAR},
+      isOpened = #{record.isopened,jdbcType=INTEGER},
+      regState = #{record.regstate,jdbcType=INTEGER},
+      protectState = #{record.protectstate,jdbcType=INTEGER},
+      roamState = #{record.roamstate,jdbcType=INTEGER},
+      deleteState = #{record.deletestate,jdbcType=INTEGER},
+      deviceUsefulId = #{record.deviceusefulid,jdbcType=VARCHAR},
+      lastUpgradeTime = #{record.lastupgradetime,jdbcType=TIMESTAMP},
+      oldDevOnlyId = #{record.olddevonlyid,jdbcType=VARCHAR},
+      location = #{record.location,jdbcType=VARCHAR},
+      holderName = #{record.holdername,jdbcType=VARCHAR},
+      assetStatus = #{record.assetstatus,jdbcType=INTEGER},
+      effectiveProtectedTime = #{record.effectiveprotectedtime,jdbcType=TIMESTAMP},
+      isSetLock = #{record.issetlock,jdbcType=INTEGER},
+      isSetReRegist = #{record.issetreregist,jdbcType=INTEGER},
+      isSetBlock = #{record.issetblock,jdbcType=INTEGER},
+      isSetUninstall = #{record.issetuninstall,jdbcType=INTEGER},
+      isSetDisable = #{record.issetdisable,jdbcType=INTEGER},
+      agentPackType = #{record.agentpacktype,jdbcType=INTEGER},
+      loginDomainName = #{record.logindomainname,jdbcType=VARCHAR},
+      accessNetworkState = #{record.accessnetworkstate,jdbcType=INTEGER},
+      isFireWall = #{record.isfirewall,jdbcType=INTEGER},
+      serverAreaId = #{record.serverareaid,jdbcType=VARCHAR},
+      reportTime = #{record.reporttime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      findTime = #{record.findtime,jdbcType=TIMESTAMP},
+      classify = #{record.classify,jdbcType=VARCHAR},
+      inforSource = #{record.inforsource,jdbcType=INTEGER},
+      isControl = #{record.iscontrol,jdbcType=INTEGER},
+      lastActiveTime = #{record.lastactivetime,jdbcType=TIMESTAMP},
+      historyOnlineTime = #{record.historyonlinetime,jdbcType=VARCHAR},
+      loseControlTime = #{record.losecontroltime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.DeviceBean" >
+    update cems_device
+    <set >
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="iptype != null" >
+        ipType = #{iptype,jdbcType=INTEGER},
+      </if>
+      <if test="ipnumber != null" >
+        ipNumber = #{ipnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        groupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="osid != null" >
+        osId = #{osid,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetypeid != null" >
+        deviceTypeId = #{devicetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="useronlyid != null" >
+        userOnlyId = #{useronlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationid != null" >
+        organizationId = #{organizationid,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcodeui != null" >
+        organizationCodeUI = #{organizationcodeui,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalid != null" >
+        approvalId = #{approvalid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalstate != null" >
+        approvalState = #{approvalstate,jdbcType=INTEGER},
+      </if>
+      <if test="devonlyid != null" >
+        devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        registerTime = #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clientid != null" >
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        clientName = #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsign != null" >
+        clientSign = #{clientsign,jdbcType=VARCHAR},
+      </if>
+      <if test="softversion != null" >
+        softVersion = #{softversion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientversion != null" >
+        clientVersion = #{clientversion,jdbcType=VARCHAR},
+      </if>
+      <if test="uninstalltime != null" >
+        unInstallTime = #{uninstalltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="switchid != null" >
+        switchId = #{switchid,jdbcType=VARCHAR},
+      </if>
+      <if test="switchport != null" >
+        switchPort = #{switchport,jdbcType=VARCHAR},
+      </if>
+      <if test="cputype != null" >
+        cpuType = #{cputype,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuhz != null" >
+        cpuHz = #{cpuhz,jdbcType=DOUBLE},
+      </if>
+      <if test="memorysize != null" >
+        memorySize = #{memorysize,jdbcType=DOUBLE},
+      </if>
+      <if test="diskmodel != null" >
+        diskModel = #{diskmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="disksize != null" >
+        diskSize = #{disksize,jdbcType=INTEGER},
+      </if>
+      <if test="diskserial != null" >
+        diskSerial = #{diskserial,jdbcType=VARCHAR},
+      </if>
+      <if test="computermanufacturer != null" >
+        computerManufacturer = #{computermanufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="computermodel != null" >
+        computerModel = #{computermodel,jdbcType=VARCHAR},
+      </if>
+      <if test="matherboardid != null" >
+        matherBoardId = #{matherboardid,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceno != null" >
+        serviceNo = #{serviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="ismutios != null" >
+        isMutiOs = #{ismutios,jdbcType=INTEGER},
+      </if>
+      <if test="isvm != null" >
+        isVm = #{isvm,jdbcType=INTEGER},
+      </if>
+      <if test="communicateip != null" >
+        communicateIP = #{communicateip,jdbcType=VARCHAR},
+      </if>
+      <if test="isopened != null" >
+        isOpened = #{isopened,jdbcType=INTEGER},
+      </if>
+      <if test="regstate != null" >
+        regState = #{regstate,jdbcType=INTEGER},
+      </if>
+      <if test="protectstate != null" >
+        protectState = #{protectstate,jdbcType=INTEGER},
+      </if>
+      <if test="roamstate != null" >
+        roamState = #{roamstate,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null" >
+        deleteState = #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="deviceusefulid != null" >
+        deviceUsefulId = #{deviceusefulid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupgradetime != null" >
+        lastUpgradeTime = #{lastupgradetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="olddevonlyid != null" >
+        oldDevOnlyId = #{olddevonlyid,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="holdername != null" >
+        holderName = #{holdername,jdbcType=VARCHAR},
+      </if>
+      <if test="assetstatus != null" >
+        assetStatus = #{assetstatus,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveprotectedtime != null" >
+        effectiveProtectedTime = #{effectiveprotectedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issetlock != null" >
+        isSetLock = #{issetlock,jdbcType=INTEGER},
+      </if>
+      <if test="issetreregist != null" >
+        isSetReRegist = #{issetreregist,jdbcType=INTEGER},
+      </if>
+      <if test="issetblock != null" >
+        isSetBlock = #{issetblock,jdbcType=INTEGER},
+      </if>
+      <if test="issetuninstall != null" >
+        isSetUninstall = #{issetuninstall,jdbcType=INTEGER},
+      </if>
+      <if test="issetdisable != null" >
+        isSetDisable = #{issetdisable,jdbcType=INTEGER},
+      </if>
+      <if test="agentpacktype != null" >
+        agentPackType = #{agentpacktype,jdbcType=INTEGER},
+      </if>
+      <if test="logindomainname != null" >
+        loginDomainName = #{logindomainname,jdbcType=VARCHAR},
+      </if>
+      <if test="accessnetworkstate != null" >
+        accessNetworkState = #{accessnetworkstate,jdbcType=INTEGER},
+      </if>
+      <if test="isfirewall != null" >
+        isFireWall = #{isfirewall,jdbcType=INTEGER},
+      </if>
+      <if test="serverareaid != null" >
+        serverAreaId = #{serverareaid,jdbcType=VARCHAR},
+      </if>
+      <if test="reporttime != null" >
+        reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="findtime != null" >
+        findTime = #{findtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classify != null" >
+        classify = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="inforsource != null" >
+        inforSource = #{inforsource,jdbcType=INTEGER},
+      </if>
+      <if test="iscontrol != null" >
+        isControl = #{iscontrol,jdbcType=INTEGER},
+      </if>
+      <if test="lastactivetime != null" >
+        lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyonlinetime != null" >
+        historyOnlineTime = #{historyonlinetime,jdbcType=VARCHAR},
+      </if>
+      <if test="losecontroltime != null" >
+        loseControlTime = #{losecontroltime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.DeviceBean" >
+    update cems_device
+    set ip = #{ip,jdbcType=VARCHAR},
+      ipType = #{iptype,jdbcType=INTEGER},
+      ipNumber = #{ipnumber,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      groupName = #{groupname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      osId = #{osid,jdbcType=VARCHAR},
+      deviceTypeId = #{devicetypeid,jdbcType=VARCHAR},
+      userOnlyId = #{useronlyid,jdbcType=VARCHAR},
+      organizationId = #{organizationid,jdbcType=VARCHAR},
+      organizationCodeUI = #{organizationcodeui,jdbcType=VARCHAR},
+      approvalId = #{approvalid,jdbcType=VARCHAR},
+      approvalState = #{approvalstate,jdbcType=INTEGER},
+      devOnlyId = #{devonlyid,jdbcType=VARCHAR},
+      registerTime = #{registertime,jdbcType=TIMESTAMP},
+      clientId = #{clientid,jdbcType=VARCHAR},
+      clientName = #{clientname,jdbcType=VARCHAR},
+      clientSign = #{clientsign,jdbcType=VARCHAR},
+      softVersion = #{softversion,jdbcType=VARCHAR},
+      clientVersion = #{clientversion,jdbcType=VARCHAR},
+      unInstallTime = #{uninstalltime,jdbcType=TIMESTAMP},
+      switchId = #{switchid,jdbcType=VARCHAR},
+      switchPort = #{switchport,jdbcType=VARCHAR},
+      cpuType = #{cputype,jdbcType=VARCHAR},
+      cpuHz = #{cpuhz,jdbcType=DOUBLE},
+      memorySize = #{memorysize,jdbcType=DOUBLE},
+      diskModel = #{diskmodel,jdbcType=VARCHAR},
+      diskSize = #{disksize,jdbcType=INTEGER},
+      diskSerial = #{diskserial,jdbcType=VARCHAR},
+      computerManufacturer = #{computermanufacturer,jdbcType=VARCHAR},
+      computerModel = #{computermodel,jdbcType=VARCHAR},
+      matherBoardId = #{matherboardid,jdbcType=VARCHAR},
+      serviceNo = #{serviceno,jdbcType=VARCHAR},
+      isMutiOs = #{ismutios,jdbcType=INTEGER},
+      isVm = #{isvm,jdbcType=INTEGER},
+      communicateIP = #{communicateip,jdbcType=VARCHAR},
+      isOpened = #{isopened,jdbcType=INTEGER},
+      regState = #{regstate,jdbcType=INTEGER},
+      protectState = #{protectstate,jdbcType=INTEGER},
+      roamState = #{roamstate,jdbcType=INTEGER},
+      deleteState = #{deletestate,jdbcType=INTEGER},
+      deviceUsefulId = #{deviceusefulid,jdbcType=VARCHAR},
+      lastUpgradeTime = #{lastupgradetime,jdbcType=TIMESTAMP},
+      oldDevOnlyId = #{olddevonlyid,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      holderName = #{holdername,jdbcType=VARCHAR},
+      assetStatus = #{assetstatus,jdbcType=INTEGER},
+      effectiveProtectedTime = #{effectiveprotectedtime,jdbcType=TIMESTAMP},
+      isSetLock = #{issetlock,jdbcType=INTEGER},
+      isSetReRegist = #{issetreregist,jdbcType=INTEGER},
+      isSetBlock = #{issetblock,jdbcType=INTEGER},
+      isSetUninstall = #{issetuninstall,jdbcType=INTEGER},
+      isSetDisable = #{issetdisable,jdbcType=INTEGER},
+      agentPackType = #{agentpacktype,jdbcType=INTEGER},
+      loginDomainName = #{logindomainname,jdbcType=VARCHAR},
+      accessNetworkState = #{accessnetworkstate,jdbcType=INTEGER},
+      isFireWall = #{isfirewall,jdbcType=INTEGER},
+      serverAreaId = #{serverareaid,jdbcType=VARCHAR},
+      reportTime = #{reporttime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      findTime = #{findtime,jdbcType=TIMESTAMP},
+      classify = #{classify,jdbcType=VARCHAR},
+      inforSource = #{inforsource,jdbcType=INTEGER},
+      isControl = #{iscontrol,jdbcType=INTEGER},
+      lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      historyOnlineTime = #{historyonlinetime,jdbcType=VARCHAR},
+      loseControlTime = #{losecontroltime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

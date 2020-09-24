@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkdoodtechnologies.ecgcloud.ecgcloud.mapper.CloudWatchBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBean" >
+    <id column="cwt_id" property="cwtId" jdbcType="INTEGER" />
+    <result column="cwt_cit_id" property="cwtCitId" jdbcType="INTEGER" />
+    <result column="cwt_cloud_type" property="cwtCloudType" jdbcType="VARCHAR" />
+    <result column="cwt_total_network_out" property="cwtTotalNetworkOut" jdbcType="VARCHAR" />
+    <result column="cwt_start_date" property="cwtStartDate" jdbcType="VARCHAR" />
+    <result column="cwt_end_date" property="cwtEndDate" jdbcType="VARCHAR" />
+    <result column="cwt_param1" property="cwtParam1" jdbcType="VARCHAR" />
+    <result column="cwt_param2" property="cwtParam2" jdbcType="VARCHAR" />
+    <result column="cwt_param3" property="cwtParam3" jdbcType="VARCHAR" />
+    <result column="cwt_param4" property="cwtParam4" jdbcType="VARCHAR" />
+    <result column="cwt_param5" property="cwtParam5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cwt_id, cwt_cit_id, cwt_cloud_type, cwt_total_network_out, cwt_start_date, cwt_end_date, 
+    cwt_param1, cwt_param2, cwt_param3, cwt_param4, cwt_param5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cloud_watch_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cloud_watch_tbl
+    where cwt_id = #{cwtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cloud_watch_tbl
+    where cwt_id = #{cwtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBeanExample" >
+    delete from cloud_watch_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="cwtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_watch_tbl (cwt_cit_id, cwt_cloud_type, cwt_total_network_out, 
+      cwt_start_date, cwt_end_date, cwt_param1, 
+      cwt_param2, cwt_param3, cwt_param4, 
+      cwt_param5)
+    values (#{cwtCitId,jdbcType=INTEGER}, #{cwtCloudType,jdbcType=VARCHAR}, #{cwtTotalNetworkOut,jdbcType=VARCHAR}, 
+      #{cwtStartDate,jdbcType=VARCHAR}, #{cwtEndDate,jdbcType=VARCHAR}, #{cwtParam1,jdbcType=VARCHAR}, 
+      #{cwtParam2,jdbcType=VARCHAR}, #{cwtParam3,jdbcType=VARCHAR}, #{cwtParam4,jdbcType=VARCHAR}, 
+      #{cwtParam5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBean" >
+    <selectKey resultType="java.lang.Integer" keyProperty="cwtId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cloud_watch_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cwtCitId != null" >
+        cwt_cit_id,
+      </if>
+      <if test="cwtCloudType != null" >
+        cwt_cloud_type,
+      </if>
+      <if test="cwtTotalNetworkOut != null" >
+        cwt_total_network_out,
+      </if>
+      <if test="cwtStartDate != null" >
+        cwt_start_date,
+      </if>
+      <if test="cwtEndDate != null" >
+        cwt_end_date,
+      </if>
+      <if test="cwtParam1 != null" >
+        cwt_param1,
+      </if>
+      <if test="cwtParam2 != null" >
+        cwt_param2,
+      </if>
+      <if test="cwtParam3 != null" >
+        cwt_param3,
+      </if>
+      <if test="cwtParam4 != null" >
+        cwt_param4,
+      </if>
+      <if test="cwtParam5 != null" >
+        cwt_param5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cwtCitId != null" >
+        #{cwtCitId,jdbcType=INTEGER},
+      </if>
+      <if test="cwtCloudType != null" >
+        #{cwtCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtTotalNetworkOut != null" >
+        #{cwtTotalNetworkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtStartDate != null" >
+        #{cwtStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtEndDate != null" >
+        #{cwtEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam1 != null" >
+        #{cwtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam2 != null" >
+        #{cwtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam3 != null" >
+        #{cwtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam4 != null" >
+        #{cwtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam5 != null" >
+        #{cwtParam5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cloud_watch_tbl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cloud_watch_tbl
+    <set >
+      <if test="record.cwtId != null" >
+        cwt_id = #{record.cwtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cwtCitId != null" >
+        cwt_cit_id = #{record.cwtCitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cwtCloudType != null" >
+        cwt_cloud_type = #{record.cwtCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtTotalNetworkOut != null" >
+        cwt_total_network_out = #{record.cwtTotalNetworkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtStartDate != null" >
+        cwt_start_date = #{record.cwtStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtEndDate != null" >
+        cwt_end_date = #{record.cwtEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtParam1 != null" >
+        cwt_param1 = #{record.cwtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtParam2 != null" >
+        cwt_param2 = #{record.cwtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtParam3 != null" >
+        cwt_param3 = #{record.cwtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtParam4 != null" >
+        cwt_param4 = #{record.cwtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cwtParam5 != null" >
+        cwt_param5 = #{record.cwtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cloud_watch_tbl
+    set cwt_id = #{record.cwtId,jdbcType=INTEGER},
+      cwt_cit_id = #{record.cwtCitId,jdbcType=INTEGER},
+      cwt_cloud_type = #{record.cwtCloudType,jdbcType=VARCHAR},
+      cwt_total_network_out = #{record.cwtTotalNetworkOut,jdbcType=VARCHAR},
+      cwt_start_date = #{record.cwtStartDate,jdbcType=VARCHAR},
+      cwt_end_date = #{record.cwtEndDate,jdbcType=VARCHAR},
+      cwt_param1 = #{record.cwtParam1,jdbcType=VARCHAR},
+      cwt_param2 = #{record.cwtParam2,jdbcType=VARCHAR},
+      cwt_param3 = #{record.cwtParam3,jdbcType=VARCHAR},
+      cwt_param4 = #{record.cwtParam4,jdbcType=VARCHAR},
+      cwt_param5 = #{record.cwtParam5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBean" >
+    update cloud_watch_tbl
+    <set >
+      <if test="cwtCitId != null" >
+        cwt_cit_id = #{cwtCitId,jdbcType=INTEGER},
+      </if>
+      <if test="cwtCloudType != null" >
+        cwt_cloud_type = #{cwtCloudType,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtTotalNetworkOut != null" >
+        cwt_total_network_out = #{cwtTotalNetworkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtStartDate != null" >
+        cwt_start_date = #{cwtStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtEndDate != null" >
+        cwt_end_date = #{cwtEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam1 != null" >
+        cwt_param1 = #{cwtParam1,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam2 != null" >
+        cwt_param2 = #{cwtParam2,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam3 != null" >
+        cwt_param3 = #{cwtParam3,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam4 != null" >
+        cwt_param4 = #{cwtParam4,jdbcType=VARCHAR},
+      </if>
+      <if test="cwtParam5 != null" >
+        cwt_param5 = #{cwtParam5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cwt_id = #{cwtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkdoodtechnologies.ecgcloud.ecgcloud.bean.CloudWatchBean" >
+    update cloud_watch_tbl
+    set cwt_cit_id = #{cwtCitId,jdbcType=INTEGER},
+      cwt_cloud_type = #{cwtCloudType,jdbcType=VARCHAR},
+      cwt_total_network_out = #{cwtTotalNetworkOut,jdbcType=VARCHAR},
+      cwt_start_date = #{cwtStartDate,jdbcType=VARCHAR},
+      cwt_end_date = #{cwtEndDate,jdbcType=VARCHAR},
+      cwt_param1 = #{cwtParam1,jdbcType=VARCHAR},
+      cwt_param2 = #{cwtParam2,jdbcType=VARCHAR},
+      cwt_param3 = #{cwtParam3,jdbcType=VARCHAR},
+      cwt_param4 = #{cwtParam4,jdbcType=VARCHAR},
+      cwt_param5 = #{cwtParam5,jdbcType=VARCHAR}
+    where cwt_id = #{cwtId,jdbcType=INTEGER}
+  </update>
+</mapper>

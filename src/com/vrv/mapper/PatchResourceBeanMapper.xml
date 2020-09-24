@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vrv.mapper.PatchResourceBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.vrv.bean.PatchResourceBean" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="updateId" property="updateid" jdbcType="VARCHAR" />
+    <result column="LANGUAGE" property="language" jdbcType="VARCHAR" />
+    <result column="showName" property="showname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="holeDescription" property="holedescription" jdbcType="VARCHAR" />
+    <result column="holeInfo" property="holeinfo" jdbcType="VARCHAR" />
+    <result column="affects" property="affects" jdbcType="VARCHAR" />
+    <result column="suggestion" property="suggestion" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="patchSize" property="patchsize" jdbcType="BIGINT" />
+    <result column="CHECKSUM" property="checksum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, updateId, LANGUAGE, showName, description, holeDescription, holeInfo, affects, 
+    suggestion, url, patchSize, CHECKSUM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.vrv.bean.PatchResourceBeanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cems_patch_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cems_patch_resource
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cems_patch_resource
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vrv.bean.PatchResourceBeanExample" >
+    delete from cems_patch_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vrv.bean.PatchResourceBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch_resource (updateId, LANGUAGE, showName, 
+      description, holeDescription, holeInfo, 
+      affects, suggestion, url, 
+      patchSize, CHECKSUM)
+    values (#{updateid,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{showname,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{holedescription,jdbcType=VARCHAR}, #{holeinfo,jdbcType=VARCHAR}, 
+      #{affects,jdbcType=VARCHAR}, #{suggestion,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{patchsize,jdbcType=BIGINT}, #{checksum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vrv.bean.PatchResourceBean" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cems_patch_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="updateid != null" >
+        updateId,
+      </if>
+      <if test="language != null" >
+        LANGUAGE,
+      </if>
+      <if test="showname != null" >
+        showName,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="holedescription != null" >
+        holeDescription,
+      </if>
+      <if test="holeinfo != null" >
+        holeInfo,
+      </if>
+      <if test="affects != null" >
+        affects,
+      </if>
+      <if test="suggestion != null" >
+        suggestion,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="patchsize != null" >
+        patchSize,
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="updateid != null" >
+        #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="showname != null" >
+        #{showname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="holedescription != null" >
+        #{holedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="holeinfo != null" >
+        #{holeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="affects != null" >
+        #{affects,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        #{suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="patchsize != null" >
+        #{patchsize,jdbcType=BIGINT},
+      </if>
+      <if test="checksum != null" >
+        #{checksum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vrv.bean.PatchResourceBeanExample" resultType="java.lang.Integer" >
+    select count(*) from cems_patch_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cems_patch_resource
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateid != null" >
+        updateId = #{record.updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null" >
+        LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showname != null" >
+        showName = #{record.showname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.holedescription != null" >
+        holeDescription = #{record.holedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.holeinfo != null" >
+        holeInfo = #{record.holeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.affects != null" >
+        affects = #{record.affects,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestion != null" >
+        suggestion = #{record.suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patchsize != null" >
+        patchSize = #{record.patchsize,jdbcType=BIGINT},
+      </if>
+      <if test="record.checksum != null" >
+        CHECKSUM = #{record.checksum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cems_patch_resource
+    set id = #{record.id,jdbcType=VARCHAR},
+      updateId = #{record.updateid,jdbcType=VARCHAR},
+      LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      showName = #{record.showname,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      holeDescription = #{record.holedescription,jdbcType=VARCHAR},
+      holeInfo = #{record.holeinfo,jdbcType=VARCHAR},
+      affects = #{record.affects,jdbcType=VARCHAR},
+      suggestion = #{record.suggestion,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      patchSize = #{record.patchsize,jdbcType=BIGINT},
+      CHECKSUM = #{record.checksum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vrv.bean.PatchResourceBean" >
+    update cems_patch_resource
+    <set >
+      <if test="updateid != null" >
+        updateId = #{updateid,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        LANGUAGE = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="showname != null" >
+        showName = #{showname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="holedescription != null" >
+        holeDescription = #{holedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="holeinfo != null" >
+        holeInfo = #{holeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="affects != null" >
+        affects = #{affects,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        suggestion = #{suggestion,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="patchsize != null" >
+        patchSize = #{patchsize,jdbcType=BIGINT},
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM = #{checksum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vrv.bean.PatchResourceBean" >
+    update cems_patch_resource
+    set updateId = #{updateid,jdbcType=VARCHAR},
+      LANGUAGE = #{language,jdbcType=VARCHAR},
+      showName = #{showname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      holeDescription = #{holedescription,jdbcType=VARCHAR},
+      holeInfo = #{holeinfo,jdbcType=VARCHAR},
+      affects = #{affects,jdbcType=VARCHAR},
+      suggestion = #{suggestion,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      patchSize = #{patchsize,jdbcType=BIGINT},
+      CHECKSUM = #{checksum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
